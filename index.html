@@ -1,0 +1,601 @@
+<title>SCNTR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#08080A;
+  --panel:#131316;
+  --panel-2:#1A1A1E;
+  --line:#26262A;
+  --bone:#F3F1EC;
+  --mute:#8C8C93;
+  --dim:#5E5E66;
+  --fresh:#57A47C;
+  --clean:#6D9DD1;
+  --bold:#C8483E;
+  --danger:#D9564C;
+  --shot:url("assets/velour-night.jpg");
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+  --pad:clamp(20px,5vw,72px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--bone);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;text-wrap:balance;letter-spacing:-.02em}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--bone);outline-offset:3px;border-radius:6px}
+.num{font-family:var(--display);font-variant-numeric:tabular-nums}
+.wordmark{font-family:var(--display);font-weight:600;letter-spacing:.4em;text-indent:.4em}
+.eyebrow{
+  font-family:var(--display);font-size:11px;font-weight:600;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  height:52px;padding:0 26px;border-radius:13px;
+  background:var(--bone);color:#0B0B0C;
+  font-family:var(--display);font-weight:600;font-size:14.5px;
+  transition:transform .16s ease,opacity .16s ease;
+}
+.btn:hover{opacity:.9}
+.btn:active{transform:scale(.985)}
+.btn.ghost{background:transparent;color:var(--bone);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:#45454C;opacity:1}
+.btn.sm{height:42px;padding:0 18px;font-size:13px;border-radius:10px}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;padding:18px var(--pad);
+  background:rgba(8,8,10,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(38,38,42,.7);
+}
+.nav .wordmark{font-size:19px}
+.nav menu{display:flex;gap:30px;list-style:none}
+.nav menu a{font-size:13.5px;color:var(--mute);transition:color .15s ease}
+.nav menu a:hover{color:var(--bone)}
+.nav .right{display:flex;align-items:center;gap:14px}
+.cartbtn{
+  position:relative;display:flex;align-items:center;gap:9px;
+  height:42px;padding:0 16px;border-radius:11px;
+  border:1px solid var(--line);background:var(--panel);
+  font-family:var(--display);font-size:13px;font-weight:600;
+  transition:border-color .15s ease;
+}
+.cartbtn:hover{border-color:#45454C}
+.cartbtn svg{width:17px;height:17px}
+.cartbtn .count{
+  min-width:19px;height:19px;padding:0 5px;border-radius:10px;
+  background:var(--bone);color:#0B0B0C;font-size:11px;
+  display:grid;place-items:center;font-variant-numeric:tabular-nums;
+}
+@media (max-width:860px){.nav menu{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch;
+  min-height:min(86vh,760px);border-bottom:1px solid var(--line);
+}
+.hero .copy{
+  display:flex;flex-direction:column;justify-content:center;
+  gap:26px;padding:clamp(48px,7vw,96px) var(--pad);
+}
+.hero h1{font-size:clamp(38px,5.4vw,68px);line-height:1.04;max-width:11ch;font-weight:500}
+.hero p{font-size:clamp(15px,1.3vw,17px);line-height:1.6;color:var(--mute);max-width:44ch}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.hero .art{
+  position:relative;
+  background:var(--shot) 52% 46%/cover no-repeat;
+  border-left:1px solid var(--line);
+}
+.hero .art::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(8,8,10,.92) 0%,rgba(8,8,10,.28) 34%,rgba(8,8,10,0) 62%);
+}
+.marks{display:flex;flex-wrap:wrap;gap:26px 44px;padding-top:8px}
+.mark{display:flex;gap:12px;align-items:center}
+.mark .ring{
+  width:40px;height:40px;border-radius:50%;flex:0 0 auto;
+  border:1px solid rgba(243,241,236,.2);display:grid;place-items:center;
+}
+.mark svg{width:17px;height:17px;opacity:.9}
+.mark b{display:block;font-family:var(--display);font-size:13.5px;font-weight:600}
+.mark span{display:block;font-size:12.5px;color:var(--dim);margin-top:2px}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:0}
+  .hero .art{order:-1;aspect-ratio:4/3;border-left:none;border-bottom:1px solid var(--line)}
+  .hero .art::after{background:linear-gradient(180deg,rgba(8,8,10,.2),rgba(8,8,10,.9))}
+}
+
+/* ---------- trust strip ---------- */
+.strip{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--line);
+}
+.strip div{
+  display:flex;gap:14px;align-items:center;
+  padding:26px var(--pad);
+}
+.strip div+div{border-left:1px solid var(--line)}
+.strip svg{width:20px;height:20px;color:var(--mute);flex:0 0 auto}
+.strip b{display:block;font-family:var(--display);font-size:13px;font-weight:600}
+.strip span{display:block;font-size:12px;color:var(--dim);margin-top:3px}
+@media (max-width:820px){
+  .strip{grid-template-columns:1fr}
+  .strip div+div{border-left:none;border-top:1px solid var(--line)}
+  .strip div{padding:18px var(--pad)}
+}
+
+/* ---------- sections ---------- */
+section.pad{padding:clamp(56px,7vw,104px) var(--pad)}
+.sechead{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:24px;margin-bottom:38px;flex-wrap:wrap;
+}
+.sechead h2{font-size:clamp(26px,3vw,38px);font-weight:500;letter-spacing:-.025em}
+.sechead p{margin-top:12px;font-size:14.5px;color:var(--mute);max-width:52ch;line-height:1.6}
+
+/* ---------- grid koleksi ---------- */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media (max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+.tile{
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:var(--panel);display:flex;flex-direction:column;
+  transition:border-color .2s ease,transform .2s ease;
+}
+.tile:hover{border-color:#3E3E45;transform:translateY(-3px)}
+.tile .art{
+  aspect-ratio:4/5;background:var(--shot) 55% 42%/220% auto no-repeat;
+  border-bottom:1px solid var(--line);cursor:pointer;
+}
+.tile .txt{padding:18px 18px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
+.tile h3{font-size:15px;font-weight:700;letter-spacing:.1em}
+.tile .tag{font-size:12.5px;color:var(--mute)}
+.tile .notes{font-size:12px;color:var(--dim);line-height:1.5;margin-top:2px}
+.tile .buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:16px}
+.tile .price{font-family:var(--display);font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+
+/* ---------- spotlight ---------- */
+.spot{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.spot .shot{
+  background:var(--shot) 50% 46%/cover no-repeat;min-height:560px;
+  border-right:1px solid var(--line);
+}
+.spot .detail{padding:clamp(40px,5vw,72px) var(--pad);display:flex;flex-direction:column;gap:20px}
+.spot h2{font-size:clamp(26px,3vw,36px);font-weight:500}
+.spot .sub{font-size:13.5px;color:var(--mute)}
+.spot .priceline{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.spot .price{font-family:var(--display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.rating{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--mute)}
+.rating b{font-family:var(--display);color:var(--bone);font-weight:600}
+.rating svg{width:15px;height:15px;color:#E0B341}
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{padding:8px 14px;border-radius:9px;background:var(--panel-2);border:1px solid var(--line);font-size:12.5px;color:#CFCDC8}
+.spot .desc{font-size:14.5px;line-height:1.7;color:#B6B4AF;max-width:52ch}
+.pyramid{display:flex;flex-direction:column;border-top:1px solid var(--line);margin-top:4px}
+.pyramid .row{display:flex;gap:20px;align-items:baseline;padding:14px 0;border-bottom:1px solid #1B1B1E}
+.pyramid b{
+  font-family:var(--display);font-size:11px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--mute);width:64px;flex:0 0 auto;
+}
+.pyramid span{font-size:13.5px;color:#C6C4BF}
+.spot .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.picker{display:flex;gap:9px;flex-wrap:wrap}
+.picker button{
+  padding:9px 15px;border-radius:10px;border:1px solid var(--line);background:var(--panel);
+  font-family:var(--display);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--mute);
+  transition:all .15s ease;
+}
+.picker button:hover{border-color:#45454C;color:var(--bone)}
+.picker button.on{background:var(--bone);color:#0B0B0C;border-color:var(--bone)}
+@media (max-width:900px){
+  .spot{grid-template-columns:1fr}
+  .spot .shot{min-height:0;aspect-ratio:1;border-right:none;border-bottom:1px solid var(--line)}
+}
+
+/* ---------- drawer ---------- */
+.scrim{
+  position:fixed;inset:0;z-index:50;background:rgba(4,4,6,.66);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .25s ease;
+}
+.scrim.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:60;width:min(420px,100vw);
+  background:var(--ink);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;
+  transform:translateX(102%);transition:transform .3s cubic-bezier(.4,0,.2,1);
+}
+.drawer.open{transform:none}
+.drawer .head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 24px 18px;border-bottom:1px solid var(--line);
+}
+.drawer .head h2{font-size:20px}
+.drawer .head button{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;color:var(--mute)}
+.drawer .head button:hover{background:var(--panel);color:var(--bone)}
+.drawer .head svg{width:19px;height:19px}
+.drawer .scroll{flex:1;overflow-y:auto;padding:0 24px}
+.ship{padding:16px 0;border-bottom:1px solid #1B1B1E}
+.ship p{font-size:12.5px;color:#C6C4BF}
+.ship .track{margin-top:11px;display:flex;align-items:center;gap:12px}
+.ship .bar{flex:1;height:4px;border-radius:2px;background:#2A2A2E;overflow:hidden}
+.ship .bar i{display:block;height:100%;background:var(--bone);transition:width .35s ease}
+.ship .lbl{font-family:var(--display);font-size:10.5px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.line{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid #1B1B1E}
+.line .thumb{
+  width:64px;height:76px;border-radius:11px;flex:0 0 auto;
+  background:var(--shot) 55% 42%/300% auto no-repeat;border:1px solid var(--line);
+}
+.line .meta{flex:1;min-width:0}
+.line h4{font-family:var(--display);font-size:14px;font-weight:600}
+.line .ml{font-size:11.5px;color:var(--dim);margin-top:3px}
+.line .row{display:flex;align-items:center;justify-content:space-between;margin-top:13px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.stepper button{width:31px;height:30px;display:grid;place-items:center;font-size:15px;line-height:1}
+.stepper button:hover{background:var(--panel-2)}
+.stepper .q{width:34px;text-align:center;font-family:var(--display);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.line .amt{font-family:var(--display);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.line .kill{align-self:flex-start;color:var(--dim);width:24px;height:24px;display:grid;place-items:center}
+.line .kill:hover{color:var(--danger)}
+.line .kill svg{width:17px;height:17px}
+.drawer .empty{padding:64px 8px;text-align:center;color:var(--dim);font-size:13.5px;line-height:1.6}
+.drawer .empty b{display:block;font-family:var(--display);color:var(--bone);font-size:15px;margin-bottom:8px}
+.drawer .foot{border-top:1px solid var(--line);padding:20px 24px 24px;display:flex;flex-direction:column;gap:12px}
+.sumline{display:flex;justify-content:space-between;font-size:13px;color:var(--mute)}
+.sumline .num{color:#D6D4CF}
+.sumline.disc .num{color:var(--fresh)}
+.grand{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid var(--line);margin-top:2px}
+.grand b{font-family:var(--display);font-size:15px}
+.grand .num{font-family:var(--display);font-size:20px;font-weight:700}
+.drawer .foot .btn{width:100%}
+
+/* ---------- footer ---------- */
+footer{
+  padding:clamp(44px,5vw,72px) var(--pad);border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;
+}
+footer .wordmark{font-size:17px}
+footer p{font-size:12.5px;color:var(--dim);line-height:1.7;max-width:34ch;margin-top:14px}
+footer nav{display:flex;gap:48px;flex-wrap:wrap}
+footer nav div{display:flex;flex-direction:column;gap:10px}
+footer nav b{font-family:var(--display);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+footer nav a{font-size:13px;color:var(--mute)}
+footer nav a:hover{color:var(--bone)}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;left:50%;bottom:34px;transform:translate(-50%,14px);z-index:80;
+  background:#EDEBE6;color:#0B0B0C;border-radius:13px;padding:14px 20px;
+  display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;
+  box-shadow:0 20px 40px -16px rgba(0,0,0,.9);
+  opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast svg{width:17px;height:17px}
+</style>
+
+<nav class="nav">
+  <a class="wordmark" href="#top">SCNTR</a>
+  <menu>
+    <li><a href="#koleksi">Koleksi</a></li>
+    <li><a href="#spotlight">Velour Night</a></li>
+    <li><a href="#cerita">Cerita</a></li>
+    <li><a href="app.html">Versi App</a></li>
+  </menu>
+  <div class="right">
+    <button class="cartbtn" id="openCart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.3 10.4h9.6L19 7.4H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+      Keranjang <span class="count" id="navCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="copy">
+    <span class="eyebrow">Eau de Parfum · 50 ml</span>
+    <h1>Wangi yang kerja keras diam-diam.</h1>
+    <p>Parfum cowok yang ga drama. Dirancang untuk pria yang fokus dan tahu tujuan — hadir tanpa perlu mengumumkan diri.</p>
+    <div class="cta">
+      <a class="btn" href="#koleksi">Lihat Koleksi</a>
+      <button class="btn ghost" data-add="velour">Beli Velour Night</button>
+    </div>
+    <div class="marks">
+      <div class="mark">
+        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6M12 20c-2 0-3.5-1.5-3.5-3.4 0-3.6 5-5 5-11M16.5 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6"/></svg></span>
+        <span><b>Maskulin</b><span>Tegas dan berkarakter</span></span>
+      </div>
+      <div class="mark">
+        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.9"/></svg></span>
+        <span><b>Tahan Lama</b><span>8–12 jam*</span></span>
+      </div>
+      <div class="mark">
+        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2 19 6v5.6c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V6l7-2.8Z"/></svg></span>
+        <span><b>Premium Quality</b><span>Bahan pilihan terbaik</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="art" role="img" aria-label="Botol SCNTR Velour Night di atas batu gelap"></div>
+</header>
+
+<div class="strip">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja Rp 200.000</span></span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 19 5.6v5.2c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V5.6L12 3Z"/><path d="m9 12 2.1 2.1L15.2 10"/></svg><span><b>100% Original</b><span>Garansi produk asli</span></span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h9v9h-9z"/><path d="M11.5 11.5h4.4l3.6 3.4v2.6h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="16" cy="18" r="1.7"/><path d="M1 6h5M2 11h3"/></svg><span><b>Pengiriman Cepat</b><span>Sampai dalam 1–2 hari</span></span></div>
+</div>
+
+<section class="pad" id="koleksi">
+  <div class="sechead">
+    <div>
+      <span class="eyebrow">Empat karakter</span>
+      <h2 style="margin-top:12px">Pilih varian</h2>
+      <p>Satu formula dasar, empat arah karakter. Semua 50 ml, semua Rp 169.000.</p>
+    </div>
+    <button class="btn ghost sm" id="addAll">Coba semua varian</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="spot" id="spotlight">
+  <div class="shot" role="img" aria-label="Foto produk SCNTR"></div>
+  <div class="detail">
+    <span class="eyebrow" id="spotEyebrow">Paling dicari</span>
+    <h2 id="spotTitle">SCNTR Velour Night</h2>
+    <div class="sub">Eau de Parfum · 50 ml</div>
+    <div class="priceline">
+      <span class="price">Rp 169.000</span>
+      <span class="rating">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
+        <b>4.8</b> (126 ulasan)
+      </span>
+    </div>
+    <div class="picker" id="picker"></div>
+    <div class="chips" id="spotChips"></div>
+    <p class="desc" id="spotDesc"></p>
+    <div class="pyramid" id="spotNotes"></div>
+    <div class="actions">
+      <button class="btn" id="spotAdd">Tambah ke Keranjang</button>
+      <button class="btn ghost" id="spotCart">Lihat Keranjang</button>
+    </div>
+  </div>
+</section>
+
+<section class="pad" id="cerita">
+  <div class="sechead">
+    <div>
+      <span class="eyebrow">Cerita</span>
+      <h2 style="margin-top:12px">Dibuat untuk jarak satu meter.</h2>
+      <p>Kami tidak mengejar wangi yang mengisi ruangan. SCNTR dirancang untuk radius percakapan — cukup dekat untuk dikenali, cukup tenang untuk tidak mengganggu. Setiap batch diracik di Indonesia dengan bahan yang bisa kami sebut namanya satu per satu.</p>
+    </div>
+  </div>
+  <div class="strip" style="border:1px solid var(--line);border-radius:18px;overflow:hidden">
+    <div><span><b>Diracik di Indonesia</b><span>Batch kecil, kontrol ketat</span></span></div>
+    <div><span><b>Tanpa hewan uji</b><span>Cruelty free, selalu</span></span></div>
+    <div><span><b>Isi ulang</b><span>Program refill mulai 2027</span></span></div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="wordmark">SCNTR</div>
+    <p>Parfum cowok yang ga drama. Jakarta, Indonesia. *Ketahanan wangi bervariasi tergantung jenis kulit dan cuaca.</p>
+  </div>
+  <nav>
+    <div><b>Belanja</b><a href="#koleksi">Semua varian</a><a href="#spotlight">Velour Night</a><a href="#koleksi">Kartu hadiah</a></div>
+    <div><b>Bantuan</b><a href="#top">Lacak pesanan</a><a href="#top">Pengembalian</a><a href="#top">Hubungi kami</a></div>
+    <div><b>Ikuti</b><a href="#top">Instagram</a><a href="#top">TikTok</a><a href="#top">Newsletter</a></div>
+  </nav>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Keranjang belanja">
+  <div class="head">
+    <h2>Keranjang</h2>
+    <button id="closeCart" aria-label="Tutup keranjang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="scroll">
+    <div class="ship">
+      <p id="shipMsg"></p>
+      <div class="track"><span class="bar"><i id="shipBar"></i></span><span class="lbl" id="shipLbl"></span></div>
+    </div>
+    <div id="lines"></div>
+  </div>
+  <div class="foot" id="drawerFoot"></div>
+</aside>
+
+<div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 7"/></svg><span id="toastMsg"></span></div>
+
+<script>
+const PRICE = 169000, SHIP = 15000, FREE_MIN = 200000;
+const rupiah = n => "Rp " + n.toLocaleString("id-ID");
+const $ = s => document.querySelector(s);
+const el = (t,c,h) => { const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; };
+
+const VARIANTS = [
+  {id:"fresh", name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)", eyebrow:"Untuk pagi",
+   title:"SCNTR Fresh", chips:["Citrus","Aquatic","Green"],
+   desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.",
+   notes:{Top:"Bergamot, lemon, daun mint", Heart:"Neroli, teh hijau", Base:"White musk, cedar"}},
+  {id:"clean", name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)", eyebrow:"Untuk kantor",
+   title:"SCNTR Clean", chips:["Soapy","Powdery","Musk"],
+   desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.",
+   notes:{Top:"Aldehid, bergamot", Heart:"Iris, lily, kapas", Base:"White musk, amberwood"}},
+  {id:"bold", name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)", eyebrow:"Untuk malam",
+   title:"SCNTR Bold", chips:["Spicy","Woody","Amber"],
+   desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.",
+   notes:{Top:"Lada hitam, kapulaga", Heart:"Nutmeg, kulit", Base:"Amber, oud, patchouli"}},
+  {id:"velour", name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
+   title:"SCNTR Velour Night", chips:["Aromatic","Woody","Musk"],
+   desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.",
+   notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}}
+];
+
+let active = VARIANTS[3];
+let cart = [];
+
+/* ---- toast ---- */
+let toastTimer;
+function toast(msg){
+  $("#toastMsg").textContent = msg;
+  $("#toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("#toast").classList.remove("show"), 2400);
+}
+
+/* ---- keranjang ---- */
+function add(id, qty = 1){
+  const v = VARIANTS.find(x => x.id === id);
+  const line = cart.find(l => l.id === id);
+  if(line) line.qty += qty; else cart.push({id, qty});
+  render();
+  toast(v.title + " masuk keranjang");
+}
+function setQty(id, delta){
+  const line = cart.find(l => l.id === id);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty < 1) cart = cart.filter(l => l.id !== id);
+  render();
+}
+function openCart(open){
+  $("#drawer").classList.toggle("open", open);
+  $("#scrim").classList.toggle("open", open);
+  if(open) $("#closeCart").focus();
+}
+
+/* ---- koleksi ---- */
+function buildGrid(){
+  const grid = $("#grid");
+  grid.innerHTML = "";
+  VARIANTS.forEach(v => {
+    const tile = el("article","tile",
+      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}"></div>
+       <div class="txt">
+         <h3 style="color:${v.color}">${v.name}</h3>
+         <div class="tag">${v.tag}</div>
+         <div class="notes">${Object.values(v.notes).join(" · ")}</div>
+         <div class="buy">
+           <span class="price">${rupiah(PRICE)}</span>
+           <button class="btn sm">Tambah</button>
+         </div>
+       </div>`);
+    const show = () => { active = v; renderSpot(); $("#spotlight").scrollIntoView({block:"start"}); };
+    tile.querySelector(".art").addEventListener("click", show);
+    tile.querySelector(".art").addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
+    tile.querySelector(".buy button").addEventListener("click", () => add(v.id));
+    grid.appendChild(tile);
+  });
+}
+
+/* ---- spotlight ---- */
+function buildPicker(){
+  const p = $("#picker");
+  p.innerHTML = "";
+  VARIANTS.forEach(v => {
+    const b = el("button", v.id === active.id ? "on" : "", v.name);
+    b.addEventListener("click", () => { active = v; renderSpot(); });
+    p.appendChild(b);
+  });
+}
+function renderSpot(){
+  $("#spotTitle").textContent = active.title;
+  $("#spotEyebrow").textContent = active.eyebrow;
+  $("#spotDesc").textContent = active.desc;
+  $("#spotChips").innerHTML = active.chips.map(c => `<span class="chip">${c}</span>`).join("");
+  $("#spotNotes").innerHTML = Object.entries(active.notes)
+    .map(([k,val]) => `<div class="row"><b>${k}</b><span>${val}</span></div>`).join("");
+  buildPicker();
+}
+
+/* ---- drawer ---- */
+function renderCart(){
+  const wrap = $("#lines");
+  wrap.innerHTML = "";
+  if(!cart.length){
+    wrap.appendChild(el("div","empty","<b>Keranjang masih kosong</b>Pilih varian yang paling kamu banget, nanti balik lagi ke sini."));
+  }
+  cart.forEach(l => {
+    const v = VARIANTS.find(x => x.id === l.id);
+    const row = el("div","line",
+      `<span class="thumb"></span>
+       <div class="meta">
+         <h4>${v.title}</h4>
+         <div class="ml">50 ml · ${v.tag}</div>
+         <div class="row">
+           <span class="stepper">
+             <button data-minus aria-label="Kurangi">−</button>
+             <span class="q">${l.qty}</span>
+             <button data-plus aria-label="Tambah">+</button>
+           </span>
+           <span class="amt">${rupiah(PRICE * l.qty)}</span>
+         </div>
+       </div>
+       <button class="kill" aria-label="Hapus ${v.title}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5h15M9.5 6.5V4.4h5v2.1M6.5 6.5 7.6 20h8.8l1.1-13.5M10 10v6.4M14 10v6.4"/></svg></button>`);
+    row.querySelector("[data-minus]").addEventListener("click", () => setQty(l.id,-1));
+    row.querySelector("[data-plus]").addEventListener("click", () => setQty(l.id,1));
+    row.querySelector(".kill").addEventListener("click", () => { cart = cart.filter(x => x.id !== l.id); render(); toast(v.title + " dihapus"); });
+    wrap.appendChild(row);
+  });
+
+  const count = cart.reduce((a,l) => a + l.qty, 0);
+  const subtotal = count * PRICE;
+  const freeShip = subtotal >= FREE_MIN;
+  const disc = freeShip ? SHIP : 0;
+  const total = subtotal ? subtotal + SHIP - disc : 0;
+
+  $("#navCount").textContent = count;
+  $("#shipBar").style.width = Math.min(100, subtotal / FREE_MIN * 100) + "%";
+  $("#shipLbl").textContent = rupiah(subtotal) + " / " + rupiah(FREE_MIN);
+  $("#shipMsg").textContent = freeShip
+    ? "Ongkir kamu gratis. Nice."
+    : "Belanja " + rupiah(FREE_MIN - subtotal) + " lagi untuk gratis ongkir.";
+
+  const foot = $("#drawerFoot");
+  foot.innerHTML = "";
+  if(cart.length){
+    foot.innerHTML =
+      `<div class="sumline"><span>Subtotal (${count} produk)</span><span class="num">${rupiah(subtotal)}</span></div>
+       <div class="sumline"><span>Ongkir</span><span class="num">${rupiah(SHIP)}</span></div>
+       <div class="sumline disc"><span>Diskon ongkir</span><span class="num">${disc ? "− " + rupiah(disc) : rupiah(0)}</span></div>
+       <div class="grand"><b>Total</b><span class="num">${rupiah(total)}</span></div>`;
+    const co = el("button","btn","Checkout");
+    co.addEventListener("click", () => toast("Checkout " + rupiah(total) + " — lanjut ke pembayaran"));
+    foot.appendChild(co);
+  }
+  const keep = el("button","btn ghost", cart.length ? "Lanjut Belanja" : "Mulai Belanja");
+  keep.addEventListener("click", () => { openCart(false); document.getElementById("koleksi").scrollIntoView({block:"start"}); });
+  foot.appendChild(keep);
+}
+
+function render(){ renderCart(); }
+
+/* ---- events ---- */
+$("#openCart").addEventListener("click", () => openCart(true));
+$("#closeCart").addEventListener("click", () => openCart(false));
+$("#scrim").addEventListener("click", () => openCart(false));
+document.addEventListener("keydown", e => { if(e.key === "Escape") openCart(false); });
+$("#spotAdd").addEventListener("click", () => add(active.id));
+$("#spotCart").addEventListener("click", () => openCart(true));
+$("#addAll").addEventListener("click", () => {
+  VARIANTS.forEach(v => { const l = cart.find(x => x.id === v.id); if(l) l.qty++; else cart.push({id:v.id, qty:1}); });
+  render(); openCart(true); toast("Empat varian masuk keranjang");
+});
+document.querySelectorAll("[data-add]").forEach(b => b.addEventListener("click", () => { add(b.dataset.add); openCart(true); }));
+
+buildGrid();
+renderSpot();
+render();
+</script>

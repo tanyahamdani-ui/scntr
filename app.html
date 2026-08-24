@@ -1,0 +1,822 @@
+<title>SCNTR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#08080A;
+  --stage:#0E0E10;
+  --panel:#151517;
+  --panel-2:#1C1C1F;
+  --line:#26262A;
+  --bone:#F3F1EC;
+  --mute:#8C8C93;
+  --dim:#5E5E66;
+  --fresh:#57A47C;
+  --clean:#6D9DD1;
+  --bold:#C8483E;
+  --danger:#D9564C;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--stage);
+  color:var(--bone);
+  font-family:var(--body);
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  gap:22px;padding:34px 16px 60px;
+}
+.brandline{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center}
+.brandline b{font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.42em;text-indent:.42em}
+.brandline span{color:var(--dim);font-size:12.5px;letter-spacing:.02em}
+
+/* ---------- phone ---------- */
+.phone{
+  position:relative;width:375px;height:812px;flex:0 0 auto;
+  border-radius:46px;background:var(--ink);
+  border:1px solid #2A2A2E;
+  box-shadow:0 0 0 9px #131316, 0 40px 90px -30px rgba(0,0,0,.9);
+  overflow:hidden;
+}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;background:var(--ink)}
+.screen.on{display:flex}
+
+.status{
+  flex:0 0 auto;height:50px;padding:16px 26px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.01em;
+  position:relative;z-index:5;
+}
+.status .glyphs{display:flex;align-items:center;gap:6px;opacity:.95}
+.bars{display:flex;align-items:flex-end;gap:2px;height:11px}
+.bars i{width:3px;background:currentColor;border-radius:1px}
+.bars i:nth-child(1){height:4px}.bars i:nth-child(2){height:6px}
+.bars i:nth-child(3){height:8px}.bars i:nth-child(4){height:11px}
+.batt{width:23px;height:11px;border:1.4px solid currentColor;border-radius:3px;position:relative;padding:1.4px}
+.batt::after{content:"";position:absolute;right:-3.4px;top:3px;width:2px;height:5px;background:currentColor;border-radius:0 1px 1px 0}
+.batt i{display:block;height:100%;width:78%;background:currentColor;border-radius:1px}
+
+.body{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.body::-webkit-scrollbar{display:none}
+
+/* ---------- type ---------- */
+.wordmark{font-family:var(--display);font-weight:600;letter-spacing:.4em;text-indent:.4em}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;font-weight:600;letter-spacing:-.01em}
+.eyebrow{font-family:var(--display);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+.num{font-family:var(--display);font-variant-numeric:tabular-nums}
+
+/* ---------- buttons ---------- */
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offset:3px;border-radius:6px}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  height:54px;border-radius:14px;background:var(--bone);color:#0B0B0C;
+  font-family:var(--display);font-weight:600;font-size:15px;letter-spacing:.01em;
+  transition:transform .16s ease, background .16s ease;
+}
+.btn:active{transform:scale(.985)}
+.btn.ghost{background:transparent;color:var(--bone);border:1px solid var(--line)}
+.btn.sm{height:44px;border-radius:11px;font-size:13.5px;padding:0 20px}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(20,20,22,.72);border:1px solid rgba(255,255,255,.09);
+  backdrop-filter:blur(8px);
+}
+.icon-btn svg{width:18px;height:18px}
+
+/* ---------- bottle art ---------- */
+.bottle{display:block}
+
+/* ---------- onboarding ---------- */
+#s-onboard .hero{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(120% 70% at 78% 42%, rgba(120,120,128,.30), transparent 62%),
+    radial-gradient(90% 60% at 20% 8%, rgba(90,90,98,.18), transparent 60%),
+    linear-gradient(180deg,#101012 0%,#0A0A0C 46%,#08080A 100%);
+}
+#s-onboard .rock{
+  position:absolute;left:-8%;right:-8%;bottom:0;height:52%;
+  background:radial-gradient(60% 78% at 30% 100%, rgba(58,58,64,.5), transparent 70%),
+             radial-gradient(70% 70% at 82% 100%, rgba(44,44,50,.55), transparent 72%);
+  filter:blur(1px);
+}
+#s-onboard .content{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:6px 30px 34px}
+#s-onboard .kicker{font-size:20px;margin-bottom:22px}
+#s-onboard h1{font-size:31px;line-height:1.2;max-width:8.5ch;font-weight:500;letter-spacing:-.02em}
+#s-onboard .rule{width:44px;height:1.5px;background:rgba(243,241,236,.55);margin:20px 0 26px}
+.feats{display:flex;flex-direction:column;gap:17px}
+.feat{display:flex;align-items:center;gap:13px}
+.feat .ring{width:38px;height:38px;border-radius:50%;border:1px solid rgba(243,241,236,.22);display:grid;place-items:center;flex:0 0 auto}
+.feat .ring svg{width:16px;height:16px;opacity:.9}
+.feat b{display:block;font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.01em}
+.feat span{display:block;font-size:12px;color:var(--mute);line-height:1.35;max-width:16ch}
+#s-onboard .bottleWrap{position:absolute;right:-34px;top:96px;width:206px;filter:drop-shadow(0 30px 40px rgba(0,0,0,.75))}
+#s-onboard .foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;align-items:center}
+#s-onboard .foot .btn{width:100%}
+#s-onboard .foot p{font-size:13px;color:var(--mute)}
+#s-onboard .foot p button{color:var(--bone);text-decoration:underline;text-underline-offset:3px;font-weight:600}
+
+/* ---------- app header ---------- */
+.appbar{display:flex;align-items:center;justify-content:space-between;padding:6px 22px 14px}
+.appbar .wordmark{font-size:19px}
+.appbar .tools{display:flex;gap:16px}
+.appbar .tools button{position:relative;display:grid;place-items:center;width:26px;height:26px}
+.appbar svg{width:21px;height:21px}
+.dot{position:absolute;top:1px;right:1px;width:7px;height:7px;border-radius:50%;background:var(--bold);border:1.5px solid var(--ink)}
+
+.search{
+  margin:0 20px 18px;height:48px;border-radius:13px;background:var(--panel);
+  border:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 16px;
+}
+.search input{flex:1;background:none;border:none;color:var(--bone);font-family:var(--body);font-size:14px}
+.search input::placeholder{color:var(--dim)}
+.search input:focus{outline:none}
+.search svg{width:18px;height:18px;color:var(--mute);flex:0 0 auto}
+
+/* ---------- promo ---------- */
+.promo{
+  margin:0 20px;border-radius:18px;border:1px solid var(--line);
+  background:
+    radial-gradient(100% 90% at 88% 55%, rgba(120,120,130,.22), transparent 60%),
+    linear-gradient(160deg,#18181B,#0F0F11);
+  padding:22px 20px 20px;position:relative;overflow:hidden;min-height:196px;
+}
+.promo h2{font-size:21px;line-height:1.22;max-width:9ch;font-weight:500;letter-spacing:-.02em}
+.promo p{margin:11px 0 16px;font-size:12px;color:var(--mute);line-height:1.45;max-width:17ch}
+.promo .btn{width:132px}
+.promo .lineup{position:absolute;right:6px;bottom:10px;display:flex;align-items:flex-end;opacity:.98}
+.promo .lineup .bottle{filter:drop-shadow(0 14px 18px rgba(0,0,0,.6))}
+.promo .lineup .b1{margin-right:-14px}
+.promo .lineup .b3{margin-left:-14px}
+
+/* ---------- trust row ---------- */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:20px 18px 6px}
+.trust div{display:flex;gap:8px;align-items:flex-start}
+.trust svg{width:17px;height:17px;color:var(--mute);flex:0 0 auto;margin-top:1px}
+.trust b{display:block;font-family:var(--display);font-size:10px;line-height:1.25;font-weight:600}
+.trust span{display:block;font-size:9px;color:var(--dim);line-height:1.3;margin-top:2px}
+
+/* ---------- variants ---------- */
+.sechead{display:flex;align-items:baseline;justify-content:space-between;padding:20px 20px 12px}
+.sechead h3{font-size:16px;font-weight:600}
+.sechead button{font-size:12px;color:var(--mute)}
+.rail{display:flex;gap:12px;padding:0 20px 4px;overflow-x:auto;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.card{
+  flex:0 0 148px;border-radius:15px;border:1px solid var(--line);
+  background:linear-gradient(170deg,#161619,#0D0D0F);
+  padding:14px 14px 13px;text-align:left;
+  transition:border-color .18s ease, transform .18s ease;
+}
+.card:active{transform:scale(.985)}
+.card:hover{border-color:#3A3A40}
+.card .art{height:112px;display:grid;place-items:center;margin-bottom:12px}
+.card .art .bottle{filter:drop-shadow(0 12px 16px rgba(0,0,0,.6))}
+.card b{font-family:var(--display);font-size:13px;font-weight:700;letter-spacing:.11em}
+.card span{display:block;font-size:11px;color:var(--mute);margin-top:3px}
+
+/* ---------- tab bar ---------- */
+.tabs{
+  flex:0 0 auto;display:grid;grid-template-columns:repeat(5,1fr);
+  padding:11px 6px 26px;border-top:1px solid var(--line);background:#0B0B0D;
+}
+.tab{display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--dim);position:relative}
+.tab svg{width:21px;height:21px}
+.tab span{font-family:var(--display);font-size:9.5px;font-weight:500;letter-spacing:.02em}
+.tab.on{color:var(--bone)}
+.badge{
+  position:absolute;top:-5px;left:calc(50% + 5px);min-width:16px;height:16px;padding:0 4px;
+  border-radius:9px;background:var(--bold);color:#fff;
+  font-family:var(--display);font-size:9.5px;font-weight:700;
+  display:grid;place-items:center;border:1.5px solid #0B0B0D;
+}
+
+/* ---------- detail ---------- */
+#s-detail .shot{
+  position:relative;height:378px;flex:0 0 auto;
+  background:
+    radial-gradient(70% 55% at 50% 44%, rgba(128,128,138,.26), transparent 65%),
+    linear-gradient(180deg,#111113,#0A0A0C);
+  display:grid;place-items:center;
+}
+#s-detail .shot .bottle{filter:drop-shadow(0 34px 44px rgba(0,0,0,.8))}
+#s-detail .navrow{position:absolute;top:8px;left:20px;right:20px;display:flex;justify-content:space-between;z-index:3}
+#s-detail .navrow .right{display:flex;gap:10px}
+.dots{position:absolute;bottom:16px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#3A3A40}
+.dots i.on{background:var(--bone);width:16px;border-radius:3px}
+#s-detail .info{padding:22px 22px 0}
+#s-detail h1{font-size:23px;font-weight:600}
+#s-detail .sub{font-size:12.5px;color:var(--mute);margin-top:5px}
+.pricerow{display:flex;align-items:center;justify-content:space-between;margin:16px 0 15px}
+.price{font-family:var(--display);font-size:22px;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.rating{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--mute)}
+.rating b{font-family:var(--display);color:var(--bone);font-weight:600}
+.rating svg{width:14px;height:14px;color:#E0B341}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  padding:7px 13px;border-radius:9px;background:var(--panel-2);border:1px solid var(--line);
+  font-size:11.5px;color:#CFCDC8;
+}
+#s-detail .desc{margin:16px 0 18px;font-size:13px;line-height:1.62;color:#B6B4AF}
+.specs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.specs div{display:flex;gap:11px;align-items:center;padding:17px 0}
+.specs div+div{border-left:1px solid var(--line);padding-left:20px}
+.specs svg{width:19px;height:19px;color:var(--mute)}
+.specs b{display:block;font-family:var(--display);font-size:12px;font-weight:600}
+.specs span{display:block;font-size:11px;color:var(--dim);margin-top:2px}
+.notes{padding:20px 0 26px}
+.notes .eyebrow{margin-bottom:12px}
+.note{display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:1px solid #1B1B1E}
+.note:last-child{border-bottom:none}
+.note b{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);width:52px;flex:0 0 auto}
+.note span{font-size:12.5px;color:#C6C4BF}
+.actionbar{
+  flex:0 0 auto;display:flex;gap:12px;padding:14px 20px 28px;
+  border-top:1px solid var(--line);background:#0B0B0D;
+}
+.actionbar .icon-square{
+  width:54px;height:54px;border-radius:14px;border:1px solid var(--line);
+  background:var(--panel);display:grid;place-items:center;flex:0 0 auto;
+}
+.actionbar .icon-square svg{width:20px;height:20px}
+.actionbar .btn{flex:1}
+
+/* ---------- cart ---------- */
+.cartbar{display:flex;align-items:center;justify-content:space-between;padding:6px 22px 16px}
+.cartbar h1{font-size:22px}
+.cartbar button{font-size:13px;color:var(--bone);text-decoration:underline;text-underline-offset:3px}
+.shipnote{
+  margin:0 20px 16px;padding:14px 16px;border-radius:14px;background:var(--panel);
+  border:1px solid var(--line);
+}
+.shipnote .top{display:flex;gap:11px;align-items:center}
+.shipnote svg{width:18px;height:18px;color:var(--mute);flex:0 0 auto}
+.shipnote p{font-size:11.5px;color:#C6C4BF;line-height:1.35}
+.track{margin-top:11px;display:flex;align-items:center;gap:10px}
+.track .bar{flex:1;height:4px;border-radius:2px;background:#2A2A2E;overflow:hidden}
+.track .bar i{display:block;height:100%;background:var(--bone);border-radius:2px;transition:width .35s ease}
+.track .lbl{font-family:var(--display);font-size:10px;color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+.items{padding:0 20px;display:flex;flex-direction:column}
+.item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid #1B1B1E}
+.item .thumb{
+  width:66px;height:78px;border-radius:11px;flex:0 0 auto;display:grid;place-items:center;
+  background:linear-gradient(165deg,#1A1A1D,#101012);border:1px solid var(--line);
+}
+.item .meta{flex:1;min-width:0}
+.item h4{font-family:var(--display);font-size:14px;font-weight:600}
+.item .ml{font-size:11.5px;color:var(--dim);margin-top:3px}
+.item .row{display:flex;align-items:center;justify-content:space-between;margin-top:13px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.stepper button{width:31px;height:30px;display:grid;place-items:center;color:var(--bone);font-size:15px;line-height:1}
+.stepper button:hover{background:var(--panel-2)}
+.stepper .q{width:33px;text-align:center;font-family:var(--display);font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.item .amt{font-family:var(--display);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.item .kill{align-self:flex-start;color:var(--dim);width:22px;height:22px;display:grid;place-items:center}
+.item .kill:hover{color:var(--danger)}
+.item .kill svg{width:17px;height:17px}
+.empty{padding:70px 30px;text-align:center;color:var(--dim);font-size:13px;line-height:1.6}
+.empty b{display:block;font-family:var(--display);color:var(--bone);font-size:15px;margin-bottom:8px}
+.totals{padding:18px 20px 4px;display:flex;flex-direction:column;gap:11px}
+.totals .l{display:flex;justify-content:space-between;font-size:12.5px;color:var(--mute)}
+.totals .l .num{color:#D6D4CF}
+.totals .l.disc .num{color:var(--fresh)}
+.totals .grand{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-top:1px solid var(--line);margin-top:5px;padding-top:15px;
+}
+.totals .grand b{font-family:var(--display);font-size:15px;font-weight:600}
+.totals .grand .num{font-family:var(--display);font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.cartfoot{padding:16px 20px 22px;display:flex;flex-direction:column;gap:11px}
+
+/* ---------- order ---------- */
+.orders{padding:0 20px 26px;display:flex;flex-direction:column;gap:12px}
+.order{border:1px solid var(--line);border-radius:15px;background:var(--panel);padding:15px 16px}
+.order .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.order .id{font-family:var(--display);font-size:13px;font-weight:600;letter-spacing:.02em}
+.order .date{font-size:11px;color:var(--dim);margin-top:4px}
+.pill{
+  font-family:var(--display);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 9px;border-radius:7px;border:1px solid;flex:0 0 auto;
+}
+.pill.kirim{color:var(--clean);border-color:rgba(109,157,209,.36);background:rgba(109,157,209,.1)}
+.pill.selesai{color:var(--fresh);border-color:rgba(87,164,124,.36);background:rgba(87,164,124,.1)}
+.pill.batal{color:var(--danger);border-color:rgba(217,86,76,.34);background:rgba(217,86,76,.08)}
+.order .line{display:flex;gap:12px;align-items:center;margin-top:14px}
+.order .thumb{
+  width:46px;height:54px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;
+  background:linear-gradient(165deg,#1A1A1D,#101012);border:1px solid var(--line);overflow:hidden;
+}
+.order .line .what b{display:block;font-family:var(--display);font-size:13px;font-weight:600}
+.order .line .what span{display:block;font-size:11.5px;color:var(--dim);margin-top:3px}
+.order .foot{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:14px;padding-top:13px;border-top:1px solid #1B1B1E;
+}
+.order .foot .amt{font-family:var(--display);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.order .foot button{
+  font-family:var(--display);font-size:12px;font-weight:600;
+  padding:9px 15px;border-radius:9px;border:1px solid var(--line);background:var(--panel-2);
+}
+.order .foot button:hover{border-color:#3A3A40}
+.has-photo .order .thumb{background:var(--shot) 55% 42%/300% auto no-repeat}
+
+/* ---------- toast ---------- */
+.toast{
+  position:absolute;left:22px;right:22px;bottom:104px;z-index:20;
+  background:#EDEBE6;color:#0B0B0C;border-radius:13px;padding:14px 16px;
+  display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;
+  box-shadow:0 18px 34px -14px rgba(0,0,0,.85);
+  opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s ease,transform .22s ease;
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast svg{width:17px;height:17px}
+
+/* ---------- foto produk (dipakai kalau assets/velour-night tersedia) ---------- */
+.has-photo .bottle{display:none}
+.has-photo #s-onboard .hero{
+  background:
+    linear-gradient(180deg, rgba(8,8,10,.12) 0%, rgba(8,8,10,.42) 40%, rgba(8,8,10,.88) 70%, #08080A 100%),
+    linear-gradient(90deg, rgba(8,8,10,.93) 0%, rgba(8,8,10,.76) 34%, rgba(8,8,10,.30) 62%, rgba(8,8,10,0) 88%),
+    var(--shot) 36% 50%/cover no-repeat;
+}
+.has-photo #s-onboard .rock{display:none}
+.has-photo #s-detail .shot{
+  background:
+    radial-gradient(78% 62% at 50% 44%, rgba(8,8,10,0) 38%, rgba(8,8,10,.55) 78%, #08080A 100%),
+    var(--shot) 50% 48%/cover no-repeat;
+}
+.has-photo .promo .lineup{display:none}
+.has-photo .promo{background:linear-gradient(160deg,#18181B,#0F0F11)}
+.has-photo .promo::after{
+  content:"";position:absolute;right:0;top:0;bottom:0;width:58%;z-index:0;
+  background:var(--shot) 40% 38%/auto 170% no-repeat;
+}
+.has-photo .promo::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,#131316 0%,rgba(19,19,22,.96) 32%,rgba(19,19,22,.55) 52%,rgba(19,19,22,0) 78%);
+}
+.has-photo .promo > *{position:relative;z-index:2}
+.has-photo .card .art{
+  border-radius:10px;margin-bottom:12px;
+  background:var(--shot) 55% 42%/250% auto no-repeat;
+}
+.has-photo .item .thumb{background:var(--shot) 55% 42%/300% auto no-repeat}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:430px){
+  .phone{width:100%;max-width:375px;height:760px;box-shadow:0 0 0 6px #131316}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0C0C0E"/><stop offset="22%" stop-color="#37373D"/>
+      <stop offset="52%" stop-color="#141418"/><stop offset="80%" stop-color="#2B2B31"/>
+      <stop offset="100%" stop-color="#0A0A0C"/>
+    </linearGradient>
+    <linearGradient id="cap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#101013"/><stop offset="30%" stop-color="#45454C"/>
+      <stop offset="60%" stop-color="#1A1A1E"/><stop offset="100%" stop-color="#0D0D10"/>
+    </linearGradient>
+    <linearGradient id="label" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F6F4EF"/><stop offset="100%" stop-color="#DAD7D0"/>
+    </linearGradient>
+
+    <symbol id="flacon" viewBox="0 0 120 210">
+      <rect x="46" y="4" width="28" height="34" rx="4" fill="url(#cap)"/>
+      <rect x="52" y="36" width="16" height="10" fill="#1B1B1F"/>
+      <rect x="18" y="44" width="84" height="162" rx="12" fill="url(#glass)"/>
+      <rect x="18.6" y="44.6" width="82.8" height="160.8" rx="11.5" fill="none" stroke="#4A4A52" stroke-opacity=".5"/>
+      <rect x="30" y="82" width="60" height="74" rx="3" fill="url(#label)"/>
+      <text x="60" y="104" text-anchor="middle" font-family="Archivo, sans-serif" font-size="12.5" font-weight="600" letter-spacing="2.6" fill="#101012">SCNTR</text>
+      <line x1="40" y1="112" x2="80" y2="112" stroke="#B4B0A8" stroke-width=".8"/>
+      <text x="60" y="124" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="5" letter-spacing=".4" fill="#6A6862">you smell like</text>
+      <text x="60" y="136" text-anchor="middle" font-family="Archivo, sans-serif" font-size="8" font-style="italic" fill="#1A1A1C">velour night</text>
+      <text x="60" y="147" text-anchor="middle" font-family="Instrument Sans, sans-serif" font-size="4.4" letter-spacing=".3" fill="#7B7973">eau de parfum · 50 ml</text>
+      <rect x="26" y="52" width="7" height="140" rx="3.5" fill="#fff" fill-opacity=".07"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="brandline">
+  <b>SCNTR</b>
+  <span>Prototipe aplikasi · geser dan klik seperti aplikasi asli</span>
+</div>
+
+<div class="phone" id="phone">
+
+  <!-- ONBOARDING -->
+  <section class="screen on" id="s-onboard">
+    <div class="hero"></div><div class="rock"></div>
+    <div class="status"><span class="num">9:41</span>
+      <span class="glyphs"><span class="bars"><i></i><i></i><i></i><i></i></span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 18.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Zm0-4.6c-1.6 0-3 .6-4.1 1.7l1.5 1.5c.7-.7 1.6-1.1 2.6-1.1s1.9.4 2.6 1.1l1.5-1.5A5.8 5.8 0 0 0 12 13.9Zm0-4.6c-2.8 0-5.4 1.1-7.3 3l1.5 1.5A8.2 8.2 0 0 1 12 11.4c2.2 0 4.3.9 5.8 2.4l1.5-1.5a10.3 10.3 0 0 0-7.3-3Zm0-4.6c-4.1 0-7.8 1.6-10.6 4.3l1.5 1.5A13 13 0 0 1 12 6.8c3.5 0 6.8 1.4 9.1 3.7l1.5-1.5A15 15 0 0 0 12 4.7Z"/></svg>
+        <span class="batt"><i></i></span>
+      </span>
+    </div>
+    <div class="bottleWrap"><svg class="bottle" viewBox="0 0 120 210" width="206" height="360"><use href="#flacon"/></svg></div>
+    <div class="content">
+      <div class="wordmark kicker">SCNTR</div>
+      <h1>Wangi yang kerja keras diam-diam.</h1>
+      <div class="rule"></div>
+      <div class="feats">
+        <div class="feat">
+          <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6M12 20c-2 0-3.5-1.5-3.5-3.4 0-3.6 5-5 5-11M16.5 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6"/></svg></span>
+          <span><b>Maskulin</b><span>Tegas dan berkarakter</span></span>
+        </div>
+        <div class="feat">
+          <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.9"/></svg></span>
+          <span><b>Tahan Lama</b><span>8–12 jam*</span></span>
+        </div>
+        <div class="feat">
+          <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2 19 6v5.6c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V6l7-2.8Z"/></svg></span>
+          <span><b>Premium Quality</b><span>Bahan pilihan terbaik</span></span>
+        </div>
+      </div>
+      <div class="foot">
+        <button class="btn" data-go="home">Jelajahi Sekarang
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>
+        </button>
+        <p>Belum punya akun? <button data-go="home">Daftar</button></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOME -->
+  <section class="screen" id="s-home">
+    <div class="status"><span class="num">9:41</span>
+      <span class="glyphs"><span class="bars"><i></i><i></i><i></i><i></i></span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 18.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Zm0-4.6c-1.6 0-3 .6-4.1 1.7l1.5 1.5c.7-.7 1.6-1.1 2.6-1.1s1.9.4 2.6 1.1l1.5-1.5A5.8 5.8 0 0 0 12 13.9Zm0-4.6c-2.8 0-5.4 1.1-7.3 3l1.5 1.5A8.2 8.2 0 0 1 12 11.4c2.2 0 4.3.9 5.8 2.4l1.5-1.5a10.3 10.3 0 0 0-7.3-3Zm0-4.6c-4.1 0-7.8 1.6-10.6 4.3l1.5 1.5A13 13 0 0 1 12 6.8c3.5 0 6.8 1.4 9.1 3.7l1.5-1.5A15 15 0 0 0 12 4.7Z"/></svg>
+        <span class="batt"><i></i></span></span>
+    </div>
+    <div class="body">
+      <div class="appbar">
+        <div class="wordmark">SCNTR</div>
+        <div class="tools">
+          <button aria-label="Notifikasi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 5-2 6.5-2 6.5h16S18 14 18 9Z"/><path d="M13.7 20a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+          <button aria-label="Pesanan" data-go="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5.5 8h13l-1.2 12H6.7L5.5 8Z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg></button>
+        </div>
+      </div>
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="6.6"/><path d="m16 16 4 4"/></svg>
+        <input placeholder="Cari varian parfum..." aria-label="Cari varian parfum">
+      </label>
+
+      <div class="promo">
+        <h2>Parfum cowok yang ga drama.</h2>
+        <p>Dirancang untuk pria yang fokus dan tahu tujuan.</p>
+        <button class="btn sm" data-go="detail">Lihat Koleksi</button>
+        <div class="lineup">
+          <svg class="bottle b1" viewBox="0 0 120 210" width="50" height="87"><use href="#flacon"/></svg>
+          <svg class="bottle b2" viewBox="0 0 120 210" width="64" height="112"><use href="#flacon"/></svg>
+          <svg class="bottle b3" viewBox="0 0 120 210" width="47" height="82"><use href="#flacon"/></svg>
+        </div>
+      </div>
+
+      <div class="trust">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja 200rb</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 19 5.6v5.2c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V5.6L12 3Z"/><path d="m9 12 2.1 2.1L15.2 10"/></svg><span><b>100% Original</b><span>Garansi produk asli</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h9v9h-9z"/><path d="M11.5 11.5h4.4l3.6 3.4v2.6h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="16" cy="18" r="1.7"/><path d="M1 6h5M2 11h3"/></svg><span><b>Pengiriman Cepat</b><span>1–2 hari sampai</span></span></div>
+      </div>
+
+      <div class="sechead"><h3>Pilih Varian</h3><button data-go="detail">Lihat Semua</button></div>
+      <div class="rail" id="rail"></div>
+      <div style="height:22px"></div>
+    </div>
+    <nav class="tabs" data-tabs></nav>
+  </section>
+
+  <!-- DETAIL -->
+  <section class="screen" id="s-detail">
+    <div class="status"><span class="num">9:41</span>
+      <span class="glyphs"><span class="bars"><i></i><i></i><i></i><i></i></span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 18.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Zm0-4.6c-1.6 0-3 .6-4.1 1.7l1.5 1.5c.7-.7 1.6-1.1 2.6-1.1s1.9.4 2.6 1.1l1.5-1.5A5.8 5.8 0 0 0 12 13.9Zm0-4.6c-2.8 0-5.4 1.1-7.3 3l1.5 1.5A8.2 8.2 0 0 1 12 11.4c2.2 0 4.3.9 5.8 2.4l1.5-1.5a10.3 10.3 0 0 0-7.3-3Zm0-4.6c-4.1 0-7.8 1.6-10.6 4.3l1.5 1.5A13 13 0 0 1 12 6.8c3.5 0 6.8 1.4 9.1 3.7l1.5-1.5A15 15 0 0 0 12 4.7Z"/></svg>
+        <span class="batt"><i></i></span></span>
+    </div>
+    <div class="body">
+      <div class="shot">
+        <div class="navrow">
+          <button class="icon-btn" data-go="home" aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m14 5-7 7 7 7"/></svg></button>
+          <div class="right">
+            <button class="icon-btn" aria-label="Bagikan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="17.5" cy="6" r="2.6"/><circle cx="6.5" cy="12" r="2.6"/><circle cx="17.5" cy="18" r="2.6"/><path d="m9 10.8 6-3.6M9 13.2l6 3.6"/></svg></button>
+            <button class="icon-btn" id="loveBtn" aria-label="Simpan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9a3.9 3.9 0 0 1 7-2.4A3.9 3.9 0 0 1 19 11c0 4.6-7 9-7 9Z"/></svg></button>
+          </div>
+        </div>
+        <svg class="bottle" viewBox="0 0 120 210" width="196" height="343"><use href="#flacon"/></svg>
+        <div class="dots"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="info">
+        <h1 id="dTitle">SCNTR Velour Night</h1>
+        <div class="sub">Eau de Parfum · 50 ml</div>
+        <div class="pricerow">
+          <span class="price">Rp 169.000</span>
+          <span class="rating">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
+            <b>4.8</b> (126)
+          </span>
+        </div>
+        <div class="chips" id="dChips"><span class="chip">Aromatic</span><span class="chip">Woody</span><span class="chip">Musk</span></div>
+        <p class="desc" id="dDesc">Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.</p>
+        <div class="specs">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.9"/></svg><span><b>Tahan Lama</b><span>8–12 Jam</span></span></div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M9 3h6v2.6l3 4.2V21H6V9.8l3-4.2V3Z"/><path d="M6 14h12"/></svg><span><b>Isi Bersih</b><span>50 ml</span></span></div>
+        </div>
+        <div class="notes">
+          <div class="eyebrow">Piramida Aroma</div>
+          <div class="note"><b>Top</b><span>Bergamot, lada hitam, apel hijau</span></div>
+          <div class="note"><b>Heart</b><span>Lavender, iris, nutmeg</span></div>
+          <div class="note"><b>Base</b><span>Cedarwood, vetiver, white musk</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="actionbar">
+      <button class="icon-square" data-go="cart" aria-label="Lihat keranjang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.3 10.4h9.6L19 7.4H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg></button>
+      <button class="btn" id="addBtn">Tambah ke Keranjang</button>
+    </div>
+  </section>
+
+  <!-- CART -->
+  <section class="screen" id="s-cart">
+    <div class="status"><span class="num">9:41</span>
+      <span class="glyphs"><span class="bars"><i></i><i></i><i></i><i></i></span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 18.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Zm0-4.6c-1.6 0-3 .6-4.1 1.7l1.5 1.5c.7-.7 1.6-1.1 2.6-1.1s1.9.4 2.6 1.1l1.5-1.5A5.8 5.8 0 0 0 12 13.9Zm0-4.6c-2.8 0-5.4 1.1-7.3 3l1.5 1.5A8.2 8.2 0 0 1 12 11.4c2.2 0 4.3.9 5.8 2.4l1.5-1.5a10.3 10.3 0 0 0-7.3-3Zm0-4.6c-4.1 0-7.8 1.6-10.6 4.3l1.5 1.5A13 13 0 0 1 12 6.8c3.5 0 6.8 1.4 9.1 3.7l1.5-1.5A15 15 0 0 0 12 4.7Z"/></svg>
+        <span class="batt"><i></i></span></span>
+    </div>
+    <div class="body">
+      <div class="cartbar"><h1>Keranjang</h1><button id="editBtn">Kosongkan</button></div>
+      <div class="shipnote">
+        <div class="top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
+          <p id="shipMsg">Gratis ongkir untuk pembelian minimal Rp 200.000</p>
+        </div>
+        <div class="track"><span class="bar"><i id="shipBar" style="width:0%"></i></span><span class="lbl" id="shipLbl">Rp 0 / Rp 200.000</span></div>
+      </div>
+      <div class="items" id="items"></div>
+      <div id="summary"></div>
+    </div>
+    <div class="cartfoot" id="cartFoot"></div>
+    <nav class="tabs" data-tabs></nav>
+  </section>
+
+  <!-- ORDER -->
+  <section class="screen" id="s-orders">
+    <div class="status"><span class="num">9:41</span>
+      <span class="glyphs"><span class="bars"><i></i><i></i><i></i><i></i></span>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 18.5a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2Zm0-4.6c-1.6 0-3 .6-4.1 1.7l1.5 1.5c.7-.7 1.6-1.1 2.6-1.1s1.9.4 2.6 1.1l1.5-1.5A5.8 5.8 0 0 0 12 13.9Zm0-4.6c-2.8 0-5.4 1.1-7.3 3l1.5 1.5A8.2 8.2 0 0 1 12 11.4c2.2 0 4.3.9 5.8 2.4l1.5-1.5a10.3 10.3 0 0 0-7.3-3Zm0-4.6c-4.1 0-7.8 1.6-10.6 4.3l1.5 1.5A13 13 0 0 1 12 6.8c3.5 0 6.8 1.4 9.1 3.7l1.5-1.5A15 15 0 0 0 12 4.7Z"/></svg>
+        <span class="batt"><i></i></span></span>
+    </div>
+    <div class="body">
+      <div class="cartbar"><h1>Pesanan Saya</h1></div>
+      <div class="orders" id="orderList"></div>
+    </div>
+    <nav class="tabs" data-tabs></nav>
+  </section>
+
+  <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 7"/></svg><span id="toastMsg"></span></div>
+</div>
+
+<script>
+const PRICE = 169000, SHIP = 15000, FREE_MIN = 200000;
+const rupiah = n => "Rp " + n.toLocaleString("id-ID");
+
+const VARIANTS = [
+  {id:"fresh", name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
+   title:"SCNTR Fresh", desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.", chips:["Citrus","Aquatic","Green"]},
+  {id:"clean", name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
+   title:"SCNTR Clean", desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.", chips:["Soapy","Powdery","Musk"]},
+  {id:"bold", name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
+   title:"SCNTR Bold", desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.", chips:["Spicy","Woody","Amber"]},
+  {id:"velour", name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
+   title:"SCNTR Velour Night", desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.", chips:["Aromatic","Woody","Musk"]}
+];
+
+let active = VARIANTS[3];
+let cart = [{id:"clean", qty:1},{id:"fresh", qty:1}];
+
+const $ = s => document.querySelector(s);
+const el = (tag, cls, html) => { const n = document.createElement(tag); if(cls) n.className = cls; if(html!=null) n.innerHTML = html; return n; };
+
+/* ---- navigation ---- */
+const TABS = [
+  {id:"home", label:"Home", d:'<path d="M4 10.5 12 4l8 6.5V20h-5.5v-5h-5v5H4z"/>'},
+  {id:"detail", label:"Produk", d:'<path d="M9 3.5h6v2.4l3 4.1V20.5H6V10l3-4.1z"/><path d="M6 14h12"/>'},
+  {id:"cart", label:"Keranjang", d:'<path d="M3 4.5h2.2L7.5 15h9.6L19 7.8H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/>'},
+  {id:"orders", label:"Order", d:'<rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M7.5 9h4M7.5 12.5h9M7.5 16h6"/>'},
+  {id:"account", label:"Akun", d:'<circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c1.2-3.4 3.8-5 7-5s5.8 1.6 7 5"/>'}
+];
+
+function buildTabs(){
+  document.querySelectorAll("[data-tabs]").forEach(nav => {
+    nav.innerHTML = "";
+    ["home","detail","cart","orders","account"].forEach(id => {
+      const t = TABS.find(x => x.id === id);
+      const b = el("button","tab",
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${t.d}</svg><span>${t.label}</span>`);
+      b.dataset.go = id;
+      b.dataset.tab = id;
+      if(id === "cart"){ const bg = el("span","badge"); bg.id = "badge-" + nav.closest(".screen").id; b.appendChild(bg); }
+      nav.appendChild(b);
+    });
+  });
+}
+
+function go(id){
+  if(id === "account"){ toast("Halaman Akun belum ada di prototipe ini"); return; }
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
+  const target = $("#s-" + id);
+  target.classList.add("on");
+  target.querySelector(".body")?.scrollTo(0,0);
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.tab === id));
+  render();
+}
+
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-go]");
+  if(g) go(g.dataset.go);
+});
+
+/* ---- toast ---- */
+let toastTimer;
+function toast(msg){
+  $("#toastMsg").textContent = msg;
+  $("#toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("#toast").classList.remove("show"), 2200);
+}
+
+/* ---- home rail ---- */
+function buildRail(){
+  const rail = $("#rail");
+  rail.innerHTML = "";
+  VARIANTS.forEach(v => {
+    const c = el("button","card",
+      `<span class="art"><svg class="bottle" viewBox="0 0 120 210" width="62" height="108"><use href="#flacon"/></svg></span>
+       <b style="color:${v.color}">${v.name}</b><span>${v.tag}</span>`);
+    c.addEventListener("click", () => { active = v; go("detail"); });
+    rail.appendChild(c);
+  });
+}
+
+/* ---- detail ---- */
+function renderDetail(){
+  $("#dTitle").textContent = active.title;
+  $("#dDesc").textContent = active.desc;
+  $("#dChips").innerHTML = active.chips.map(c => `<span class="chip">${c}</span>`).join("");
+}
+
+$("#addBtn").addEventListener("click", () => {
+  const line = cart.find(l => l.id === active.id);
+  if(line) line.qty++; else cart.push({id:active.id, qty:1});
+  render();
+  toast(active.title + " masuk keranjang");
+});
+
+$("#loveBtn").addEventListener("click", e => {
+  const on = e.currentTarget.classList.toggle("loved");
+  e.currentTarget.querySelector("svg").setAttribute("fill", on ? "currentColor" : "none");
+  toast(on ? "Disimpan ke favorit" : "Dihapus dari favorit");
+});
+
+/* ---- cart ---- */
+$("#editBtn").addEventListener("click", () => {
+  if(!cart.length){ toast("Keranjang sudah kosong"); return; }
+  cart = [];
+  render();
+  toast("Keranjang dikosongkan");
+});
+
+function setQty(id, delta){
+  const line = cart.find(l => l.id === id);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty < 1) cart = cart.filter(l => l.id !== id);
+  render();
+}
+
+function renderCart(){
+  const wrap = $("#items");
+  wrap.innerHTML = "";
+  if(!cart.length){
+    wrap.appendChild(el("div","empty","<b>Keranjang masih kosong</b>Pilih varian yang paling kamu banget, nanti balik lagi ke sini."));
+  }
+  cart.forEach(line => {
+    const v = VARIANTS.find(x => x.id === line.id);
+    const row = el("div","item",
+      `<span class="thumb"><svg class="bottle" viewBox="0 0 120 210" width="40" height="70"><use href="#flacon"/></svg></span>
+       <div class="meta">
+         <h4>${v.title}</h4>
+         <div class="ml">50 ml · ${v.tag}</div>
+         <div class="row">
+           <span class="stepper">
+             <button data-minus aria-label="Kurangi">−</button>
+             <span class="q num">${line.qty}</span>
+             <button data-plus aria-label="Tambah">+</button>
+           </span>
+           <span class="amt">${rupiah(PRICE * line.qty)}</span>
+         </div>
+       </div>
+       <button class="kill" aria-label="Hapus ${v.title}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5h15M9.5 6.5V4.4h5v2.1M6.5 6.5 7.6 20h8.8l1.1-13.5M10 10v6.4M14 10v6.4"/></svg></button>`);
+    row.querySelector("[data-minus]").addEventListener("click", () => setQty(line.id,-1));
+    row.querySelector("[data-plus]").addEventListener("click", () => setQty(line.id,1));
+    row.querySelector(".kill").addEventListener("click", () => { cart = cart.filter(l => l.id !== line.id); render(); toast(v.title + " dihapus"); });
+    wrap.appendChild(row);
+  });
+
+  const count = cart.reduce((a,l) => a + l.qty, 0);
+  const subtotal = count * PRICE;
+  const freeShip = subtotal >= FREE_MIN;
+  const disc = freeShip ? SHIP : 0;
+  const total = subtotal + SHIP - disc;
+
+  $("#shipBar").style.width = Math.min(100, subtotal / FREE_MIN * 100) + "%";
+  $("#shipLbl").textContent = rupiah(subtotal) + " / " + rupiah(FREE_MIN);
+  $("#shipMsg").textContent = freeShip
+    ? "Ongkir kamu gratis. Nice."
+    : "Gratis ongkir untuk pembelian minimal Rp 200.000";
+
+  $("#summary").innerHTML = cart.length ? `
+    <div class="totals">
+      <div class="l"><span>Subtotal (${count} Produk)</span><span class="num">${rupiah(subtotal)}</span></div>
+      <div class="l"><span>Ongkir</span><span class="num">${rupiah(SHIP)}</span></div>
+      <div class="l disc"><span>Diskon ongkir</span><span class="num">${disc ? "− " + rupiah(disc) : rupiah(0)}</span></div>
+      <div class="grand"><b>Total</b><span class="num">${rupiah(total)}</span></div>
+    </div>` : "";
+
+  $("#cartFoot").innerHTML = "";
+  if(cart.length){
+    const co = el("button","btn","Checkout");
+    co.addEventListener("click", () => toast("Checkout " + rupiah(total) + " — lanjut ke pembayaran"));
+    $("#cartFoot").appendChild(co);
+  }
+  const shop = el("button","btn ghost", cart.length ? "Lanjut Belanja" : "Mulai Belanja");
+  shop.addEventListener("click", () => go("home"));
+  $("#cartFoot").appendChild(shop);
+
+  document.querySelectorAll(".badge").forEach(b => {
+    b.textContent = count;
+    b.style.display = count ? "grid" : "none";
+  });
+}
+
+function render(){ renderDetail(); renderCart(); renderOrders(); }
+
+/* ---- riwayat pesanan ---- */
+const ORDERS = [
+  {id:"SCNTR-2481", date:"22 Agu 2026", status:"kirim", label:"Dikirim",
+   variant:"velour", qty:1, total:184000, cta:"Lacak Paket",
+   note:"JNE REG, tiba 24–25 Agu"},
+  {id:"SCNTR-2306", date:"9 Agu 2026", status:"selesai", label:"Selesai",
+   variant:"bold", qty:2, total:338000, cta:"Beli Lagi", note:"Diterima 12 Agu"},
+  {id:"SCNTR-2210", date:"27 Jul 2026", status:"batal", label:"Dibatalkan",
+   variant:"clean", qty:1, total:184000, cta:"Beli Lagi", note:"Stok habis"}
+];
+
+function renderOrders(){
+  const list = $("#orderList");
+  list.innerHTML = "";
+  ORDERS.forEach(o => {
+    const v = VARIANTS.find(x => x.id === o.variant);
+    const card = el("article","order",
+      `<div class="top">
+         <div><div class="id">#${o.id}</div><div class="date">${o.date} · ${o.note}</div></div>
+         <span class="pill ${o.status}">${o.label}</span>
+       </div>
+       <div class="line">
+         <span class="thumb"><svg class="bottle" viewBox="0 0 120 210" width="28" height="49"><use href="#flacon"/></svg></span>
+         <span class="what"><b>${v.title}</b><span>50 ml · ${o.qty} produk</span></span>
+       </div>
+       <div class="foot"><span class="amt">${rupiah(o.total)}</span><button>${o.cta}</button></div>`);
+    card.querySelector(".foot button").addEventListener("click", () => {
+      if(o.cta === "Lacak Paket"){ toast("Paket #" + o.id + " sedang dalam perjalanan"); return; }
+      const line = cart.find(l => l.id === v.id);
+      if(line) line.qty += o.qty; else cart.push({id:v.id, qty:o.qty});
+      render();
+      go("cart");
+      toast(v.title + " ditambahkan lagi");
+    });
+    list.appendChild(card);
+  });
+}
+
+/* ---- foto produk ---- */
+const PHOTO = "assets/velour-night.jpg";
+(function loadPhoto(){
+  const probe = new Image();
+  probe.onload = () => {
+    document.documentElement.style.setProperty("--shot", 'url("' + PHOTO + '")');
+    document.documentElement.classList.add("has-photo");
+  };
+  probe.src = PHOTO;
+})();
+
+buildTabs();
+buildRail();
+render();
+</script>
