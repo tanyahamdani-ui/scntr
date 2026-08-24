@@ -1,0 +1,16 @@
+{
+  "name": "SCNTR — Parfum",
+  "short_name": "SCNTR",
+  "description": "Parfum cowok yang ga drama. Eau de parfum 50 ml.",
+  "start_url": "/app.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#08080A",
+  "theme_color": "#08080A",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

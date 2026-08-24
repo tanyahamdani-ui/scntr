@@ -263,6 +263,75 @@ section.pad{padding:clamp(56px,7vw,104px) var(--pad)}
 .grand .num{font-family:var(--display);font-size:20px;font-weight:700}
 .drawer .foot .btn{width:100%}
 
+/* ---------- checkout ---------- */
+.modal{
+  position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:20px;
+  background:rgba(4,4,6,.72);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.modal.open{opacity:1;pointer-events:auto}
+.sheet{
+  width:min(460px,100%);max-height:min(88vh,760px);overflow-y:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  transform:translateY(10px);transition:transform .22s ease;
+}
+.modal.open .sheet{transform:none}
+.sheet .head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:22px 24px 16px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;background:var(--panel);z-index:2;
+}
+.sheet .head h2{font-size:19px}
+.sheet .head button{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;color:var(--mute)}
+.sheet .head button:hover{background:var(--panel-2);color:var(--bone)}
+.sheet .head svg{width:19px;height:19px}
+.sheet .pad{padding:20px 24px 24px;display:flex;flex-direction:column;gap:18px}
+.recap{display:flex;flex-direction:column;gap:9px}
+.recap .r{display:flex;justify-content:space-between;gap:14px;font-size:13px;color:var(--mute)}
+.recap .r .num{color:#D6D4CF}
+.recap .r.tot{
+  border-top:1px solid var(--line);padding-top:12px;margin-top:3px;
+  font-size:15px;color:var(--bone);align-items:baseline;
+}
+.recap .r.tot b{font-family:var(--display)}
+.recap .r.tot .num{font-family:var(--display);font-size:19px;font-weight:700;color:var(--bone)}
+.qris{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding:22px;border:1px solid var(--line);border-radius:16px;background:var(--ink);
+}
+.qris img{width:210px;height:210px;object-fit:contain;background:#fff;border-radius:12px;padding:10px}
+.qris .missing{
+  width:210px;height:210px;border-radius:12px;border:1px dashed #3A3A40;
+  display:grid;place-items:center;text-align:center;padding:20px;
+  font-size:12px;color:var(--dim);line-height:1.5;
+}
+.qris .amount{text-align:center}
+.qris .amount span{display:block;font-size:11.5px;color:var(--mute)}
+.qris .amount b{display:block;font-family:var(--display);font-size:24px;font-weight:700;margin-top:5px;font-variant-numeric:tabular-nums}
+.qris .hint{font-size:12px;color:var(--dim);text-align:center;line-height:1.55;max-width:34ch}
+.steps{display:flex;flex-direction:column;gap:10px}
+.steps .s{display:flex;gap:12px;font-size:13px;color:#B6B4AF;line-height:1.5}
+.steps .s i{
+  flex:0 0 auto;width:21px;height:21px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;font-family:var(--display);font-size:11px;font-weight:600;
+  font-style:normal;color:var(--mute);margin-top:1px;
+}
+.fields{display:flex;flex-direction:column;gap:12px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.field input,.field textarea{
+  background:var(--ink);border:1px solid var(--line);border-radius:11px;
+  padding:13px 14px;color:var(--bone);font-family:var(--body);font-size:14px;resize:vertical;
+}
+.field input::placeholder,.field textarea::placeholder{color:#4A4A52}
+.field input:focus,.field textarea:focus{outline:none;border-color:#4A4A52}
+.field.bad input,.field.bad textarea{border-color:var(--danger)}
+.field .err{font-size:11.5px;color:var(--danger);display:none}
+.field.bad .err{display:block}
+.sheet .go{display:flex;flex-direction:column;gap:10px}
+.sheet .go .btn{width:100%}
+.sheet .note{font-size:11.5px;color:var(--dim);line-height:1.55;text-align:center}
+
 /* ---------- footer ---------- */
 footer{
   padding:clamp(44px,5vw,72px) var(--pad);border-top:1px solid var(--line);
@@ -294,7 +363,6 @@ footer nav a:hover{color:var(--bone)}
     <li><a href="#koleksi">Koleksi</a></li>
     <li><a href="#spotlight">Velour Night</a></li>
     <li><a href="#cerita">Cerita</a></li>
-    <li><a href="app.html">Versi App</a></li>
   </menu>
   <div class="right">
     <button class="cartbtn" id="openCart">
@@ -415,6 +483,54 @@ footer nav a:hover{color:var(--bone)}
   </div>
   <div class="foot" id="drawerFoot"></div>
 </aside>
+
+<div class="modal" id="checkout" role="dialog" aria-modal="true" aria-label="Pembayaran">
+  <div class="sheet">
+    <div class="head">
+      <h2>Bayar pakai QRIS</h2>
+      <button id="closeCheckout" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="pad">
+      <div class="recap" id="recap"></div>
+
+      <div class="qris">
+        <img id="qrisImg" src="assets/qris.png" alt="Kode QRIS SCNTR" hidden>
+        <div class="missing" id="qrisMissing">Kode QRIS belum dipasang.<br>Simpan gambarnya sebagai <b>assets/qris.png</b> di folder situs.</div>
+        <div class="amount"><span>Masukkan nominal persis</span><b id="qrisAmount">Rp 0</b></div>
+        <p class="hint">QRIS statis: nominalnya kamu ketik sendiri di aplikasi. Bisa dibayar dari bank mana pun, GoPay, OVO, DANA, ShopeePay.</p>
+      </div>
+
+      <div class="steps">
+        <div class="s"><i>1</i><span>Scan kode di atas, ketik nominalnya persis, lalu bayar.</span></div>
+        <div class="s"><i>2</i><span>Screenshot bukti bayarnya.</span></div>
+        <div class="s"><i>3</i><span>Isi data di bawah, lalu kirim ke WhatsApp kami beserta bukti bayarnya.</span></div>
+      </div>
+
+      <div class="fields">
+        <div class="field" id="f-nama">
+          <label for="i-nama">Nama penerima</label>
+          <input id="i-nama" placeholder="Nama lengkap" autocomplete="name">
+          <span class="err">Nama masih kosong.</span>
+        </div>
+        <div class="field" id="f-hp">
+          <label for="i-hp">Nomor HP</label>
+          <input id="i-hp" placeholder="08xxxxxxxxxx" inputmode="tel" autocomplete="tel">
+          <span class="err">Nomor HP masih kosong.</span>
+        </div>
+        <div class="field" id="f-alamat">
+          <label for="i-alamat">Alamat pengiriman</label>
+          <textarea id="i-alamat" rows="3" placeholder="Jalan, nomor, kelurahan, kecamatan, kota, kode pos"></textarea>
+          <span class="err">Alamat masih kosong.</span>
+        </div>
+      </div>
+
+      <div class="go">
+        <button class="btn" id="waSend">Kirim Pesanan ke WhatsApp</button>
+        <p class="note">Pesanan dan rinciannya otomatis tersusun di chat. Kirim juga bukti bayarnya di chat yang sama.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 7"/></svg><span id="toastMsg"></span></div>
 
@@ -572,7 +688,7 @@ function renderCart(){
        <div class="sumline disc"><span>Diskon ongkir</span><span class="num">${disc ? "− " + rupiah(disc) : rupiah(0)}</span></div>
        <div class="grand"><b>Total</b><span class="num">${rupiah(total)}</span></div>`;
     const co = el("button","btn","Checkout");
-    co.addEventListener("click", () => toast("Checkout " + rupiah(total) + " — lanjut ke pembayaran"));
+    co.addEventListener("click", () => { openCart(false); openCheckout(); });
     foot.appendChild(co);
   }
   const keep = el("button","btn ghost", cart.length ? "Lanjut Belanja" : "Mulai Belanja");
@@ -582,11 +698,92 @@ function renderCart(){
 
 function render(){ renderCart(); }
 
+/* ---- checkout: QRIS statis + konfirmasi WhatsApp ---- */
+// Ganti dengan nomor WhatsApp toko, format internasional tanpa "+" atau spasi.
+// Contoh: 6281234567890
+const WA_NUMBER = "628984618900";
+
+function totals(){
+  const count = cart.reduce((a,l) => a + l.qty, 0);
+  const subtotal = count * PRICE;
+  const disc = subtotal >= FREE_MIN ? SHIP : 0;
+  return {count, subtotal, disc, total: subtotal ? subtotal + SHIP - disc : 0};
+}
+
+function openCheckout(){
+  if(!cart.length) return;
+  const t = totals();
+  $("#recap").innerHTML =
+    cart.map(l => {
+      const v = VARIANTS.find(x => x.id === l.id);
+      return `<div class="r"><span>${v.title} · ${l.qty} pcs</span><span class="num">${rupiah(PRICE * l.qty)}</span></div>`;
+    }).join("") +
+    `<div class="r"><span>Ongkir</span><span class="num">${rupiah(SHIP)}</span></div>` +
+    (t.disc ? `<div class="r"><span>Diskon ongkir</span><span class="num">− ${rupiah(t.disc)}</span></div>` : "") +
+    `<div class="r tot"><b>Total</b><span class="num">${rupiah(t.total)}</span></div>`;
+  $("#qrisAmount").textContent = rupiah(t.total);
+  $("#checkout").classList.add("open");
+  $("#i-nama").focus();
+}
+function closeCheckout(){ $("#checkout").classList.remove("open"); }
+
+function pesanWhatsApp(){
+  const nama = $("#i-nama").value.trim();
+  const hp = $("#i-hp").value.trim();
+  const alamat = $("#i-alamat").value.trim();
+  let ok = true;
+  [["f-nama",nama],["f-hp",hp],["f-alamat",alamat]].forEach(([id,val]) => {
+    const bad = !val;
+    document.getElementById(id).classList.toggle("bad", bad);
+    if(bad) ok = false;
+  });
+  if(!ok){ toast("Lengkapi dulu nama, nomor HP, dan alamatnya"); return; }
+  if(!WA_NUMBER){ toast("Nomor WhatsApp toko belum diisi di kode"); return; }
+
+  const t = totals();
+  const baris = cart.map((l,i) => {
+    const v = VARIANTS.find(x => x.id === l.id);
+    return `${i+1}. ${v.title} 50 ml x${l.qty} — ${rupiah(PRICE * l.qty)}`;
+  }).join("\n");
+
+  const pesan =
+`Halo SCNTR, saya mau pesan:
+
+${baris}
+
+Subtotal: ${rupiah(t.subtotal)}
+Ongkir: ${rupiah(SHIP)}${t.disc ? `\nDiskon ongkir: − ${rupiah(t.disc)}` : ""}
+Total: ${rupiah(t.total)}
+
+Nama: ${nama}
+No HP: ${hp}
+Alamat: ${alamat}
+
+Sudah bayar via QRIS, bukti transfer saya kirim di chat ini.`;
+
+  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(pesan), "_blank", "noopener");
+  closeCheckout();
+  toast("Pesanan dibuka di WhatsApp — kirim juga bukti bayarnya");
+}
+
+(function cekQris(){
+  const img = $("#qrisImg"), miss = $("#qrisMissing");
+  const ada = () => { img.hidden = false; miss.hidden = true; };
+  const tiada = () => { img.hidden = true; miss.hidden = false; };
+  img.addEventListener("load", ada);
+  img.addEventListener("error", tiada);
+  if(img.complete) img.naturalWidth ? ada() : tiada();
+})();
+
+$("#closeCheckout").addEventListener("click", closeCheckout);
+$("#checkout").addEventListener("click", e => { if(e.target.id === "checkout") closeCheckout(); });
+$("#waSend").addEventListener("click", pesanWhatsApp);
+
 /* ---- events ---- */
 $("#openCart").addEventListener("click", () => openCart(true));
 $("#closeCart").addEventListener("click", () => openCart(false));
 $("#scrim").addEventListener("click", () => openCart(false));
-document.addEventListener("keydown", e => { if(e.key === "Escape") openCart(false); });
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ closeCheckout(); openCart(false); } });
 $("#spotAdd").addEventListener("click", () => add(active.id));
 $("#spotCart").addEventListener("click", () => openCart(true));
 $("#addAll").addEventListener("click", () => {
