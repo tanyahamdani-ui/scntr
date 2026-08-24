@@ -133,6 +133,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
 @media (display-mode:standalone),(display-mode:fullscreen),(max-width:520px){
   body{padding:0;gap:0;min-height:100dvh}
   .brandline{display:none}
+  .status{display:none}
   .phone{
     width:100%;max-width:none;height:100dvh;
     border-radius:0;border:none;box-shadow:none;
@@ -1004,6 +1005,16 @@ function renderOrders(){
     list.appendChild(card);
   });
 }
+
+/* ---- jam status bar: ikut jam asli, bukan 9:41 ---- */
+(function jam(){
+  const set = () => {
+    const t = new Date().toLocaleTimeString("id-ID", {hour:"2-digit", minute:"2-digit"});
+    document.querySelectorAll(".status .num").forEach(n => n.textContent = t);
+  };
+  set();
+  setInterval(set, 20000);
+})();
 
 /* ---- PWA: service worker + ajakan pasang ---- */
 (function pwa(){
