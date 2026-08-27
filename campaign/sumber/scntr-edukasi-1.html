@@ -1,0 +1,36 @@
+<!doctype html><html lang="id"><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--ink:#0B0B0D;--bone:#F3F1EC;--mute:#9A9AA1;--dim:#66666E;--line:#2A2A2F;
+--fresh:#57A47C;--clean:#6D9DD1;--bold:#C8483E;--velour:#F3F1EC;
+--display:"Archivo","Helvetica Neue",Arial,sans-serif;--body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1350px;overflow:hidden}
+body{background:var(--ink);color:var(--bone);font-family:var(--body);-webkit-font-smoothing:antialiased}
+.card{width:1080px;height:1350px;position:relative;display:flex;flex-direction:column;padding:80px}
+.logo{font-family:var(--display);font-size:26px;font-weight:600;letter-spacing:.38em;color:var(--dim)}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;
+ border-top:1px solid var(--line);padding-top:28px}
+.harga{font-family:var(--display);font-size:30px;font-weight:600}
+.url{font-family:var(--display);font-size:26px;font-weight:500;color:var(--mute)}
+.isi{flex:1;margin-top:80px}
+h1{font-family:var(--display);font-size:68px;font-weight:600;letter-spacing:-.035em;line-height:1.07;text-wrap:balance;max-width:16ch}
+ol{list-style:none;margin-top:72px;counter-reset:n}
+li{counter-increment:n;display:grid;grid-template-columns:88px 1fr;gap:0 24px;margin-bottom:44px}
+li::before{content:counter(n);font-family:var(--display);font-size:26px;font-weight:600;color:var(--mute);
+ width:64px;height:64px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center}
+li b{font-family:var(--display);font-size:33px;font-weight:600;align-self:center}
+li span{grid-column:2;font-size:27px;line-height:1.45;color:var(--mute);margin-top:8px;max-width:34ch}
+</style><div class="card">
+  <div class="logo">S C N T R</div>
+  <div class="isi">
+    <h1>Wangi kamu cepat hilang? Bukan parfumnya.</h1>
+    <ol>
+      <li><b>Kulitmu kering.</b><span>Wangi butuh minyak buat nempel. Semprot habis mandi, pas badan masih lembap.</span></li>
+      <li><b>Kamu gosok pergelangan.</b><span>Digosok itu mematahkan molekulnya. Semprot, lalu biarkan kering sendiri.</span></li>
+      <li><b>Salah titik.</b><span>Leher, belakang telinga, dada. Titik yang hangat dan bergerak, bukan baju.</span></li>
+    </ol>
+  </div>
+  <div class="foot"><div class="harga">Rp 169.000 · 50 ml</div><div class="url">scntr.pages.dev</div></div></div></html>
