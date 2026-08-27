@@ -1,0 +1,334 @@
+<title>Peluncuran SCNTR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#0B0B0D;--panel:#141417;--panel-2:#1B1B1F;--line:#2A2A2F;
+  --bone:#F3F1EC;--mute:#9A9AA1;--dim:#66666E;
+  --fresh:#57A47C;--clean:#6D9DD1;--bold:#C8483E;--gold:#C9A961;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+:root[data-theme="light"]{
+  --ink:#FAF9F6;--panel:#FFFFFF;--panel-2:#F2F0EA;--line:#DFDCD3;
+  --bone:#131316;--mute:#5E5E66;--dim:#8A8A93;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--ink);color:var(--bone);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;line-height:1.6;
+  padding:clamp(28px,5vw,64px) clamp(18px,5vw,56px) 90px;
+}
+.wrap{max-width:940px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;letter-spacing:-.02em;font-weight:600}
+.eyebrow{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.lede{font-size:clamp(15px,1.6vw,17px);color:var(--mute);max-width:62ch;margin-top:14px}
+
+header.top{border-bottom:1px solid var(--line);padding-bottom:34px;margin-bottom:44px}
+header.top h1{font-size:clamp(30px,5vw,50px);line-height:1.05;margin-top:14px;font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.tag{
+  font-family:var(--display);font-size:11.5px;font-weight:500;
+  padding:7px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--mute);
+}
+
+section{margin-bottom:52px}
+section > h2{font-size:clamp(21px,2.6vw,27px);margin-bottom:6px;font-weight:600}
+section > p.sub{color:var(--mute);font-size:14.5px;max-width:62ch;margin-bottom:24px}
+
+.note{
+  border-left:2px solid var(--gold);background:var(--panel);
+  padding:16px 18px;border-radius:0 12px 12px 0;font-size:14px;color:var(--mute);margin:22px 0;
+}
+.note b{color:var(--bone);font-family:var(--display);font-size:13.5px;display:block;margin-bottom:5px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{font-size:14px;margin-bottom:8px}
+.card p{font-size:13px;color:var(--mute)}
+.card .who{font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:620px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{
+  font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);background:var(--panel-2);white-space:nowrap;
+}
+tr:last-child td{border-bottom:none}
+td.day{font-family:var(--display);font-weight:600;white-space:nowrap;color:var(--bone)}
+td .kanal{
+  display:inline-block;font-family:var(--display);font-size:10px;font-weight:600;letter-spacing:.08em;
+  padding:3px 7px;border-radius:5px;border:1px solid var(--line);color:var(--mute);margin-right:5px;white-space:nowrap;
+}
+.k-ig{color:var(--clean);border-color:rgba(109,157,209,.4)}
+.k-tt{color:var(--bold);border-color:rgba(200,72,62,.4)}
+.k-wa{color:var(--fresh);border-color:rgba(87,164,124,.4)}
+
+.copy{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}
+.copy .label{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.copy .label b{font-family:var(--display);font-size:13px}
+.copy .label span{font-size:11.5px;color:var(--dim)}
+.copy pre{
+  font-family:var(--body);font-size:13.5px;line-height:1.65;white-space:pre-wrap;
+  color:#C9C7C2;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:15px;overflow-x:auto;
+}
+:root[data-theme="light"] .copy pre{color:#33333A}
+
+ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:12px}
+ol.steps li{counter-increment:s;display:flex;gap:14px;font-size:14px;color:var(--mute)}
+ol.steps li::before{
+  content:counter(s);flex:0 0 auto;width:24px;height:24px;border-radius:50%;
+  border:1px solid var(--line);display:grid;place-items:center;
+  font-family:var(--display);font-size:11.5px;font-weight:600;color:var(--bone);margin-top:2px;
+}
+ol.steps li b{color:var(--bone);font-family:var(--display);font-size:13.5px}
+
+ul.check{list-style:none;display:flex;flex-direction:column;gap:10px}
+ul.check li{display:flex;gap:12px;font-size:14px;color:var(--mute)}
+ul.check li::before{content:"";flex:0 0 auto;width:16px;height:16px;border-radius:4px;border:1px solid var(--line);margin-top:4px}
+ul.check li b{color:var(--bone);font-family:var(--display);font-size:13.5px;display:block}
+
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.kpi div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi b{display:block;font-family:var(--display);font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.kpi span{display:block;font-size:12px;color:var(--mute);margin-top:5px}
+.kpi small{display:block;font-size:11px;color:var(--dim);margin-top:8px}
+
+footer{border-top:1px solid var(--line);padding-top:26px;font-size:12.5px;color:var(--dim);max-width:70ch}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <span class="eyebrow">Rencana kampanye · 14 hari</span>
+  <h1>Peluncuran SCNTR</h1>
+  <p class="lede">Kampanye organik untuk membuka toko <b>scntr.pages.dev</b>: membangun kenal dulu, baru jualan. Semua materi di sini tinggal salin-tempel, dan dirancang untuk dikerjakan sendirian tanpa tim dan tanpa budget iklan.</p>
+  <div class="meta">
+    <span class="tag">Instagram + TikTok + WhatsApp</span>
+    <span class="tag">Tanpa budget iklan</span>
+    <span class="tag">Target: 20 order pertama</span>
+    <span class="tag">Rp 169.000 / 50 ml</span>
+  </div>
+</header>
+
+<div class="note">
+  <b>Asumsi yang kupakai — koreksi kalau meleset</b>
+  Kamu jualan sendiri, belum ada tim; belum ada budget iklan; stok siap kirim; dan foto produk yang tersedia baru satu (Velour Night). Kalau ada budget iklan atau tanggal peluncuran yang sudah dipatok, bilang saja — kalendernya kusesuaikan.
+</div>
+
+<section>
+  <h2>Inti pesan</h2>
+  <p class="sub">Satu kalimat yang harus nempel di kepala orang setelah lihat kontenmu: <b>SCNTR itu wangi yang kerja diam-diam.</b> Semua konten di bawah cuma variasi dari kalimat ini.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="who">Buat siapa</div>
+      <h3>Cowok 18–30, kerja atau kuliah</h3>
+      <p>Mau wangi enak tapi ogah ribet belajar istilah parfum. Budget di bawah 200rb. Beli lewat HP, bayar QRIS.</p>
+    </div>
+    <div class="card">
+      <div class="who">Masalahnya</div>
+      <h3>Takut salah pilih</h3>
+      <p>Wangi tidak bisa dicium lewat layar. Ini rintangan terbesar jualan parfum online — dan seluruh kampanye ini dirancang untuk menjinakkannya.</p>
+    </div>
+    <div class="card">
+      <div class="who">Jawaban kita</div>
+      <h3>Terjemahkan wangi jadi situasi</h3>
+      <p>Jangan bilang "aromatic woody musk". Bilang "buat hari yang harus rapi" atau "buat malam yang butuh kesan pertama".</p>
+    </div>
+    <div class="card">
+      <div class="who">Alasan beli sekarang</div>
+      <h3>Harga pembuka + gratis ongkir</h3>
+      <p>Gratis ongkir otomatis di atas Rp 200.000, artinya beli dua varian sudah gratis ongkir. Ini yang didorong terus.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Tiga sudut konten</h2>
+  <p class="sub">Semua post masuk salah satu dari tiga ini. Kalau sebuah ide tidak masuk mana pun, buang.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="who">Sudut 1 · 50%</div>
+      <h3>Situasi, bukan aroma</h3>
+      <p>"Wangi buat ketemu calon mertua." "Wangi buat lembur tapi tetap kelihatan waras." Orang mengenali dirinya di situasi, bukan di daftar nada aroma.</p>
+    </div>
+    <div class="card">
+      <div class="who">Sudut 2 · 30%</div>
+      <h3>Edukasi singkat</h3>
+      <p>Beda eau de parfum dan eau de toilette. Kenapa wangi hilang di kulit kering. Cara semprot yang benar. Bikin kamu terlihat paham, bukan cuma jualan.</p>
+    </div>
+    <div class="card">
+      <div class="who">Sudut 3 · 20%</div>
+      <h3>Bukti dan wajah</h3>
+      <p>Testimoni, proses packing, tanganmu sendiri menyiapkan paket. Toko baru butuh bukti bahwa ada manusia di baliknya.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Kalender 14 hari</h2>
+  <p class="sub">Satu post utama per hari, plus Story. Hari 1–4 sengaja belum jualan — biar tidak terasa seperti orang asing yang tiba-tiba menodong.</p>
+  <div class="scroll">
+    <table>
+      <thead>
+        <tr><th>Hari</th><th>Kanal</th><th>Konten</th><th>Tujuan</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="day">H-3</td><td><span class="kanal k-ig">IG</span><span class="kanal k-tt">TikTok</span></td><td>Teaser: foto botol gelap, caption cuma satu kalimat inti. Tanpa harga, tanpa link.</td><td>Bikin penasaran</td></tr>
+        <tr><td class="day">H-2</td><td><span class="kanal k-ig">IG</span></td><td>Carousel: "4 varian, 4 karakter" — Fresh, Clean, Bold, Velour Night dengan situasinya masing-masing.</td><td>Kenalkan pilihan</td></tr>
+        <tr><td class="day">H-1</td><td><span class="kanal k-ig">IG</span><span class="kanal k-wa">WA</span></td><td>Story hitung mundur + broadcast ke kontak dekat: "besok buka, aku kabarin duluan".</td><td>Kumpulkan pembeli pertama</td></tr>
+        <tr><td class="day">Hari 1</td><td><span class="kanal k-ig">IG</span><span class="kanal k-tt">TikTok</span><span class="kanal k-wa">WA</span></td><td><b>Buka toko.</b> Post pengumuman + link di bio. Story: cara pesan dalam 3 langkah, rekam layar dari HP.</td><td>Order pertama</td></tr>
+        <tr><td class="day">Hari 2</td><td><span class="kanal k-tt">TikTok</span></td><td>Video 20 detik: "cara semprot parfum yang bener" — edukasi, produk cuma numpang lewat.</td><td>Jangkauan baru</td></tr>
+        <tr><td class="day">Hari 3</td><td><span class="kanal k-ig">IG</span></td><td>Post situasi: "wangi buat interview". Ajak komentar: "besok kamu ada acara apa?"</td><td>Interaksi</td></tr>
+        <tr><td class="day">Hari 4</td><td><span class="kanal k-ig">IG</span><span class="kanal k-wa">WA</span></td><td>Proses packing order pertama. Wajah atau tangan harus kelihatan.</td><td>Bukti hidup</td></tr>
+        <tr><td class="day">Hari 5</td><td><span class="kanal k-tt">TikTok</span></td><td>"Parfum 169rb vs 1,6 juta — bedanya apa sih?" Jujur, tidak menjelekkan yang mahal.</td><td>Jangkauan baru</td></tr>
+        <tr><td class="day">Hari 6</td><td><span class="kanal k-ig">IG</span></td><td>Testimoni pertama, apa adanya. Screenshot chat lebih dipercaya daripada desain rapi.</td><td>Kepercayaan</td></tr>
+        <tr><td class="day">Hari 7</td><td><span class="kanal k-ig">IG</span><span class="kanal k-wa">WA</span></td><td><b>Dorongan mingguan:</b> ingatkan gratis ongkir untuk pembelian dua botol.</td><td>Naikkan nilai order</td></tr>
+        <tr><td class="day">Hari 8</td><td><span class="kanal k-ig">IG</span></td><td>Kuis Story: "kamu tim Fresh atau tim Bold?" Balas satu per satu.</td><td>Interaksi</td></tr>
+        <tr><td class="day">Hari 9</td><td><span class="kanal k-tt">TikTok</span></td><td>"Wangi kamu ketahuan orang tipe apa" — konten ringan yang gampang dibagikan.</td><td>Jangkauan baru</td></tr>
+        <tr><td class="day">Hari 10</td><td><span class="kanal k-ig">IG</span></td><td>Di balik nama: kenapa varian tenang itu dinamai Velour Night.</td><td>Kedalaman merek</td></tr>
+        <tr><td class="day">Hari 11</td><td><span class="kanal k-ig">IG</span><span class="kanal k-wa">WA</span></td><td>Kumpulan testimoni minggu pertama jadi satu carousel.</td><td>Kepercayaan</td></tr>
+        <tr><td class="day">Hari 12</td><td><span class="kanal k-tt">TikTok</span></td><td>Jawab komentar yang paling sering muncul, direkam sebagai video.</td><td>Hilangkan keraguan</td></tr>
+        <tr><td class="day">Hari 13</td><td><span class="kanal k-ig">IG</span></td><td>Post situasi kedua: "wangi buat kondangan". Format sama, konteks baru.</td><td>Interaksi</td></tr>
+        <tr><td class="day">Hari 14</td><td><span class="kanal k-ig">IG</span><span class="kanal k-wa">WA</span></td><td><b>Tutup babak:</b> laporan dua minggu — berapa botol terkirim, ucapan terima kasih, ajakan terakhir.</td><td>Order + bahan konten</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Materi siap pakai</h2>
+  <p class="sub">Tinggal salin. Ganti bagian dalam kurung siku sesuai keadaan.</p>
+
+  <div class="copy">
+    <div class="label"><b>Caption pembuka — Hari 1</b><span>Instagram</span></div>
+    <pre>Wangi yang kerja keras diam-diam.
+
+Aku bikin SCNTR karena capek lihat parfum cowok yang teriak-teriak.
+Ini kebalikannya: kecium pas orang mendekat, bukan pas kamu masuk ruangan.
+
+4 varian, 50 ml, Rp 169.000.
+Fresh buat pagi. Clean buat kantor. Bold buat malam. Velour Night buat yang nggak mau ditebak.
+
+Beli 2 gratis ongkir, otomatis.
+
+Link di bio → scntr.pages.dev
+
+#parfumpria #parfumlokal #eaudeparfum #parfummurah</pre>
+  </div>
+
+  <div class="copy">
+    <div class="label"><b>Naskah TikTok — 20 detik</b><span>Rekam sekali jalan, tanpa skrip kaku</span></div>
+    <pre>[0–3 dtk, botol di tangan, kamera dekat]
+"Parfum cowok itu masalahnya satu: kebanyakan teriak."
+
+[3–8 dtk, semprot ke pergelangan tangan]
+"Yang bagus tuh yang baru kecium pas orang udah deket."
+
+[8–15 dtk, tunjukkan empat botol atau sebut satu-satu]
+"Aku bikin empat. Fresh buat pagi, Clean buat kantor,
+Bold buat malam, Velour Night buat yang nggak mau ditebak."
+
+[15–20 dtk, kembali ke kamera]
+"169 ribu, 50 ml. Link ada di bio."
+
+Teks di layar: WANGI YANG KERJA DIAM-DIAM
+Suara: musik tenang, jangan yang lagi ramai — nggak cocok sama produknya.</pre>
+  </div>
+
+  <div class="copy">
+    <div class="label"><b>Broadcast WhatsApp — H-1</b><span>Kirim ke kontak dekat, satu per satu, jangan grup</span></div>
+    <pre>Hai [nama], aku baru buka toko parfum sendiri namanya SCNTR.
+
+Besok resmi buka, tapi aku kabarin kamu duluan.
+Parfum cowok, 50 ml, Rp 169.000, ada 4 varian.
+
+Kalau kamu penasaran, ini tokonya: scntr.pages.dev
+
+Nggak maksa beli kok — dilihat aja udah seneng banget. 🙏</pre>
+  </div>
+
+  <div class="copy">
+    <div class="label"><b>Balasan DM: "wanginya kayak apa?"</b><span>Pertanyaan paling sering, siapkan jawabannya</span></div>
+    <pre>Susah dijelasin lewat teks, jadi aku bantuin pilih ya.
+
+Kamu lebih sering butuh wangi buat suasana yang mana?
+1. Pagi, kuliah/kerja, pengen seger — Fresh
+2. Kantor, meeting, harus rapi — Clean
+3. Malam, ketemu orang, pengen berkesan — Bold
+4. Sehari-hari tapi nggak mau pasaran — Velour Night
+
+Ketik nomornya aja, nanti aku jelasin yang itu.</pre>
+  </div>
+
+  <div class="copy">
+    <div class="label"><b>Balasan DM: "kok mahal/murah ya?"</b><span>Jangan defensif, jawab dengan angka</span></div>
+    <pre>Wajar sih nanyanya. 50 ml itu kira-kira 500 semprot,
+dipakai 2x sehari berarti jalan 8 bulanan.
+
+Jadi Rp 169.000 itu sekitar Rp 700 per hari.
+Lebih murah dari parkir. 😄
+
+Kalau mau coba dulu, ambil satu aja nggak apa-apa.</pre>
+  </div>
+
+  <div class="copy">
+    <div class="label"><b>Bio Instagram</b><span>Ganti sekarang, sebelum kampanye jalan</span></div>
+    <pre>SCNTR — parfum cowok yang ga drama
+Eau de parfum 50 ml · Rp 169.000
+Gratis ongkir min. 200rb
+Pesan di sini ↓
+scntr.pages.dev</pre>
+  </div>
+</section>
+
+<section>
+  <h2>Sebelum hari pertama</h2>
+  <p class="sub">Beberapa hal ini harus beres sebelum posting pertama, karena semua konten akan mengarahkan orang ke sana.</p>
+  <ul class="check">
+    <li><b>Coba pesan sendiri dari HP</b>Dari pilih varian sampai pesanan masuk WhatsApp. Kamu harus tahu persis apa yang dilihat pembeli.</li>
+    <li><b>Siapkan foto untuk tiga varian lain</b>Sekarang keempat varian pakai foto yang sama. Pembeli akan menyadarinya, dan itu mengurangi kepercayaan.</li>
+    <li><b>Tentukan ongkir dan kurir</b>Situs pakai ongkir flat Rp 15.000. Pastikan itu masuk akal untuk kota tujuan yang jauh, atau siapkan jawaban di chat.</li>
+    <li><b>Siapkan balasan cepat WhatsApp</b>Simpan lima jawaban di atas sebagai pesan tersimpan, biar bisa balas dalam hitungan detik.</li>
+    <li><b>Pasang aplikasi ke layar utama</b>Supaya kamu sendiri terbiasa dengan tampilan yang dipakai pembeli.</li>
+    <li><b>Siapkan pencatatan order</b>Pesanan masuk lewat chat dan tidak tersimpan otomatis di mana pun. Cukup spreadsheet sederhana untuk 20 order pertama.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ukuran keberhasilan</h2>
+  <p class="sub">Angka untuk 14 hari pertama, dengan modal nol rupiah. Kalau meleset jauh, yang diperbaiki dulu bagian paling bawah corongnya.</p>
+  <div class="kpi">
+    <div><b>20</b><span>order</span><small>≈ Rp 3,4 juta kotor</small></div>
+    <div><b>50</b><span>chat masuk</span><small>1 dari 2,5 chat jadi order itu wajar</small></div>
+    <div><b>1,4</b><span>botol per order</span><small>didorong lewat gratis ongkir</small></div>
+    <div><b>10</b><span>testimoni</span><small>bahan konten bulan berikutnya</small></div>
+  </div>
+  <div class="note" style="margin-top:22px">
+    <b>Kalau chat ramai tapi order sepi</b>
+    Masalahnya di keyakinan, bukan di jangkauan. Perbanyak testimoni dan bukti, jangan tambah post jualan.
+    <br><br>
+    <b>Kalau chat sepi sejak awal</b>
+    Masalahnya di konten, bukan di produk. Perbanyak Sudut 1 dan 2 — konten yang berguna atau bikin orang mengenali dirinya, bukan konten katalog.
+  </div>
+</section>
+
+<section>
+  <h2>Kalau nanti ada budget iklan</h2>
+  <p class="sub">Jangan mulai dari iklan. Tunggu sampai ada konten organik yang terbukti disukai orang, baru dorong yang itu.</p>
+  <ol class="steps">
+    <li><b>Pilih satu konten dengan simpanan terbanyak</b> — bukan yang paling banyak suka. Simpanan berarti orang menganggapnya berguna.</li>
+    <li><b>Naikkan dengan Rp 50.000 selama 3 hari</b> ke audiens cowok 18–30 di kotamu. Cukup untuk tahu apakah tembus.</li>
+    <li><b>Ukur satu angka saja:</b> berapa chat masuk. Kalau di bawah 5, ganti kontennya, bukan tambah budgetnya.</li>
+    <li><b>Baru naikkan bertahap</b> setelah ada satu konten yang stabil mendatangkan chat.</li>
+  </ol>
+</section>
+
+<footer>
+  Rencana ini dirancang untuk toko yang baru buka dan dikerjakan sendirian, jadi sengaja tidak menuntut produksi konten berat. Bagian yang paling mungkin meleset adalah target 20 order — angka itu asumsi, bukan janji, dan sangat bergantung pada seberapa besar lingkaran pertemananmu di dua minggu pertama. Setelah 14 hari, yang paling berharga bukan omzetnya, melainkan testimoni dan konten yang sudah terkumpul.
+</footer>
+
+</div>
