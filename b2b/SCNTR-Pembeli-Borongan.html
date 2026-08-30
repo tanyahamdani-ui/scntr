@@ -1,0 +1,1268 @@
+<title>Pembeli Borongan SCNTR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #E8E6E1;
+    --surface: #FCFBFA;
+    --surface-2: #F1EFEB;
+    --ink: #1A1815;
+    --muted: #6E6862;
+    --accent: #A8641B;
+    --accent-soft: #F0E2CE;
+    --line: #D3CFC8;
+    --line-strong: #B8B2A9;
+    --ok: #2F6B4A;
+
+    --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131211;
+      --surface: #1D1B19;
+      --surface-2: #262320;
+      --ink: #E9E5DF;
+      --muted: #968E85;
+      --accent: #D9973F;
+      --accent-soft: #38291733;
+      --line: #302C28;
+      --line-strong: #46403A;
+      --ok: #6FBF8E;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #131211;
+    --surface: #1D1B19;
+    --surface-2: #262320;
+    --ink: #E9E5DF;
+    --muted: #968E85;
+    --accent: #D9973F;
+    --accent-soft: #38291733;
+    --line: #302C28;
+    --line-strong: #46403A;
+    --ok: #6FBF8E;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead { display: flex; flex-direction: column; gap: 16px; }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .standfirst {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--muted);
+    font-size: 16.5px;
+  }
+
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+
+  .fact { background: var(--surface); padding: 14px 16px; }
+
+  .fact dt {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 4px;
+  }
+
+  .fact dd {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- tier sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 18px; }
+
+  .tier-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .tier-head h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .tier-head p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 60ch; }
+
+  .tier-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- lead card ---------- */
+
+  .lead {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lead-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 12px;
+  }
+
+  .lead-name {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 18.5px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .chip {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    border: 1px solid var(--line-strong);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .chip.hot {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .why { margin: 0; font-size: 15px; color: var(--ink); max-width: 62ch; }
+  .why span { color: var(--muted); }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border-radius: 3px;
+  }
+
+  .contacts b { font-weight: 500; color: var(--ink); }
+
+  details {
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+  }
+
+  summary {
+    cursor: pointer;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary::before {
+    content: "▸ ";
+    display: inline-block;
+    transition: transform 0.15s ease;
+  }
+
+  details[open] summary::before { content: "▾ "; }
+
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .msg {
+    margin: 12px 0 0;
+    white-space: pre-wrap;
+    font-family: var(--f-body);
+    font-size: 14.5px;
+    line-height: 1.62;
+    color: var(--ink);
+    background: var(--surface-2);
+    border-left: 2px solid var(--line-strong);
+    padding: 14px 16px;
+    border-radius: 0 3px 3px 0;
+    overflow-x: auto;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+  .btn {
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 13.5px;
+    padding: 8px 14px;
+    border-radius: 3px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #FFFDF9;
+  }
+
+  .btn.primary:hover { color: #FFFDF9; opacity: 0.88; }
+  .btn.copied { color: var(--ok); border-color: var(--ok); }
+
+  /* ---------- flow ---------- */
+
+  .flow {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 13px;
+    border-left: 1px solid var(--line-strong);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .step { position: relative; display: flex; flex-direction: column; gap: 6px; }
+
+  .step::before {
+    content: "";
+    position: absolute;
+    left: -17px;
+    top: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--ground);
+    border: 1px solid var(--line-strong);
+  }
+
+  .step-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 10px;
+  }
+
+  .step-num {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .step-head h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .chip.who-you {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .step p { margin: 0; font-size: 14.5px; color: var(--muted); max-width: 62ch; }
+  .step p b { color: var(--ink); font-weight: 600; }
+
+  .timing, .gap {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .timing-label {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .timing p:last-child, .gap p:last-child {
+    margin: 0;
+    font-size: 14.5px;
+    max-width: 62ch;
+  }
+
+  .timing b, .gap b { font-weight: 600; }
+
+  /* ---------- crib ---------- */
+
+  .crib {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .crib h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  .crib .q {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+
+  th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .scroller { overflow-x: auto; }
+
+  .note {
+    font-size: 13.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    max-width: 64ch;
+  }
+
+  .note a { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">SCNTR — Daftar Prospek Borongan</p>
+    <h1>Pembeli borongan buat SCNTR</h1>
+    <p class="standfirst">Sembilan calon pembeli yang beli <strong>banyak sekaligus</strong>, bukan satu-dua botol. Vendor hampers korporat dan jaringan grooming — mereka yang jualan ke end user, kamu yang produksi dan kirim. Tiap kartu udah ada pesan pembuka yang ditulis khusus buat mereka: <strong>tekan tombol, WhatsApp kebuka, teksnya udah keisi.</strong></p>
+
+    <dl class="facts">
+      <div class="fact"><dt>Prospek siap kirim</dt><dd>9</dd></div>
+      <div class="fact"><dt>Harga retail</dt><dd>Rp169.000</dd></div>
+      <div class="fact"><dt>Target pesanan</dt><dd>50–250 pcs</dd></div>
+      <div class="fact"><dt>Kontak dicek</dt><dd>Agu 2026</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============ ALUR ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Alur · dari chat pertama sampai duit masuk</p>
+      <h2>Jalannya sampai mana</h2>
+      <p>Delapan tahap, sekitar 3–6 minggu dari pesan pertama sampai pembayaran. Yang ditandai <b>kamu</b> artinya harus kamu sendiri; sisanya jalan tanpa kamu.</p>
+    </div>
+
+    <ol class="flow">
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">1</span>
+          <h3>Kirim 9 pesan pembuka</h3>
+          <span class="chip who-you">Kamu · 15 menit</span>
+        </div>
+        <p>Tekan tombol WhatsApp di tiap kartu di bawah, teksnya sudah keisi, tinggal kirim. Habisin semuanya dalam satu duduk — jangan dicicil, biar balasannya datang berbarengan.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">2</span>
+          <h3>Tiga sampai empat bales</h3>
+          <span class="chip">2–5 hari</span>
+        </div>
+        <p>Dari 9, wajar cuma 3–4 yang nyaut. Itu angka normal, bukan tanda produknya jelek. Yang diam, tinggalin — jangan buang tenaga ngejar.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">3</span>
+          <h3>Mereka minta price list</h3>
+          <span class="chip who-you">Kamu · 2 menit</span>
+        </div>
+        <p>Pertanyaan pertama, hampir selalu. Balasannya sudah ditulis di bagian bawah halaman ini — salin, tempel, kirim. Di titik ini mereka biasanya juga minta katalog produk.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">4</span>
+          <h3>Mereka minta sample</h3>
+          <span class="chip hot">Titik serius pertama</span>
+        </div>
+        <p>Kalau sudah minta sample, mereka beneran mempertimbangkan. Kirim satu botol, ongkir biar mereka yang tanggung — itu saringan alami buat yang cuma iseng. Bagian ini kerjaan kamu banget: kemas, kirim, kasih resi.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">5</span>
+          <h3>Nego jumlah</h3>
+          <span class="chip">1–2 minggu</span>
+        </div>
+        <p>Mereka bakal nawar. Aturannya satu: jangan turunkan harga, naikkan jumlahnya. Harga Rp95.000 itu ada, tapi cuma di 250 pcs. Balasannya juga sudah ditulis di bawah.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">6</span>
+          <h3>PO masuk, DP 50% cair</h3>
+          <span class="chip hot">Duit pertama</span>
+        </div>
+        <p>Vendor korporat kerja pakai dokumen. Mereka minta surat penawaran resmi, kamu balas invoice, mereka terbitkan PO dan transfer DP. Uangnya masuk sebelum kamu produksi — jadi modalnya bukan dari kantong kamu.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">7</span>
+          <h3>Produksi dan kirim</h3>
+          <span class="chip who-you">Kamu · bagian yang kamu kuasai</span>
+        </div>
+        <p>Siapkan stok, kemas, kirim. Pelunasan biasanya cair setelah barang diterima dan dicek. Inilah kenapa jalur ini cocok buat kamu: dari delapan tahap, cuma di sini tenaganya kepakai banyak.</p>
+      </li>
+
+      <li class="step">
+        <div class="step-head">
+          <span class="step-num">8</span>
+          <h3>Pesanan ulang</h3>
+          <span class="chip hot">Yang paling berharga</span>
+        </div>
+        <p>Kalau isian hampernya lancar, mereka pesan lagi musim berikutnya tanpa kamu perlu jualan ulang. Satu vendor yang cocok nilainya lebih besar daripada seratus pembeli eceran — dan nol chat pembeli buat kamu.</p>
+      </li>
+    </ol>
+
+    <div class="timing">
+      <p class="timing-label">Kenapa sekarang waktunya</p>
+      <p>Hampers korporat itu musiman, dan puncaknya akhir tahun. Vendor mengunci pemasok di <b>September–Oktober</b>, jadi mengetuk di Agustus itu pas — mereka masih nyusun daftar isian. Lewat November, kamu kelewat satu siklus penuh dan harus nunggu Ramadan.</p>
+    </div>
+
+    <div class="gap">
+      <p class="timing-label">Dua hal yang belum ada</p>
+      <p>Di tahap 3 mereka minta katalog produk, di tahap 6 mereka minta surat penawaran dan invoice. Dua-duanya belum kamu punya, dan dua-duanya bakal diminta dalam minggu pertama.</p>
+    </div>
+  </section>
+
+  <!-- ============ TIER A ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Prioritas A · paling nyambung</p>
+      <h2>Vendor hampers &amp; souvenir korporat</h2>
+      <p>Mereka dibayar perusahaan buat ngisi paket hadiah. Parfum 50 ml itu isian ideal: nilainya kelihatan, ringan buat ongkir, dan nggak ada tanggal kedaluwarsa kayak makanan. Satu deal bisa 100–500 botol.</p>
+    </div>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="Suplai parfum SCNTR untuk hampers korporat">
+      <div class="lead-top">
+        <h3 class="lead-name">Lokasoka</h3>
+        <span class="chip hot">Paling cocok</span>
+        <span class="chip">Jakarta Selatan · Bogor</span>
+      </div>
+      <p class="why">Mereka terang-terangan bilang jadi rumah buat <b>lebih dari 2.000 UKM</b> yang produknya masuk ke gift set korporat. <span>Artinya nyari brand lokal baru itu memang kerjaan mereka — kamu bukan orang asing yang ngetuk pintu.</span></p>
+      <div class="contacts">
+        <span><b>Web</b> lokasoka.com</span>
+        <span><b>IG</b> @lokasoka_com</span>
+        <span><b>Kantor</b> Bukit Duri, Jaksel · Bogor</span>
+        <span><b>Jam</b> Sen–Jum 09.00–16.00</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Lokasoka, saya Dani dari SCNTR.
+
+SCNTR itu brand parfum pria lokal — 4 varian (Fresh, Clean, Bold, Velour Night), 50 ml, retail Rp169.000. Produk sudah jadi, stok ada, produksi jalan.
+
+Saya lihat Lokasoka menaungi ribuan UKM buat gift set korporat. Saya mau menawarkan SCNTR jadi salah satu isian: parfum 50 ml itu ringan buat ongkir, nilainya kelihatan di tangan penerima, dan nggak ada urusan kedaluwarsa seperti F&amp;B.
+
+Saya siap dengan harga khusus untuk pesanan mulai 50 pcs, dan terbuka buat custom label atau kotak sesuai klien kamu.
+
+Boleh saya kirim price list dan foto produknya? Kalau perlu, saya kirim 1 botol sample gratis biar bisa dicium langsung.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://lokasoka.com/business/corporate-gift" target="_blank" rel="noopener">Buka situsnya</a>
+          <a class="btn" href="https://instagram.com/lokasoka_com" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6281287472997" data-mail="" data-subject="Suplai parfum SCNTR untuk hampers Souvia">
+      <div class="lead-top">
+        <h3 class="lead-name">Souvia</h3>
+        <span class="chip hot">Udah pakai parfum</span>
+        <span class="chip">Bogor · Kuningan, Jaksel</span>
+      </div>
+      <p class="why">Koleksi hampers mereka <b>sudah memasukkan parfum</b> sebagai isian. <span>Jadi kamu nggak perlu meyakinkan bahwa parfum layak masuk hamper — tinggal bersaing sebagai pemasoknya.</span></p>
+      <div class="contacts">
+        <span><b>WA</b> 0812-8747-2997</span>
+        <span><b>Telp</b> (0251) 2006006</span>
+        <span><b>IG</b> @souvia.co.id</span>
+        <span><b>Store</b> Jl. Karbela Timur No.6, Kuningan</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Souvia, saya Dani dari SCNTR.
+
+Saya lihat hampers Souvia sudah pakai parfum sebagai salah satu isian. Saya produsen parfum pria lokal — merek SCNTR, 4 varian (Fresh, Clean, Bold, Velour Night), 50 ml, retail Rp169.000.
+
+Saya mau menawarkan diri jadi pemasok parfum untuk hampers Souvia. Stok siap, produksi jalan, dan saya bisa ikut kebutuhan custom — label, kotak, sampai kartu ucapan.
+
+Untuk pesanan mulai 50 pcs saya kasih harga khusus.
+
+Boleh saya kirim price list dan foto produknya? Saya juga siap kirim 1 sample gratis buat dicek kualitas dan wanginya.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" href="https://instagram.com/souvia.co.id" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6282351888910" data-mail="info@totalgiftsindonesia.com" data-subject="Penawaran suplai parfum SCNTR untuk gift set">
+      <div class="lead-top">
+        <h3 class="lead-name">Total Gifts Indonesia</h3>
+        <span class="chip">Kb. Jeruk, Jakarta Barat</span>
+      </div>
+      <p class="why">Katalog mereka penuh barang fungsional — tumbler, powerbank, tas, payung. <span>Belum ada lini perawatan diri sama sekali, jadi parfum masuk sebagai kategori baru, bukan pesaing barang yang sudah mereka jual.</span></p>
+      <div class="contacts">
+        <span><b>WA</b> 0823-5188-8910</span>
+        <span><b>Telp</b> (021) 2263 4742</span>
+        <span><b>Email</b> info@totalgiftsindonesia.com</span>
+        <span><b>IG</b> @totalgiftsindonesia</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Total Gifts Indonesia, saya Dani dari SCNTR.
+
+Saya lihat katalog Total Gifts kuat di merchandise fungsional — drinkware, gadget, tas, alat tulis. Yang belum ada: lini personal care.
+
+SCNTR adalah brand parfum pria lokal, 4 varian, 50 ml, retail Rp169.000. Buat gift set dan seminar kit, parfum punya kelebihan yang jarang dipunya merchandise lain: dipakai tiap hari, dan penerimanya inget siapa yang ngasih.
+
+Saya siap suplai dengan harga khusus mulai 50 pcs, dan bisa custom label untuk logo klien kamu.
+
+Boleh saya kirim price list dan foto produknya? Sample gratis juga bisa saya kirim kalau mau dicek dulu.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" data-mail-link>Kirim via email</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6282213288183" data-mail="kampanee.gift@gmail.com" data-subject="Penawaran suplai parfum SCNTR untuk hampers korporat">
+      <div class="lead-top">
+        <h3 class="lead-name">Kampanee Gift</h3>
+        <span class="chip">Surabaya</span>
+      </div>
+      <p class="why">Empat kategori produk mereka semuanya barang keras — tumbler, alat tulis, elektronik, kemasan. <span>Parfum jadi satu-satunya isian yang sifatnya personal, dan itu yang bikin hamper terasa nggak generik.</span></p>
+      <div class="contacts">
+        <span><b>WA</b> 0822-1328-8183</span>
+        <span><b>Telp</b> (031) 548 4342</span>
+        <span><b>Email</b> kampanee.gift@gmail.com</span>
+        <span><b>IG</b> @kampanee_gift</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Kampanee Gift, saya Dani dari SCNTR.
+
+Saya perhatikan isian hampers Kampanee kebanyakan barang fungsional — tumbler, alat tulis, elektronik. Semuanya kuat, tapi impersonal.
+
+SCNTR adalah brand parfum pria lokal: 4 varian, 50 ml, retail Rp169.000. Satu botol parfum bikin hamper terasa dipilihin, bukan diborong. Ringan buat ongkir, dan nggak ada masa kedaluwarsa.
+
+Saya siap jadi pemasok dengan harga khusus mulai 50 pcs, termasuk opsi custom label.
+
+Boleh saya kirim price list dan foto produknya? Sample gratis bisa saya kirim ke Surabaya kalau mau dicek langsung.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" data-mail-link>Kirim via email</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6285708828727" data-mail="business@kirasouvenir.com" data-subject="Penawaran suplai parfum SCNTR untuk hampers custom">
+      <div class="lead-top">
+        <h3 class="lead-name">Kira Souvenir</h3>
+        <span class="chip">Surabaya · kirim se-Indonesia</span>
+      </div>
+      <p class="why">Jualan utama mereka adalah kecepatan — hamper custom jadi dalam dua hari. <span>Vendor secepat itu butuh pemasok yang stoknya selalu siap, dan itu justru sisi yang kamu pegang.</span></p>
+      <div class="contacts">
+        <span><b>Telp</b> 0857-0882-8727</span>
+        <span><b>Email</b> business@kirasouvenir.com</span>
+        <span><b>IG</b> @kirasouvenir</span>
+        <span><b>Alamat</b> City of Tomorrow Mall, Surabaya</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Kira Souvenir, saya Dani dari SCNTR.
+
+Saya baca Kira bisa menyelesaikan hamper korporat custom dalam dua hari. Kecepatan segitu cuma jalan kalau pemasoknya selalu punya stok — dan itu bagian yang saya pegang.
+
+SCNTR adalah brand parfum pria lokal: 4 varian, 50 ml, retail Rp169.000. Stok siap kirim, produksi jalan rutin.
+
+Saya menawarkan SCNTR jadi isian hamper Kira, dengan harga khusus mulai 50 pcs dan opsi custom label untuk klien kamu.
+
+Boleh saya kirim price list dan foto produknya? Saya juga siap kirim 1 sample gratis.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" data-mail-link>Kirim via email</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6287888112836" data-mail="sales.tirtapro@gmail.com" data-subject="Kolaborasi bundling parfum SCNTR + pouch Tirtapro">
+      <div class="lead-top">
+        <h3 class="lead-name">Tirtapro</h3>
+        <span class="chip">Setu, Tangerang Selatan</span>
+      </div>
+      <p class="why">Mereka produsen tas, pouch, dan dompet kulit sintetis. <span>Pouch + parfum itu bundel yang masuk akal — mereka punya wadahnya, kamu punya isinya. Tawarannya kolaborasi, bukan sekadar titip barang.</span></p>
+      <div class="contacts">
+        <span><b>WA</b> 0878-8811-2836</span>
+        <span><b>Email</b> sales.tirtapro@gmail.com</span>
+        <span><b>IG</b> @tirtapro</span>
+        <span><b>Pabrik</b> Jl. Lingkar Selatan, Tangsel</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Tirtapro, saya Dani dari SCNTR.
+
+Tirtapro bikin pouch dan tas custom untuk souvenir korporat. Saya bikin parfum pria — merek SCNTR, 4 varian, 50 ml, retail Rp169.000.
+
+Ide saya sederhana: gabungkan jadi satu paket. Pouch Tirtapro dengan logo klien, isinya satu botol SCNTR. Kamu naik nilai per paketnya tanpa nambah lini produksi, saya dapat jalur distribusi. Isian, bukan pesaing.
+
+Saya siap suplai dengan harga khusus mulai 50 pcs.
+
+Kalau menarik, boleh saya kirim price list dan foto produknya? Sample gratis juga saya siapkan — jaraknya dekat, Tangsel ke tempat saya.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" data-mail-link>Kirim via email</a>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <!-- ============ TIER B ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Prioritas B · pesanan berulang</p>
+      <h2>Jaringan barbershop &amp; grooming pria</h2>
+      <p>Pelanggan mereka persis pembeli SCNTR: cowok yang lagi ngurus penampilan, di ruangan tempat wangi jadi bahan obrolan. Nilai per pesanan lebih kecil dari hampers, tapi ulang terus tiap bulan.</p>
+    </div>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="Penawaran suplai parfum SCNTR">
+      <div class="lead-top">
+        <h3 class="lead-name">Starsbox Indonesia</h3>
+        <span class="chip hot">Udah jual parfum</span>
+        <span class="chip">Batam · jaringan nasional</span>
+      </div>
+      <p class="why">Ekosistem grooming pria dengan banyak outlet, dan lini produknya <b>sudah termasuk parfum</b> di samping pomade dan hair tonic. <span>Rutenya lewat DM Instagram — akun bisnis mereka aktif.</span></p>
+      <div class="contacts">
+        <span><b>Web</b> starsboxindonesia.com</span>
+        <span><b>IG</b> @starsboxindonesia</span>
+        <span><b>TikTok</b> @starsbox_official</span>
+        <span><b>Pusat</b> Nagoya Hill, Batam</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Starsbox, saya Dani dari SCNTR.
+
+Saya lihat lini grooming Starsbox sudah punya parfum di samping pomade dan hair tonic. Saya produsen parfum pria lokal — SCNTR, 4 varian (Fresh, Clean, Bold, Velour Night), 50 ml, retail Rp169.000.
+
+Saya mau menawarkan dua opsi, mana pun yang lebih pas buat kamu:
+1. Suplai putus dengan harga distributor, buat dijual ulang di outlet Starsbox.
+2. Konsinyasi — barang saya taruh, bayar yang laku saja. Risiko di saya.
+
+Buat barbershop, parfum itu barang impulsif: orang baru rapi, mau langsung wangi juga.
+
+Boleh saya kirim price list dan foto produknya? Sample gratis saya kirim ke outlet kalau mau dicoba dulu.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://instagram.com/starsboxindonesia" target="_blank" rel="noopener">DM Instagram</a>
+          <a class="btn" href="https://starsboxindonesia.com/" target="_blank" rel="noopener">Buka situsnya</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="Penawaran suplai parfum SCNTR">
+      <div class="lead-top">
+        <h3 class="lead-name">Chief Barber &amp; Supplies Co.</h3>
+        <span class="chip">Bandung · jaringan Chief Barbershop</span>
+      </div>
+      <p class="why">Induk usaha Chief Barbershop, khusus dibentuk buat menggarap produk perawatan pria dan sudah punya jalur ritel sendiri. <span>Mereka pemain distribusi, bukan cuma satu gerai.</span></p>
+      <div class="contacts">
+        <span><b>IG</b> @chiefbarbershop</span>
+        <span><b>Jalur</b> DM Instagram / kontak di bio</span>
+        <span><b>Basis</b> Bandung</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Chief, saya Dani dari SCNTR.
+
+Chief sudah punya jalur distribusi produk grooming yang jalan. Saya punya produknya: SCNTR, parfum pria lokal, 4 varian (Fresh, Clean, Bold, Velour Night), 50 ml, retail Rp169.000. Stok siap, produksi rutin.
+
+Saya nggak punya jaringan ritel, dan nggak berniat bersaing di rak yang sama dengan pomade. Parfum itu pelengkap — orang yang beli pomade biasanya juga cari wangi.
+
+Saya terbuka untuk suplai putus dengan harga distributor, atau konsinyasi kalau kamu mau coba dulu tanpa risiko stok.
+
+Boleh saya kirim price list dan foto produknya?
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://instagram.com/chiefbarbershop" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="Penawaran suplai parfum SCNTR untuk jaringan reseller">
+      <div class="lead-top">
+        <h3 class="lead-name">Smith Pomade</h3>
+        <span class="chip">11 distributor · 30 provinsi</span>
+      </div>
+      <p class="why">Punya puluhan barbershop rekanan, ratusan reseller, dan masuk rak Guardian, Ranch Market, sampai The Food Hall. <span>Jaringan sebesar itu yang kamu pinjam — mereka nggak bikin parfum sendiri.</span></p>
+      <div class="contacts">
+        <span><b>IG</b> @smithpomade</span>
+        <span><b>Jalur</b> DM Instagram / email di bio</span>
+        <span><b>Rak ritel</b> Guardian, Ranch Market, AEON</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka</summary>
+        <div class="msg">Halo Smith, saya Dani dari SCNTR.
+
+Smith punya yang saya nggak punya: jaringan. Puluhan barbershop rekanan, ratusan reseller, 11 distributor, plus rak di ritel modern.
+
+Saya punya yang belum ada di lini Smith: parfum. SCNTR, brand parfum pria lokal — 4 varian (Fresh, Clean, Bold, Velour Night), 50 ml, retail Rp169.000. Produk jadi, stok siap, produksi jalan.
+
+Parfum bukan pesaing pomade, tapi barang yang dicari orang yang sama, di rak yang sama.
+
+Saya terbuka untuk skema apa pun yang cocok buat kamu: suplai putus dengan harga distributor, white label pakai merek Smith, atau titip lewat jaringan reseller kamu.
+
+Boleh saya kirim price list dan foto produknya? Sample gratis saya siapkan.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://instagram.com/smithpomade" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <!-- ============ TIER C ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Prioritas C · pembeli datang sendiri</p>
+      <h2>Etalase yang bikin kamu ditemukan</h2>
+      <p>Bukan orang yang kamu hubungi, tapi tempat mendaftar sekali lalu pembeli grosir yang nyari. Perlu sedikit tenaga di awal, setelah itu jalan sendiri.</p>
+    </div>
+
+    <article class="lead">
+      <div class="lead-top">
+        <h3 class="lead-name">Indotrading</h3>
+        <span class="chip hot">Gratis</span>
+        <span class="chip">Direktori B2B</span>
+      </div>
+      <p class="why">Direktori supplier B2B terbesar di Indonesia, dan sudah punya kategori Parfum &amp; Wewangian yang aktif. <span>Pendaftaran supplier dasarnya gratis; pembeli grosir yang cari pemasok parfum bakal nemu listing kamu.</span></p>
+      <div class="contacts">
+        <span><b>Web</b> indotrading.com</span>
+        <span><b>Biaya</b> Daftar supplier: gratis</span>
+        <span><b>Kategori</b> Parfum &amp; Wewangian</span>
+      </div>
+      <details>
+        <summary>Teks listing — tinggal tempel</summary>
+        <div class="msg">SCNTR — Parfum Pria Lokal 50 ml | Harga Grosir &amp; Reseller
+
+Produsen parfum pria dengan 4 varian karakter: Fresh, Clean, Bold, dan Velour Night. Kemasan 50 ml, harga retail Rp169.000 per botol.
+
+Melayani:
+• Pembelian grosir mulai 50 pcs, harga turun bertingkat sampai 500 pcs
+• Isian hampers dan souvenir korporat
+• Suplai untuk barbershop, butik, dan toko grooming
+• Custom label untuk kebutuhan perusahaan
+
+Stok siap kirim ke seluruh Indonesia. Sample tersedia untuk pembeli serius.
+
+Hubungi kami untuk price list lengkap.</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin teks listing</button>
+          <a class="btn" href="https://www.indotrading.com/" target="_blank" rel="noopener">Buka Indotrading</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead">
+      <div class="lead-top">
+        <h3 class="lead-name">Grup reseller Facebook</h3>
+        <span class="chip hot">Gratis</span>
+        <span class="chip">Ribuan anggota</span>
+      </div>
+      <p class="why">Grup seperti <b>Komunitas Reseller dan Dropship Indonesia</b> isinya orang yang aktif nyari barang buat dijual ulang. <span>Satu postingan bisa dapat beberapa reseller sekaligus, dan merekalah yang nanti berhadapan sama pembeli eceran.</span></p>
+      <div class="contacts">
+        <span><b>Platform</b> Facebook Groups</span>
+        <span><b>Biaya</b> Gratis</span>
+        <span><b>Cari</b> "reseller dropship indonesia"</span>
+      </div>
+      <details>
+        <summary>Postingan — tinggal tempel</summary>
+        <div class="msg">🔸 BUKA RESELLER — PARFUM PRIA SCNTR 🔸
+
+Halo, saya produsen parfum pria lokal. Merek SCNTR, 4 varian: Fresh, Clean, Bold, Velour Night. Ukuran 50 ml, harga retail Rp169.000.
+
+Yang saya cari: reseller dan dropshipper yang serius jualan.
+
+Yang saya sediakan:
+• Harga reseller dengan margin jelas (chat buat price list)
+• Foto produk dan materi jualan siap pakai — kamu nggak perlu bikin konten sendiri
+• Sistem dropship, barang saya yang kirim atas nama kamu
+• Nggak ada biaya pendaftaran
+
+Yang saya butuh dari kamu: cuma niat jualan.
+
+Produk sudah jadi, stok ada, bukan pre-order. Komen atau chat kalau minat, saya kirim price list dan katalognya.</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin postingan</button>
+          <a class="btn" href="https://www.facebook.com/groups/3857652620966978/" target="_blank" rel="noopener">Buka grupnya</a>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <!-- ============ GELOMBANG 2 ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Gelombang 2 · setelah nol balasan</p>
+      <h2>Ganti target, ganti produknya</h2>
+      <p>Sembilan prospek pertama nol balasan. Tiga sebabnya, dan ketiganya bisa diperbaiki.</p>
+    </div>
+
+    <div class="crib">
+      <h3>Kenapa gelombang 1 sepi</h3>
+      <p class="q">Bukan produknya. Bukan harganya.</p>
+      <div class="why" style="margin-bottom:10px"><b>1. Targetnya kebesaran.</b> <span>Lokasoka, Souvia, Total Gifts, Smith — semuanya perusahaan mapan dengan kotak masuk penjualan yang tiap hari dibanjiri penawaran vendor. Yang baca admin, yang mutusin orang lain, dan pesan masuk yang minta mereka <i>membeli</i> hampir selalu tenggelam.</span></div>
+      <div class="why" style="margin-bottom:10px"><b>2. Produknya salah untuk keperluan ini.</b> <span>SCNTR parfum <i>pria</i>, sementara hampers korporat dibagikan ke karyawan dan klien laki-laki maupun perempuan. Vendor tidak bisa memasukkan isian yang cuma terpakai separuh penerima. Ini kemungkinan besar penyebab terbesarnya.</span></div>
+      <div class="why"><b>3. Pesannya kepanjangan.</b> <span>Pesan pembuka gelombang 1 panjangnya 91–113 kata, pakai daftar bernomor. Di WhatsApp dan DM, itu kebaca sebagai siaran massal, bukan orang yang benar-benar menulis. Ini kesalahan penyusunan, dan sudah diperbaiki di bawah.</span></div>
+    </div>
+
+    <div class="crib">
+      <h3>Kenapa yang ditawarkan sekarang diffuser</h3>
+      <p class="q">Produk yang sama, keperluan yang beda.</p>
+      <div class="why" style="margin-bottom:10px"><b>Tidak bergender.</b> <span>Room diffuser dipakai siapa saja. Satu keberatan terbesar vendor langsung hilang.</span></div>
+      <div class="why" style="margin-bottom:10px"><b>Terlihat lebih berisi.</b> <span>Botol 100 ml dengan batang reed punya tinggi dan volume. Parfum 50 ml tenggelam di dasar keranjang, dan "terlihat bernilai" itu setengah dari jualan vendor hampers.</span></div>
+      <div class="why"><b>Mereknya bertahan 6–8 minggu.</b> <span>Parfum masuk laci. Diffuser berdiri di meja kerja atau ruang tamu dengan nama SCNTR terbaca terus. Buat perusahaan yang memberi, itu ingatan yang jalan dua bulan — dan itu yang sebenarnya mereka beli.</span></div>
+    </div>
+
+    <div class="crib">
+      <h3>Satu hal yang harus dibereskan sebelum kirim sample</h3>
+      <p class="q">Beda kategori, beda aturan.</p>
+      <div class="why"><b>Diffuser ruangan bukan kosmetik.</b> <span>Notifikasi BPOM SCNTR yang sekarang hanya menutup parfum badan — produk ruangan jalur izinnya berbeda dan tidak otomatis ikut. Karena pembelinya perusahaan yang memeriksa dokumen, pastikan status legalitas diffuser ini jelas sebelum ada pesanan, bukan sesudah. Kalau ditanya di awal dan belum jelas, jawab apa adanya dan sebut sedang diurus.</span></div>
+    </div>
+
+    <div class="crib">
+      <h3>Aturan baru pesan pembuka</h3>
+      <p class="q">Maksimal 45 kata. Satu pertanyaan. Tidak ada harga, tidak ada daftar.</p>
+      <div class="why"><span>Tujuan pesan pertama bukan menjual — cuma dapat <b>satu "boleh"</b> yang murah buat mereka. Katalog, harga, dan tier baru keluar setelah mereka membalas. Menawarkan sample gratis itu permintaan paling ringan yang bisa kamu ajukan: mereka tidak keluar uang, tidak berkomitmen, cuma bilang iya.</span></div>
+    </div>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="">
+      <div class="lead-top">
+        <h3 class="lead-name">Tujuh prospek baru</h3>
+        <span class="chip hot">Usaha dijalankan pemiliknya</span>
+      </div>
+      <p class="why">Semuanya usaha hampers yang dikelola sendiri oleh pemiliknya, aktif di Instagram. <span>Bedanya dengan gelombang 1: yang baca DM adalah orang yang berhak memutuskan. Mereka juga justru butuh isian yang beda supaya hampersnya tidak sama dengan sebelah.</span></p>
+      <div class="contacts">
+        <span><b>@hampersurabaya</b> Surabaya · corporate</span>
+        <span><b>@hampers.bdg</b> Bandung · bulk</span>
+        <span><b>@hamperstuff.id</b> Surabaya · sejak 2019</span>
+        <span><b>@book.idea</b> Jakarta · corporate</span>
+        <span><b>@partysupplies_souvenir</b> Surabaya</span>
+        <span><b>@piringcantiksurabaya</b> Surabaya · Sidoarjo</span>
+        <span><b>Corporate Gifts ID</b> WA 0895-6390-68080</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka — 30 kata</summary>
+        <div class="msg">Halo, saya Dani — bikin room diffuser lokal, SCNTR. Botol 100 ml, wanginya tahan 6–8 minggu.
+
+Kepikiran cocok jadi isian hampers kamu. Boleh saya kirim satu gratis buat dilihat langsung?</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://instagram.com/hampersurabaya" target="_blank" rel="noopener">@hampersurabaya</a>
+          <a class="btn" href="https://instagram.com/hampers.bdg" target="_blank" rel="noopener">@hampers.bdg</a>
+          <a class="btn" href="https://instagram.com/hamperstuff.id" target="_blank" rel="noopener">@hamperstuff.id</a>
+          <a class="btn" href="https://instagram.com/book.idea" target="_blank" rel="noopener">@book.idea</a>
+          <a class="btn" href="https://instagram.com/partysupplies_souvenir" target="_blank" rel="noopener">@partysupplies_souvenir</a>
+          <a class="btn" href="https://instagram.com/piringcantiksurabaya" target="_blank" rel="noopener">@piringcantiksurabaya</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="62895639068080" data-mail="" data-subject="Parfum SCNTR untuk hampers non-makanan">
+      <div class="lead-top">
+        <h3 class="lead-name">Corporate Gifts ID</h3>
+        <span class="chip hot">Sudah pakai perawatan tubuh</span>
+        <span class="chip">Nomor WhatsApp langsung</span>
+      </div>
+      <p class="why">Hampers mereka sudah berisi lini non-makanan — sabun mandi premium, lotion, lilin aromaterapi. <span>Parfum jatuh persis di rak yang sama, jadi kamu tidak perlu meyakinkan kategorinya dulu.</span></p>
+      <div class="contacts">
+        <span><b>WA</b> 0895-6390-68080</span>
+        <span><b>Web</b> corporategifts.id</span>
+        <span><b>Isian</b> sabun premium, lotion, lilin aromaterapi</span>
+      </div>
+      <details>
+        <summary>Pesan pembuka — 42 kata</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — room diffuser lokal 100 ml, wanginya tahan 6–8 minggu.
+
+Saya lihat hampers kamu sudah ada lilin aromaterapi. Diffuser masuk di rak yang sama, dan umurnya lebih panjang.
+
+Boleh saya kirim satu sample gratis buat dicek?</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+        </div>
+      </details>
+    </article>
+
+    <div class="crib">
+      <h3>Dua hal yang menentukan hasil gelombang ini</h3>
+      <p class="q">Lebih berpengaruh daripada isi pesannya.</p>
+      <div class="why" style="margin-bottom:10px"><b>Akun pengirimnya.</b> <span>DM dari akun kosong dibaca sebagai spam, seberapa pun bagus pesannya. Kirim dari akun Instagram SCNTR yang ada foto produk dan postingannya — kalau belum ada, isi dulu beberapa postingan pakai materi kampanye yang sudah kamu punya. Ini yang paling menentukan.</span></div>
+      <div class="why"><b>Jangan kirim serentak.</b> <span>Sebar dalam dua hari, jangan tujuh DM dalam sepuluh menit. Instagram membatasi akun yang mengirim serentak ke orang yang tidak mengikuti kamu, dan pesannya bisa tidak sampai sama sekali tanpa pemberitahuan.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CRIB ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Kalau mereka bales</p>
+      <h2>Tiga balasan yang pasti kepakai</h2>
+      <p>Tiga pertanyaan ini yang bakal datang duluan, hampir selalu berurutan begini. Jawabannya sudah ditulis — tinggal salin.</p>
+    </div>
+
+    <div class="crib">
+      <h3>1. "Boleh minta price list?"</h3>
+      <p class="q">Datang paling cepat, biasanya di balasan pertama.</p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Jumlah</th><th>Harga per botol</th><th>Margin buat mereka</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>50 pcs</td><td>Rp115.000</td><td>47%</td></tr>
+            <tr><td>100 pcs</td><td>Rp105.000</td><td>61%</td></tr>
+            <tr><td>250 pcs</td><td>Rp95.000</td><td>78%</td></tr>
+            <tr><td>500 pcs ke atas</td><td>Rp85.000</td><td>99%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="msg">Ini price list SCNTR untuk pembelian grosir:
+
+• 50 pcs — Rp115.000 per botol
+• 100 pcs — Rp105.000 per botol
+• 250 pcs — Rp95.000 per botol
+• 500 pcs ke atas — Rp85.000 per botol
+
+Harga retail di pasaran Rp169.000, jadi marginnya jelas.
+
+Semua varian bisa dicampur dalam satu pesanan — Fresh, Clean, Bold, Velour Night. Custom label tersedia mulai 50 pcs.
+
+Ongkir saya tanggung untuk pesanan 100 pcs ke atas, wilayah Jawa.
+
+Mau saya kirimkan foto produk dan katalognya sekalian?</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>2. "Bisa kirim sample dulu?"</h3>
+      <p class="q">Tanda bagus — mereka serius. Jangan ditolak.</p>
+      <div class="msg">Bisa, dengan senang hati.
+
+Saya kirim 1 botol gratis, kamu cukup tanggung ongkirnya. Pilih varian mana yang mau dicoba: Fresh, Clean, Bold, atau Velour Night. Kalau mau semua empat, boleh juga — biar bisa dibandingin langsung.
+
+Boleh saya minta alamat kirim dan nama penerimanya?
+
+Biasanya sampai dalam 2–4 hari kerja, nanti saya kirimkan nomor resinya.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>3. "Bisa kurang lagi harganya?"</h3>
+      <p class="q">Jangan turunin harga. Naikkan jumlahnya.</p>
+      <div class="msg">Harga di price list itu sudah harga terbaik untuk jumlah segitu.
+
+Tapi kalau memang butuh angka yang lebih rendah, jalannya lewat jumlah — di 250 pcs turun ke Rp95.000, dan di 500 pcs jadi Rp85.000 per botol.
+
+Kalau anggarannya yang jadi patokan, kasih tahu saja angkanya. Nanti saya susunkan komposisi varian yang pas di angka itu.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+  </section>
+
+  <!-- ============ CRIB LANJUTAN ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Lima situasi berikutnya</p>
+      <h2>Balasan yang belum kepakai, tapi bakal</h2>
+      <p>Yang tiga di atas menutup awal percakapan. Lima ini menutup sisanya — termasuk dua yang paling sering bikin orang bengong: didiamkan, dan ditolak.</p>
+    </div>
+
+    <div class="crib">
+      <h3>4. Didiamkan — susulan setelah 5 hari kerja</h3>
+      <p class="q">Kirim sekali. Cuma sekali. Kalau tetap diam, tinggalkan dan lanjut ke yang lain.</p>
+      <div class="msg">Halo, saya susul pesan saya minggu lalu soal SCNTR — parfum pria lokal untuk isian hampers.
+
+Saya paham kalau sekarang belum jadi prioritas. Cuma mau memastikan pesannya tidak tenggelam saja.
+
+Kalau memang belum butuh sekarang, tidak masalah — saya simpan kontak kamu dan menghubungi lagi menjelang musim berikutnya.
+
+Kalau ternyata masih relevan, saya bisa kirim katalog dan satu botol sample gratis buat dicek.
+
+Terima kasih.
+Dani — SCNTR</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>5. "Kami sudah ada supplier" atau "belum butuh"</h3>
+      <p class="q">Penolakan itu bukan pintu tertutup, cuma pintu yang belum waktunya. Jangan membantah — tinggalkan jejak yang enak diingat.</p>
+      <div class="msg">Terima kasih sudah dibalas, saya hargai kejelasannya.
+
+Tidak apa-apa. Kalau boleh, saya titip dua hal saja:
+
+Pertama, saya simpan kontak kamu dan menghubungi lagi menjelang musim hampers berikutnya — siapa tahu situasinya berbeda.
+
+Kedua, kalau suatu saat supplier kamu meleset dari tenggat, atau ada klien yang minta isian di luar katalog biasa, saya siap jadi cadangan. Stok saya ada, dan produknya sudah bernotifikasi BPOM.
+
+Semoga lancar terus.
+Dani — SCNTR</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>6. "Produknya sudah ada BPOM?"</h3>
+      <p class="q">Pertanyaan yang bikin banyak brand baru mentok. Buat kamu justru senjata — jawab cepat dan percaya diri.</p>
+      <div class="msg">Sudah. SCNTR punya notifikasi BPOM, jadi aman untuk pengadaan korporat dan tidak akan jadi ganjalan waktu tim procurement klien kamu memeriksa.
+
+Kalau dibutuhkan untuk kelengkapan dokumen di sisi kamu, saya kirimkan detailnya.
+
+Ada dokumen lain yang biasanya diminta klien kamu? Sebutkan saja, saya siapkan sekalian.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>7. "Bisa custom label pakai logo klien kami?"</h3>
+      <p class="q">Pertanyaan bagus — artinya mereka sudah membayangkan produkmu di dalam hamper mereka.</p>
+      <div class="msg">Bisa. Custom label tersedia mulai 50 pcs.
+
+Yang bisa diubah: logo perusahaan klien, nama acara, atau kartu ucapan yang diselipkan di kotak. Bentuk dan warna botolnya tetap seperti aslinya — itu yang bikin produknya terlihat seperti barang jadi, bukan barang promosi.
+
+Desainnya saya kerjakan gratis. Biaya cetak menyesuaikan jumlah dan bahan, dan saya pisahkan di penawaran biar kelihatan jelas.
+
+Boleh saya tahu jumlah dan tanggal acaranya? Dari situ saya pastikan waktunya keburu.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>8. "Berapa lama sampai barangnya siap?"</h3>
+      <p class="q">Sekarang kamu punya jawaban yang kuat — pakai. Stok siap itu pembeda paling tajam buat vendor yang dikejar tenggat.</p>
+      <div class="msg">Cepat, karena saya kirim dari stok — bukan produksi setelah dipesan.
+
+Stok siap saya sekarang 1.000 botol. Untuk pesanan sampai 100 pcs, barang siap 2 hari kerja. Untuk 100–500 pcs, 3–5 hari kerja. Terhitung sejak DP diterima.
+
+Yang menambah waktu cuma custom label, karena ada proses cetak. Kalau butuh itu, kasih tahu tanggal acaranya — saya pastikan keburu atau saya bilang terus terang kalau tidak.
+
+Jadi kalau ada klien yang mendadak butuh isian hamper, saya bisa jadi jalan keluarnya.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+  </section>
+
+
+  <p class="note">Kontak diambil dari situs resmi masing-masing perusahaan, dicek Agustus 2026 — nomor bisa berubah, jadi tombol WhatsApp-nya cuma membuka chat, belum mengirim apa pun. Harga di price list sudah diuji terhadap HPP Rp45.000 — keempat tier untung, margin 47–61 persen, jadi angkanya aman dipakai apa adanya. Tiga lead di prioritas B rutenya lewat DM Instagram karena mereka nggak memajang nomor WhatsApp bisnis secara publik.</p>
+
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll(".lead").forEach(function (lead) {
+      var msgEl = lead.querySelector(".msg");
+      if (!msgEl) return;
+      var text = msgEl.textContent;
+      var wa = lead.getAttribute("data-wa");
+      var mail = lead.getAttribute("data-mail");
+      var subject = lead.getAttribute("data-subject") || "";
+
+      var waLink = lead.querySelector("[data-wa-link]");
+      if (waLink && wa) {
+        waLink.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(text);
+      }
+
+      var mailLink = lead.querySelector("[data-mail-link]");
+      if (mailLink && mail) {
+        mailLink.href = "mailto:" + mail +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(text);
+      }
+    });
+
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var scope = btn.closest("details") || btn.closest(".crib");
+        var msgEl = scope && scope.querySelector(".msg");
+        if (!msgEl) return;
+        var text = msgEl.textContent;
+        var done = function () {
+          var original = btn.textContent;
+          btn.textContent = "Tersalin";
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.textContent = original;
+            btn.classList.remove("copied");
+          }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+        } else {
+          fallback(text, done);
+        }
+      });
+    });
+
+    function fallback(text, done) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) { /* clipboard unavailable */ }
+      document.body.removeChild(ta);
+    }
+  })();
+</script>

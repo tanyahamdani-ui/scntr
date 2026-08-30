@@ -1,0 +1,984 @@
+<title>Produsen &amp; Pasokan SCNTR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --ground: #E8E6E1;
+    --surface: #FCFBFA;
+    --surface-2: #F1EFEB;
+    --ink: #1A1815;
+    --muted: #6E6862;
+    --accent: #A8641B;
+    --accent-soft: #F0E2CE;
+    --line: #D3CFC8;
+    --line-strong: #B8B2A9;
+    --ok: #2F6B4A;
+    --alert: #9E3B23;
+    --alert-soft: #F6E3DC;
+
+    --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #131211;
+      --surface: #1D1B19;
+      --surface-2: #262320;
+      --ink: #E9E5DF;
+      --muted: #968E85;
+      --accent: #D9973F;
+      --accent-soft: #38291733;
+      --line: #302C28;
+      --line-strong: #46403A;
+      --ok: #6FBF8E;
+      --alert: #E08A6C;
+      --alert-soft: #3A231A66;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #131211;
+    --surface: #1D1B19;
+    --surface-2: #262320;
+    --ink: #E9E5DF;
+    --muted: #968E85;
+    --accent: #D9973F;
+    --accent-soft: #38291733;
+    --line: #302C28;
+    --line-strong: #46403A;
+    --ok: #6FBF8E;
+    --alert: #E08A6C;
+    --alert-soft: #3A231A66;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .masthead { display: flex; flex-direction: column; gap: 16px; }
+
+  .standfirst { margin: 0; max-width: 62ch; color: var(--muted); font-size: 16.5px; }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- temuan ---------- */
+
+  .finding {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .finding .eyebrow { color: var(--accent); }
+
+  .finding h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .finding p { margin: 0; font-size: 15px; max-width: 62ch; }
+  .finding p + p { color: var(--muted); }
+  .finding b { font-weight: 600; }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 18px; }
+
+  .tier-head {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+  }
+
+  .tier-head h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .tier-head p { margin: 0; color: var(--muted); font-size: 14.5px; max-width: 60ch; }
+
+  .tier-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ---------- banding jalur ---------- */
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+
+  .route {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .route.pick { border-color: var(--accent); }
+
+  .route-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+
+  .route h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .route dl { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+
+  .route .rr {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .route .rr:last-child { border-bottom: none; padding-bottom: 0; }
+  .route .rr dt { color: var(--muted); }
+  .route .rr dd { margin: 0; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; }
+
+  .verdict { font-size: 14px; color: var(--muted); margin: 0; }
+  .verdict b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- kartu ---------- */
+
+  .lead {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lead-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; }
+
+  .lead-name {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 18.5px;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .chip {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    border: 1px solid var(--line-strong);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .chip.hot { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  .chip.warn { border-color: var(--alert); color: var(--alert); background: var(--alert-soft); }
+
+  .why { margin: 0; font-size: 15px; max-width: 62ch; }
+  .why span { color: var(--muted); }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .specs div { background: var(--surface-2); padding: 9px 11px; }
+
+  .specs dt {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .specs dd {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 10px 12px;
+    background: var(--surface-2);
+    border-radius: 3px;
+  }
+
+  .contacts b { font-weight: 500; color: var(--ink); }
+
+  details { border-top: 1px solid var(--line); padding-top: 12px; }
+
+  summary {
+    cursor: pointer;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+  summary::before { content: "▸ "; }
+  details[open] summary::before { content: "▾ "; }
+  summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .msg {
+    margin: 12px 0 0;
+    white-space: pre-wrap;
+    font-size: 14.5px;
+    line-height: 1.62;
+    background: var(--surface-2);
+    border-left: 2px solid var(--line-strong);
+    padding: 14px 16px;
+    border-radius: 0 3px 3px 0;
+    overflow-x: auto;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+  .btn {
+    font-family: var(--f-body);
+    font-weight: 500;
+    font-size: 13.5px;
+    padding: 8px 14px;
+    border-radius: 3px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #FFFDF9; }
+  .btn.primary:hover { color: #FFFDF9; opacity: 0.88; }
+  .btn.copied { color: var(--ok); border-color: var(--ok); }
+
+  /* ---------- legalitas ---------- */
+
+  .scroller { overflow-x: auto; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+
+  th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .crib {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .crib h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  .crib .q { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin: 0 0 6px; }
+
+  .note {
+    font-size: 13.5px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    max-width: 64ch;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">SCNTR — Sisi Pasokan</p>
+    <h1>Siapa yang bikinin botolnya</h1>
+    <p class="standfirst">Kalau vendor hampers pesan 250 botol, pertanyaannya pindah: <strong>barangnya dari mana.</strong> Ini daftar produsen dan pemasok bahan, plus satu temuan hukum yang sebaiknya kamu baca duluan karena mengubah urutan kerjanya.</p>
+  </header>
+
+  <div class="finding">
+    <p class="eyebrow">Yang sudah beres, dan satu sisanya</p>
+    <h2>Notifikasi BPOM sudah ada — itu keunggulan, bukan sekadar syarat</h2>
+    <p>Parfum masuk kategori kosmetik menurut Peraturan BPOM No. 12 Tahun 2020, dan wajib punya nomor notifikasi sebelum diedarkan. <b>SCNTR sudah punya.</b> Artinya pertanyaan pertama yang bikin banyak brand baru mentok di depan vendor korporat, buat kamu sudah lewat — pakai itu sebagai pembeda waktu bicara dengan mereka.</p>
+    <p>Yang tersisa cuma satu, dan baru relevan kalau kamu pindah produksi: <b>nomor notifikasi terikat pada fasilitas produksi yang terdaftar.</b> Kalau produksi pindah ke pabrik maklon, notifikasinya kemungkinan perlu diperbarui dengan pabrik baru — tidak otomatis ikut. Pertanyaan itu sudah tertulis di brief produksi, jadi pabriknya yang menjawab, bukan kamu yang menebak.</p>
+  </div>
+
+  <!-- ============ BANDING JALUR ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Keputusan · pilih satu</p>
+      <h2>Dua jalur pasokan</h2>
+      <p>Dengan HPP rakit sendiri di Rp25.000, bedanya bukan lagi soal biaya — selisihnya cuma Rp6.000 per botol. Yang benar-benar dibeli lewat maklon adalah kapasitas dan waktu kamu.</p>
+    </div>
+
+    <div class="compare">
+      <div class="route">
+        <div class="route-top">
+          <h3>Jalur A — Maklon</h3>
+          <span class="chip">Nanti, bukan sekarang</span>
+        </div>
+        <dl>
+          <div class="rr"><dt>Minimum</dt><dd>600–1.000 pcs</dd></div>
+          <div class="rr"><dt>Modal awal</dt><dd>Rp19–41 juta</dd></div>
+          <div class="rr"><dt>HPP per botol</dt><dd>Rp19.000–41.000</dd></div>
+          <div class="rr"><dt>BPOM</dt><dd>Diurus pabrik</dd></div>
+          <div class="rr"><dt>Waktu</dt><dd>4–12 minggu</dd></div>
+          <div class="rr"><dt>Tenaga kamu</dt><dd>Hampir nol</dd></div>
+        </dl>
+        <p class="verdict"><b>Belum kepakai sekarang.</b> HPP rakit sendiri kamu sudah Rp25.000, jadi maklon cuma menghemat Rp6.000 per botol — Rp6 juta di 1.000 pcs, ditukar dengan Rp19 juta yang keluar sekaligus dan nyangkut jadi stok. Alasannya nanti bukan biaya, tapi kapasitas.</p>
+      </div>
+
+      <div class="route pick">
+        <div class="route-top">
+          <h3>Jalur B — Rakit sendiri</h3>
+          <span class="chip hot">Tetap di sini dulu</span>
+        </div>
+        <dl>
+          <div class="rr"><dt>Minimum</dt><dd>Sebotol pun bisa</dd></div>
+          <div class="rr"><dt>Modal awal</dt><dd>Ratusan ribu</dd></div>
+          <div class="rr"><dt>HPP per botol</dt><dd>Rp25.000</dd></div>
+          <div class="rr"><dt>BPOM</dt><dd>Sudah ada</dd></div>
+          <div class="rr"><dt>Waktu</dt><dd>Langsung</dd></div>
+          <div class="rr"><dt>Tenaga kamu</dt><dd>Semua di kamu</dd></div>
+        </dl>
+        <p class="verdict"><b>Jalan terus sampai kapasitas mentok.</b> Di HPP Rp25.000 dan harga grosir terendah Rp95.000, marginnya 74% — pesanan 250 pcs menghasilkan Rp17,5 juta. Yang bakal menghentikan jalur ini bukan hitungan untung, tapi tangan kamu sendiri.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PEMBANDING ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Pembanding · sembilan pabrik</p>
+      <h2>Harga maklon di pasaran</h2>
+      <p>Semua disandingkan dengan HPP kamu sendiri. Angka dikutip dari situs masing-masing per Agustus 2026, dinormalkan jadi harga per botol supaya bisa dibandingkan.</p>
+    </div>
+
+    <div class="crib">
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Pabrik</th><th>MOQ</th><th>Per botol</th><th>Ukuran</th></tr>
+          </thead>
+          <tbody>
+            <tr style="background:var(--accent-soft)">
+              <td><b>Rakit sendiri (kamu)</b></td><td>—</td><td><b>Rp25.000</b></td><td>50 ml</td>
+            </tr>
+            <tr><td>PBKTL — Bekasi</td><td>1.000</td><td>±Rp19.000</td><td>belum pasti</td></tr>
+            <tr><td>Amulia — Econo Line</td><td>Rp1 juta</td><td>Rp26.455–34.091</td><td>30 ml</td></tr>
+            <tr><td>Maklon Kosmetik Ind. — Surabaya</td><td>600</td><td>Rp30.000–33.500</td><td>30 ml</td></tr>
+            <tr><td>Maklonesia — Medan</td><td>1.000</td><td>±Rp30.000</td><td>—</td></tr>
+            <tr><td>Nose Herbal Indo — Jakarta</td><td>1.000</td><td>±Rp30.000</td><td>—</td></tr>
+            <tr><td>Gazka — Bantul</td><td>1.000</td><td>±Rp41.400</td><td>50 ml</td></tr>
+            <tr><td>Formula Jelita — Jakarta</td><td>3.000/varian</td><td>tidak dipublikasi</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="verdict"><b>Kesimpulannya: HPP kamu sudah lebih murah dari hampir semua maklon.</b> Yang tercatat di bawah Rp25.000 cuma PBKTL, dan angkanya perlu diuji dulu — situs mereka menyebut Rp19 juta untuk 1.000 pcs tanpa merinci apakah botol, tutup, dan kotak sudah termasuk. Kalau ternyata belum, harga sebenarnya naik jauh di atas Rp25.000. Pertanyaan itu sudah ada di brief produksi kamu, poin nomor satu.</p>
+
+      <p class="verdict">Perlu diingat juga soal ukuran: sebagian besar angka murah di tabel ini untuk botol <b>30 ml</b>, sementara SCNTR 50 ml. Kalau dinaikkan ke 50 ml, harganya ikut naik — jadi jarak sebenarnya lebih lebar lagi dari yang terlihat.</p>
+    </div>
+
+    <article class="lead">
+      <div class="lead-top">
+        <h3 class="lead-name">Empat yang tidak memasang harga</h3>
+        <span class="chip hot">Justru ini yang ditanya</span>
+      </div>
+      <p class="why">Pabrik yang tidak memasang harga di situs biasanya menghitung per proyek — dan harga publikasi seringkali cuma angka pancingan. <span>Kalau kamu memang mau membandingkan serius, keempat ini yang paling layak dimintai penawaran, karena angkanya belum dipoles buat iklan.</span></p>
+      <div class="contacts">
+        <span><b>KOSME</b> Surabaya · marketing@kosme.co.id</span>
+        <span><b>Siseda Pepade</b> Jakarta · 0895-0851-1420</span>
+        <span><b>Zealin</b> Brebes · 0812-3111-5022</span>
+        <span><b>Asia Skinlab</b> Gresik · 0817-9759-777</span>
+      </div>
+      <details>
+        <summary>Permintaan penawaran — kirim ke keempatnya</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria yang sudah berjalan dan sudah punya notifikasi BPOM.
+
+Saya sedang membandingkan beberapa pabrik untuk produksi rutin, dan mau minta penawaran.
+
+Yang saya butuhkan:
+• Eau de Parfum, botol kaca 50 ml
+• 4 varian aroma, total 1.000 pcs
+• Aroma stok yang mendekati karakter kami lebih diutamakan daripada formulasi custom
+
+Mohon penawarannya dirinci per pos, jangan digabung jadi harga paket:
+1. Formulasi dan sampling
+2. Botol 50 ml, sprayer, dan tutup — per pcs
+3. Label dan kotak — per pcs
+4. Biaya isi dan produksi — per botol
+
+Serta:
+5. Harga di 1.000 pcs dan 2.000 pcs
+6. Minimum per varian kalau 1.000 pcs dipecah jadi empat
+7. Waktu dari kontrak sampai barang siap kirim
+
+Sebagai pembanding, HPP produksi kami sendiri saat ini Rp25.000 per botol untuk 50 ml. Jadi mohon penawarannya realistis di kisaran itu — kalau di atasnya, terus terang belum masuk hitungan buat kami.
+
+Brief produksi lengkap dengan foto produk bisa saya kirimkan kalau diminta.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <!-- ============ MAKLON ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Jalur A · empat pabrik</p>
+      <h2>Maklon — pabrik yang bikin semuanya</h2>
+      Simpan daftar ini untuk saat kapasitas mentok — bukan buat sekarang. Semua sudah CPKB. Urut dari minimum pesanan paling kecil. Angka di bawah dikutip dari situs mereka sendiri per Agustus 2026 — perlakukan sebagai ancar-ancar, bukan harga final.</p>
+    </div>
+
+    <article class="lead" data-wa="6285182025567" data-mail="info@maklonkosmetik.co.id" data-subject="Permintaan penawaran maklon parfum EDP 50 ml">
+      <div class="lead-top">
+        <h3 class="lead-name">PT Maklon Kosmetik Indonesia</h3>
+        <span class="chip hot">MOQ terkecil</span>
+        <span class="chip">Sukomanunggal, Surabaya</span>
+      </div>
+      <p class="why">Punya paket start-up <b>600 botol</b> — satu-satunya yang mau di bawah seribu. <span>Buat kamu yang belum tahu pasti seberapa besar pesanan vendor bakal datang, ini titik masuk paling ringan.</span></p>
+      <dl class="specs">
+        <div><dt>MOQ</dt><dd>600 pcs</dd></div>
+        <div><dt>Paket start-up</dt><dd>±Rp25,5 jt</dd></div>
+        <div><dt>Per botol 30 ml</dt><dd>Rp33.500</dd></div>
+        <div><dt>BPOM</dt><dd>Termasuk</dd></div>
+      </dl>
+      <div class="contacts">
+        <span><b>WA</b> 0851-8202-5567</span>
+        <span><b>Email</b> info@maklonkosmetik.co.id</span>
+        <span><b>Alamat</b> Jl. Kupang Baru 1/100, Surabaya</span>
+      </div>
+      <details>
+        <summary>Permintaan penawaran</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria yang sudah berjalan.
+
+Saya sedang menyiapkan produksi dan mau minta penawaran maklon.
+
+Yang saya butuhkan:
+• Eau de Parfum, botol 50 ml
+• 4 varian aroma (fresh citrus, soapy clean, spicy woody, aromatic woody musk)
+• Jumlah awal: 600–1.000 pcs, dibagi ke 4 varian
+• Butuh pengurusan notifikasi BPOM atas nama brand saya
+
+Saya lihat ada paket start-up 600 botol di situs kamu. Boleh saya minta rinciannya untuk ukuran 50 ml?
+
+Yang ingin saya tahu:
+1. Harga per botol untuk 50 ml EDP, di jumlah 600 dan 1.000 pcs
+2. Apa saja yang sudah termasuk — botol, kemasan, label, BPOM
+3. Berapa lama dari kontrak sampai barang jadi
+4. Bisa pakai aroma stok, atau harus formulasi custom
+5. Apakah bisa kirim sample aroma dulu sebelum produksi
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" data-mail-link>Kirim via email</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6281212380220" data-mail="" data-subject="Permintaan penawaran maklon parfum EDP 50 ml">
+      <div class="lead-top">
+        <h3 class="lead-name">PBKTL Sapta Indonesia</h3>
+        <span class="chip hot">Paling murah</span>
+        <span class="chip">Pondok Gede, Bekasi</span>
+      </div>
+      <p class="why">Paket UMKM <b>Rp19 juta untuk 1.000 pcs</b> — sekitar Rp19.000 per botol, sudah termasuk bantuan BPOM dan HAKI. <span>Kalau harga jual grosir kamu Rp95.000, marginnya kelewat lebar. Lokasinya juga paling dekat kalau kamu di Jabodetabek.</span></p>
+      <dl class="specs">
+        <div><dt>MOQ</dt><dd>1.000 pcs</dd></div>
+        <div><dt>Paket UMKM</dt><dd>Rp19 jt</dd></div>
+        <div><dt>Per botol</dt><dd>±Rp19.000</dd></div>
+        <div><dt>Waktu</dt><dd>±4,3 minggu</dd></div>
+      </dl>
+      <div class="contacts">
+        <span><b>WA</b> 0812-1238-0220</span>
+        <span><b>Pabrik</b> Jl. Lestari 1 Blok B No.2-3, Jatimakmur, Bekasi</span>
+        <span><b>Termasuk</b> BPOM + HAKI</span>
+      </div>
+      <details>
+        <summary>Permintaan penawaran</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria yang sudah berjalan.
+
+Saya tertarik dengan Paket UMKM 1.000 pcs yang saya baca di situs PBKTL, dan mau minta penawaran resminya.
+
+Yang saya butuhkan:
+• Eau de Parfum, botol 50 ml
+• 4 varian aroma (fresh citrus, soapy clean, spicy woody, aromatic woody musk)
+• 1.000 pcs total, dibagi ke 4 varian
+• Notifikasi BPOM atas nama brand saya
+
+Yang ingin saya tahu:
+1. Apakah Rp19 juta itu sudah termasuk botol, kemasan, dan label
+2. Apakah 1.000 pcs boleh dipecah jadi 4 varian, atau minimum per varian dihitung sendiri
+3. Berapa lama proses BPOM sampai nomor notifikasi terbit
+4. Bisa pakai aroma stok yang sudah ada, atau harus formulasi baru
+5. Apakah ada biaya di luar paket yang perlu saya siapkan
+
+Kalau memungkinkan, saya mau lihat contoh botol 50 ml yang tersedia.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" href="https://www.pbktl.id/maklon-parfum-moq-rendah/" target="_blank" rel="noopener">Buka situsnya</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6285188686564" data-mail="" data-subject="Permintaan penawaran maklon parfum EDP 50 ml">
+      <div class="lead-top">
+        <h3 class="lead-name">PT Gazka Biofarma Kosmetindo</h3>
+        <span class="chip">Sewon, Bantul — Yogyakarta</span>
+      </div>
+      <p class="why">Angkanya paling terbuka: EDT 50 ml dengan aroma stok, total sekitar Rp41,4 juta untuk 1.000 pcs. <span>Lebih mahal dari PBKTL, tapi mereka mencantumkan hitungannya terang-terangan — enak buat jadi pembanding waktu nego.</span></p>
+      <dl class="specs">
+        <div><dt>MOQ</dt><dd>1.000 pcs</dd></div>
+        <div><dt>Total</dt><dd>±Rp41,4 jt</dd></div>
+        <div><dt>Per botol</dt><dd>±Rp41.400</dd></div>
+        <div><dt>Waktu</dt><dd>8–12 minggu</dd></div>
+      </dl>
+      <div class="contacts">
+        <span><b>WA</b> 0851-8868-6564</span>
+        <span><b>IG</b> @gazka.co.id</span>
+        <span><b>Pabrik</b> Glagah Lor, Bangunharjo, Sewon, Bantul</span>
+      </div>
+      <details>
+        <summary>Permintaan penawaran</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria yang sudah berjalan.
+
+Saya mau minta penawaran maklon parfum.
+
+Yang saya butuhkan:
+• Eau de Parfum, botol 50 ml
+• 4 varian aroma (fresh citrus, soapy clean, spicy woody, aromatic woody musk)
+• 1.000 pcs total, dibagi ke 4 varian
+• Notifikasi BPOM atas nama brand saya
+
+Di situs Gazka saya baca estimasi EDT 50 ml dengan aroma stok sekitar Rp41,4 juta untuk 1.000 pcs.
+
+Yang ingin saya tahu:
+1. Berapa selisihnya kalau naik dari EDT ke EDP
+2. Apakah 1.000 pcs boleh dibagi ke 4 varian
+3. Apa saja yang termasuk — botol, kemasan, label, BPOM, halal
+4. Pilihan botol 50 ml apa saja yang tersedia sebagai stok
+5. Apakah ada program pre-order buat meringankan modal awal
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+          <a class="btn" href="https://instagram.com/gazka.co.id" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6282213444359" data-mail="" data-subject="Permintaan penawaran maklon parfum EDP 50 ml">
+      <div class="lead-top">
+        <h3 class="lead-name">PT Formula Jelita Internasional</h3>
+        <span class="chip warn">Terlalu besar untuk sekarang</span>
+        <span class="chip">Ciputat Raya, Jakarta</span>
+      </div>
+      <p class="why">MOQ <b>3.000 pcs per varian</b> dan lead time 4–5 bulan — untuk empat varian artinya 12.000 botol. <span>Simpan nomornya buat nanti kalau SCNTR sudah jalan rutin; sekarang belum masuk hitungan.</span></p>
+      <dl class="specs">
+        <div><dt>MOQ</dt><dd>3.000/varian</dd></div>
+        <div><dt>Kemasan custom</dt><dd>min 10.000</dd></div>
+        <div><dt>Lead time</dt><dd>4–5 bulan</dd></div>
+        <div><dt>Sertifikat</dt><dd>BPOM, Halal, CPKB</dd></div>
+      </dl>
+      <div class="contacts">
+        <span><b>WA</b> 0822-1344-4359</span>
+        <span><b>IG</b> @fji.id</span>
+        <span><b>Kantor</b> HWA Tower Lt. 8, Jl. Ciputat Raya No.123, Jakarta</span>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ BAHAN ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Jalur B · bahan baku</p>
+      <h2>Kalau tetap mau rakit sendiri</h2>
+      <p>Buat menambal stok cepat, menguji aroma baru, atau melayani pesanan kecil sambil menunggu maklon jalan. Dua-duanya bisa dijalankan berbarengan.</p>
+    </div>
+
+    <article class="lead" data-wa="" data-mail="" data-subject="Permintaan harga bibit parfum">
+      <div class="lead-top">
+        <h3 class="lead-name">Amorenza Parfum</h3>
+        <span class="chip hot">Grosir mulai 100 ml</span>
+        <span class="chip">Losari, Cirebon</span>
+      </div>
+      <p class="why">Distributor bibit parfum dengan ribuan pilihan aroma, dan harga grosir sudah berlaku dari pembelian 100 ml. <span>Buka setiap hari sampai jam 9 malam, dan sudah ada di marketplace besar — jadi bisa dicoba tanpa transfer langsung dulu.</span></p>
+      <dl class="specs">
+        <div><dt>Minimum grosir</dt><dd>100 ml</dd></div>
+        <div><dt>Kisaran</dt><dd>Rp220–322 rb/kg</dd></div>
+        <div><dt>Jam buka</dt><dd>09.00–21.00</dd></div>
+      </dl>
+      <div class="contacts">
+        <span><b>IG</b> @amorenzaofficial</span>
+        <span><b>Web</b> amorparfum.com</span>
+        <span><b>Alamat</b> Jl. Gatot Subroto No. 27, Losari, Cirebon</span>
+      </div>
+      <details>
+        <summary>Permintaan harga</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria.
+
+Saya mau minta daftar harga bibit parfum untuk kebutuhan produksi rutin.
+
+Karakter aroma yang saya cari:
+1. Citrus aquatic yang ringan dan segar
+2. Soapy powdery musk — wangi sabun yang bersih
+3. Spicy woody amber yang kuat dan tahan lama
+4. Aromatic woody musk yang lembut
+
+Yang ingin saya tahu:
+• Harga per kg untuk masing-masing karakter di atas
+• Rekomendasi kode aroma yang paling mendekati
+• Berapa minimum untuk dapat harga grosir
+• Apakah bisa kirim sample kecil dulu sebelum beli banyak
+• Konsentrasi yang disarankan untuk Eau de Parfum
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://www.amorparfum.com/2021/09/harga-bibit-parfum-terbaik.html" target="_blank" rel="noopener">Buka daftar harganya</a>
+          <a class="btn" href="https://instagram.com/amorenzaofficial" target="_blank" rel="noopener">DM Instagram</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead" data-wa="6285103023699" data-mail="" data-subject="Permintaan harga bibit parfum">
+      <div class="lead-top">
+        <h3 class="lead-name">Benberg Arome</h3>
+        <span class="chip">Nomor langsung</span>
+      </div>
+      <p class="why">Memajang nomor telepon terbuka untuk tanya harga dan minimum order. <span>Pembanding cepat buat harga Amorenza — dua penawaran selalu lebih baik dari satu.</span></p>
+      <div class="contacts">
+        <span><b>WA / Telp</b> 0851-0302-3699</span>
+      </div>
+      <details>
+        <summary>Permintaan harga</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria.
+
+Saya mau tanya harga bibit parfum untuk produksi rutin.
+
+Karakter yang saya cari:
+1. Citrus aquatic — segar dan ringan
+2. Soapy powdery musk — wangi sabun bersih
+3. Spicy woody amber — kuat, tahan lama
+4. Aromatic woody musk — lembut
+
+Boleh minta:
+• Harga per kg untuk masing-masing
+• Minimum order
+• Apakah tersedia sample kecil untuk dicoba dulu
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" data-wa-link target="_blank" rel="noopener">Kirim via WhatsApp</a>
+        </div>
+      </details>
+    </article>
+
+    <article class="lead">
+      <div class="lead-top">
+        <h3 class="lead-name">Botol kaca 50 ml</h3>
+        <span class="chip">Direktori pemasok</span>
+      </div>
+      <p class="why">Untuk botol, jalur tercepat adalah direktori — puluhan pemasok lokal memajang stok 50 ml di sana, dan kamu bisa minta penawaran ke beberapa sekaligus. <span>Pemasok luar seperti Roetell dan Daxin melayani OEM dengan harga lebih murah, tapi baru masuk akal di jumlah besar karena ada bea dan waktu kirim.</span></p>
+      <div class="contacts">
+        <span><b>Lokal</b> indonetwork.co.id — kategori botol parfum</span>
+        <span><b>OEM luar</b> roetell.com · daxinglassbottle.com</span>
+      </div>
+      <details>
+        <summary>Permintaan penawaran botol</summary>
+        <div class="msg">Halo, saya Dani dari SCNTR — brand parfum pria.
+
+Saya mencari pemasok botol kaca untuk produksi rutin.
+
+Spesifikasi yang saya cari:
+• Botol kaca 50 ml untuk Eau de Parfum
+• Dengan sprayer dan tutup
+• Model polos yang bersih, bukan yang banyak ornamen
+
+Yang ingin saya tahu:
+• Harga per pcs di jumlah 500, 1.000, dan 2.000
+• Minimum order
+• Stok yang tersedia sekarang model apa saja
+• Apakah bisa sablon atau pasang label sendiri
+• Berapa lama pengiriman ke lokasi saya
+
+Kalau ada katalog, boleh dikirimkan.
+
+Terima kasih.
+Dani — SCNTR</div>
+        <div class="actions">
+          <button class="btn primary" data-copy>Salin pesan</button>
+          <a class="btn" href="https://www.indonetwork.co.id/k/parfum?q=Botol+parfum" target="_blank" rel="noopener">Buka direktorinya</a>
+        </div>
+      </details>
+    </article>
+  </section>
+
+  <!-- ============ LEGALITAS ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Legalitas · biaya dan waktu</p>
+      <h2>Notifikasi BPOM, kalau diurus sendiri</h2>
+      <p>Angka ini gunanya buat pembanding: begitu kamu lihat berapa mahal dan lamanya mengurus sendiri, paket maklon yang sudah termasuk BPOM jadi kelihatan murah.</p>
+    </div>
+
+    <div class="crib">
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>Pos</th><th>Biaya</th><th>Catatan</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>PNBP BPOM</td><td>Rp500 rb – 1,25 jt</td><td>per SKU, jadi dikali 4 varian</td></tr>
+            <tr><td>Uji laboratorium</td><td>Rp2 – 5 jt</td><td>per varian — cemaran mikroba, logam berat, stabilitas</td></tr>
+            <tr><td>Konsultan</td><td>Rp8 – 15 jt</td><td>opsional, tapi hampir selalu dipakai</td></tr>
+            <tr><td>Waktu</td><td>90–120 hari kerja</td><td>bisa 6–12 bulan kalau diurus sendiri</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="verdict">Selain biaya, ada syarat yang tidak bisa dibeli cepat: <b>NIB lewat OSS</b>, <b>merek terdaftar di DJKI</b>, dan <b>Penanggung Jawab Teknis</b> — orang berijazah S1 farmasi, kimia, biologi, atau kedokteran yang menandatangani keamanan produk. Pabrik maklon sudah punya semua itu, dan itulah yang sebenarnya kamu beli waktu ikut paketnya.</p>
+    </div>
+  </section>
+
+  <!-- ============ CRIB ============ -->
+  <section>
+    <div class="tier-head">
+      <p class="tier-tag">Kalau pabriknya bales</p>
+      <h2>Tiga jawaban yang bakal kepakai</h2>
+      <p>Sisi beli beda dari sisi jual: di sini kamu yang pegang uang, jadi kamu yang boleh banyak nanya.</p>
+    </div>
+
+    <div class="crib">
+      <h3>1. Mereka kirim paket, tapi tidak dirinci</h3>
+      <p class="q">Sering terjadi. Minta pecahan biayanya sebelum bicara harga.</p>
+      <div class="msg">Terima kasih penawarannya.
+
+Sebelum saya putuskan, boleh minta rincian isi paketnya? Yang ingin saya lihat terpisah:
+
+• Biaya formulasi dan sampling
+• Harga botol 50 ml per pcs
+• Kemasan dan label per pcs
+• Biaya pengurusan BPOM
+• Biaya isi dan produksi per botol
+
+Saya sedang membandingkan beberapa pabrik, dan lebih mudah kalau angkanya bisa disandingkan per pos.
+
+Satu lagi: kalau saya ambil 1.000 pcs dibagi 4 varian, apakah harganya sama dengan 1.000 pcs satu varian? Kalau beda, berapa selisihnya.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>2. "MOQ kami 1.000 pcs, tidak bisa kurang"</h3>
+      <p class="q">Biasanya bisa digeser — bukan dengan minta diskon, tapi dengan menawar bentuk.</p>
+      <div class="msg">Saya mengerti soal MOQ-nya.
+
+Boleh saya tawarkan dua kemungkinan?
+
+1. Saya ambil 1.000 pcs, tapi dikirim bertahap — 400 pcs di awal, sisanya menyusul dalam 2–3 bulan. Pembayaran tetap sesuai kesepakatan.
+
+2. Saya mulai dari satu varian dulu sebanyak 1.000 pcs, dan tiga varian lain menyusul setelah yang pertama terserap.
+
+Saya sedang menyiapkan pasokan untuk pesanan korporat, jadi volumenya akan naik. Yang saya butuhkan sekarang cuma titik masuk yang tidak menahan modal terlalu lama.
+
+Kira-kira mana yang lebih memungkinkan dari sisi kamu?</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+
+    <div class="crib">
+      <h3>3. Sebelum transfer sepeser pun</h3>
+      <p class="q">Kirim ini dulu. Uang muka maklon tidak kecil, dan pabrik yang benar tidak akan keberatan ditanyai.</p>
+      <div class="msg">Sebelum kita lanjut ke pemesanan, boleh saya minta beberapa hal untuk kelengkapan?
+
+1. Salinan sertifikat CPKB pabrik
+2. Contoh nomor notifikasi BPOM dari produk klien lain yang pernah kamu urus
+3. Sample aroma yang sudah disetujui, sebelum produksi massal jalan
+4. Kontrak tertulis yang mencantumkan spesifikasi, jumlah, jadwal, dan skema pembayaran
+5. Kejelasan siapa pemilik formula setelah produksi — saya ingin memastikan formulanya tidak dipakai untuk brand lain
+
+Kalau semuanya jelas, saya siap lanjut ke uang muka.</div>
+      <div class="actions"><button class="btn primary" data-copy>Salin balasan</button></div>
+    </div>
+  </section>
+
+  <p class="note">Kontak dan angka diambil dari situs resmi masing-masing perusahaan, dicek Agustus 2026. Harga paket maklon berubah-ubah dan hampir selalu bisa dinegosiasikan, jadi perlakukan angka di sini sebagai bahan banding, bukan harga jadi. Ketentuan BPOM merujuk Peraturan BPOM No. 12 Tahun 2020 tentang Tata Cara Pengajuan Notifikasi Kosmetika — untuk keputusan yang mengikat, pastikan langsung ke BPOM atau konsultan legalitas.</p>
+
+</div>
+
+<script>
+  (function () {
+    document.querySelectorAll(".lead").forEach(function (lead) {
+      var msgEl = lead.querySelector(".msg");
+      if (!msgEl) return;
+      var text = msgEl.textContent;
+      var wa = lead.getAttribute("data-wa");
+      var mail = lead.getAttribute("data-mail");
+      var subject = lead.getAttribute("data-subject") || "";
+
+      var waLink = lead.querySelector("[data-wa-link]");
+      if (waLink && wa) waLink.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(text);
+
+      var mailLink = lead.querySelector("[data-mail-link]");
+      if (mailLink && mail) {
+        mailLink.href = "mailto:" + mail +
+          "?subject=" + encodeURIComponent(subject) +
+          "&body=" + encodeURIComponent(text);
+      }
+    });
+
+    document.querySelectorAll("[data-copy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var scope = btn.closest("details") || btn.closest(".crib");
+        var msgEl = scope && scope.querySelector(".msg");
+        if (!msgEl) return;
+        var text = msgEl.textContent;
+        var done = function () {
+          var original = btn.textContent;
+          btn.textContent = "Tersalin";
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.textContent = original;
+            btn.classList.remove("copied");
+          }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+        } else {
+          fallback(text, done);
+        }
+      });
+    });
+
+    function fallback(text, done) {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) { /* clipboard tidak tersedia */ }
+      document.body.removeChild(ta);
+    }
+  })();
+</script>
