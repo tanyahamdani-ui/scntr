@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>SCNTR Room Fragrance — Katalog Grosir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  @page { size: A4; margin: 0; }
+
+  :root {
+    --paper: #FAF9F7;
+    --ink: #1C1A18;
+    --muted: #75706A;
+    --dim: #9A948C;
+    --brass: #9C6B24;
+    --line: #DDD8D0;
+    --line-soft: #EBE7E1;
+    --panel: #F2F0EC;
+    --night: #16151A;
+
+    --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); }
+
+  body {
+    font-family: var(--f-body);
+    color: var(--ink);
+    font-size: 10.5pt;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    padding: 18mm 18mm 14mm;
+    background: var(--paper);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .page:last-child { page-break-after: auto; }
+
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin: 0;
+  }
+
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 29pt;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 16pt;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  h3 { font-family: var(--f-display); font-weight: 600; font-size: 10.5pt; margin: 0; }
+
+  p { margin: 0; }
+  .lede { font-size: 10.5pt; color: var(--muted); max-width: 62ch; }
+
+  /* ---------- sampul ---------- */
+
+  .cover { padding: 0; }
+
+  .cover-photo {
+    height: 132mm;
+    background-color: var(--night);
+    background-size: cover;
+    background-position: center 62%;
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cover-photo .fallback {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 30pt;
+    letter-spacing: 0.4em;
+    color: rgba(251, 250, 248, 0.22);
+  }
+
+  .cover-mark {
+    position: absolute;
+    top: 16mm;
+    left: 18mm;
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 15pt;
+    letter-spacing: 0.34em;
+    color: #FBFAF8;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.55);
+  }
+
+  .cover-badge {
+    position: absolute;
+    bottom: 12mm;
+    left: 18mm;
+    font-family: var(--f-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #EFE7D8;
+    border: 1px solid rgba(239, 231, 216, 0.4);
+    background: rgba(18, 17, 22, 0.78);
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+
+  .cover-body {
+    padding: 13mm 18mm 12mm;
+    display: flex;
+    flex-direction: column;
+    gap: 8mm;
+    flex: 1;
+  }
+
+  .cover-head { display: flex; flex-direction: column; gap: 4.5mm; }
+
+  .cover-facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .cf { background: var(--paper); padding: 5mm 4mm; }
+
+  .cf dt {
+    font-family: var(--f-mono);
+    font-size: 7pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 2mm;
+  }
+
+  .cf dd {
+    margin: 0;
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 12.5pt;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cover-foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--f-mono);
+    font-size: 8pt;
+    color: var(--dim);
+    border-top: 1px solid var(--line);
+    padding-top: 4mm;
+  }
+
+  /* ---------- kop halaman ---------- */
+
+  .page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 3mm;
+    margin-bottom: 8mm;
+  }
+
+  .page-head .wordmark {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: 9pt;
+    letter-spacing: 0.3em;
+  }
+
+  .page-head .sect {
+    font-family: var(--f-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .page-foot {
+    margin-top: auto;
+    padding-top: 5mm;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--f-mono);
+    font-size: 7.5pt;
+    color: var(--dim);
+  }
+
+  /* ---------- keunggulan ---------- */
+
+  .benefits { margin-top: 7mm; display: flex; flex-direction: column; gap: 5mm; }
+
+  .benefit {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brass);
+    padding: 5mm 6mm;
+    display: grid;
+    grid-template-columns: 46mm 1fr;
+    gap: 6mm;
+    align-items: start;
+  }
+
+  .benefit-label {
+    font-family: var(--f-mono);
+    font-size: 8pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding-top: 0.5mm;
+  }
+
+  .benefit p { font-size: 10pt; }
+  .benefit p b { font-weight: 600; }
+
+  .rooms {
+    margin-top: 7mm;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 5mm 6mm;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+
+  .rooms p { font-size: 10pt; color: var(--muted); }
+  .rooms b { color: var(--ink); font-weight: 600; }
+
+  .spec-strip {
+    margin-top: 7mm;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .spec { background: var(--paper); padding: 4.5mm 4mm; }
+
+  .spec dt {
+    font-family: var(--f-mono);
+    font-size: 7pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 1.5mm;
+  }
+
+  .spec dd { margin: 0; font-size: 10pt; font-weight: 500; }
+
+  /* ---------- harga ---------- */
+
+  table { border-collapse: collapse; width: 100%; margin-top: 6mm; }
+
+  thead th {
+    font-family: var(--f-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    text-align: left;
+    padding: 0 4mm 3mm 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  tbody td {
+    padding: 3.6mm 4mm 3.6mm 0;
+    border-bottom: 1px solid var(--line);
+    font-variant-numeric: tabular-nums;
+    font-size: 10.5pt;
+  }
+
+  td.qty { font-weight: 500; }
+
+  td.price {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 13pt;
+    letter-spacing: -0.01em;
+  }
+
+  td.margin { color: var(--brass); font-weight: 500; }
+
+  .price-note { margin-top: 3mm; font-size: 9pt; color: var(--muted); }
+
+  .terms { margin-top: 5mm; display: flex; flex-direction: column; }
+
+  .term {
+    display: grid;
+    grid-template-columns: 42mm 1fr;
+    gap: 5mm;
+    padding: 2.6mm 0;
+    border-bottom: 1px solid var(--line-soft);
+    align-items: start;
+  }
+
+  .term:first-of-type { border-top: 1px solid var(--line-soft); }
+
+  .term dt {
+    font-family: var(--f-mono);
+    font-size: 8pt;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass);
+    padding-top: 1px;
+  }
+
+  .term dd { margin: 0; font-size: 10pt; }
+  .term dd b { font-weight: 600; }
+
+  /* ---------- penutup ---------- */
+
+  .reasons { display: flex; flex-direction: column; gap: 6mm; margin-top: 8mm; }
+
+  .reason { display: grid; grid-template-columns: 8mm 1fr; gap: 5mm; align-items: start; }
+
+  .reason-num {
+    font-family: var(--f-mono);
+    font-size: 8pt;
+    color: var(--brass);
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .reason h3 { margin-bottom: 1.5mm; }
+  .reason p { font-size: 10pt; color: var(--muted); max-width: 60ch; }
+
+  .kontak {
+    margin-top: 9mm;
+    background: var(--night);
+    color: #F4F1EC;
+    padding: 8mm 9mm 7mm;
+    display: flex;
+    flex-direction: column;
+    gap: 5mm;
+  }
+
+  .kontak .eyebrow { color: #D6A75C; }
+  .kontak h2 { color: #FBFAF8; }
+  .kontak p { font-size: 10.5pt; color: #CFC8BE; max-width: 58ch; }
+
+  .kontak-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6mm;
+    border-top: 1px solid rgba(244, 241, 236, 0.18);
+    padding-top: 5mm;
+  }
+
+  .kontak-grid dt {
+    font-family: var(--f-mono);
+    font-size: 7pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #A79E92;
+    margin-bottom: 2mm;
+  }
+
+  .kontak-grid dd { margin: 0; font-family: var(--f-mono); font-size: 10pt; color: #FBFAF8; }
+</style>
+</head>
+<body>
+
+<!-- ================= HALAMAN 1 — SAMPUL ================= -->
+<div class="page cover">
+  <div class="cover-photo" __PHOTOSTYLE__>
+    <div class="cover-mark">SCNTR</div>
+    __FALLBACK__
+    <div class="cover-badge">Room Fragrance — Katalog Grosir 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-head">
+      <p class="eyebrow">Reed Diffuser — 100 ml</p>
+      <h1>Ruangan,<br>terisi ketenangan.</h1>
+      <p class="lede">SCNTR Room Fragrance adalah pengharum ruangan reed diffuser dengan aroma yang diracik khusus. Elegan, maskulin, minimalis — dan karena dipakai ruangan, bukan badan, produk ini cocok untuk siapa pun penerimanya. Tersedia untuk pembelian grosir, isian hampers korporat, dan suplai ritel.</p>
+    </div>
+
+    <dl class="cover-facts">
+      <div class="cf"><dt>Isi</dt><dd>100 ml</dd></div>
+      <div class="cf"><dt>Tahan</dt><dd>6–8 minggu</dd></div>
+      <div class="cf"><dt>Grosir mulai</dt><dd>Rp99.000</dd></div>
+      <div class="cf"><dt>Minimum</dt><dd>50 pcs</dd></div>
+    </dl>
+
+    <div class="cover-foot">
+      <span>Katalog untuk pembeli grosir &amp; korporat</span>
+      <span>scntr.pages.dev</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HALAMAN 2 — PRODUK ================= -->
+<div class="page">
+  <div class="page-head">
+    <span class="wordmark">SCNTR</span>
+    <span class="sect">Produk</span>
+  </div>
+
+  <h2>Velour Night</h2>
+  <p class="lede" style="margin-top:2.5mm">Aromatic woody musk yang lembut dan hangat. Tenang, percaya diri, dan berkelas tanpa banyak bicara — karakter yang sama dengan parfum SCNTR, dipindahkan ke ruangan.</p>
+
+  <div class="benefits">
+    <div class="benefit">
+      <span class="benefit-label">Long Lasting</span>
+      <p><b>Wangi tahan lama hingga 6–8 minggu.</b> Tanpa listrik, tanpa api, tanpa perawatan. Cukup dibalik batangnya sesekali kalau ingin wanginya lebih kuat.</p>
+    </div>
+    <div class="benefit">
+      <span class="benefit-label">Premium Fragrance</span>
+      <p><b>Aroma eksklusif, diracik khusus untuk SCNTR.</b> Bukan aroma pasaran yang bisa ditemukan di merek lain.</p>
+    </div>
+    <div class="benefit">
+      <span class="benefit-label">Mood Enhancer</span>
+      <p><b>Menciptakan suasana nyaman, tenang, dan fokus.</b> Cocok untuk ruang kerja dan ruang tamu, tempat orang perlu betah berlama-lama.</p>
+    </div>
+  </div>
+
+  <div class="rooms">
+    <p class="eyebrow">Penempatan</p>
+    <p><b>Elegan, maskulin, minimalis.</b> Cocok untuk kamar, ruang kerja, ruang tamu, atau studio. Botol kaca matte hitam dengan batang reed hitam — berdiri sebagai benda pajangan, bukan sekadar pengharum.</p>
+  </div>
+
+  <dl class="spec-strip">
+    <div class="spec"><dt>Isi</dt><dd>100 ml</dd></div>
+    <div class="spec"><dt>Kemasan</dt><dd>Kaca matte + reed</dd></div>
+    <div class="spec"><dt>Ketahanan</dt><dd>6–8 minggu</dd></div>
+    <div class="spec"><dt>Produksi</dt><dd>Lokal, Indonesia</dd></div>
+  </dl>
+
+  <div class="page-foot">
+    <span>SCNTR Room Fragrance — Katalog Grosir</span>
+    <span>02</span>
+  </div>
+</div>
+
+<!-- ================= HALAMAN 3 — HARGA ================= -->
+<div class="page">
+  <div class="page-head">
+    <span class="wordmark">SCNTR</span>
+    <span class="sect">Harga &amp; Ketentuan</span>
+  </div>
+
+  <h2>Harga grosir</h2>
+  <p class="lede" style="margin-top:2.5mm">Empat tingkat harga menurut jumlah pesanan. Paket 100 botol yang paling banyak diambil — di jumlah itu ongkir kami tanggung dan opsi custom label terbuka. Harga retail di pasaran Rp199.000 per botol.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:34%">Jumlah pesanan</th>
+        <th style="width:33%">Harga per botol</th>
+        <th style="width:33%">Margin penjual</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="qty">50 pcs — coba dulu</td><td class="price">Rp129.000</td><td class="margin">54%</td></tr>
+      <tr><td class="qty"><b>100 pcs</b> — paket standar</td><td class="price">Rp119.000</td><td class="margin">67%</td></tr>
+      <tr><td class="qty">250 pcs</td><td class="price">Rp109.000</td><td class="margin">83%</td></tr>
+      <tr><td class="qty">500 pcs ke atas</td><td class="price">Rp99.000</td><td class="margin">101%</td></tr>
+    </tbody>
+  </table>
+
+  <p class="price-note">Margin dihitung dari harga beli terhadap harga retail Rp199.000. Untuk pesanan di atas 500 pcs, harga dibicarakan tersendiri.</p>
+
+  <dl class="terms">
+    <div class="term">
+      <dt>Minimum</dt>
+      <dd>50 pcs per pesanan.</dd>
+    </div>
+    <div class="term">
+      <dt>Custom label</dt>
+      <dd>Tersedia mulai 100 pcs untuk kebutuhan korporat — logo perusahaan, nama acara, atau kartu ucapan. Desain gratis, biaya cetak menyesuaikan jumlah dan bahan.</dd>
+    </div>
+    <div class="term">
+      <dt>Waktu siap</dt>
+      <dd>50–100 pcs siap dalam 3 hari kerja, 250 pcs dalam 5 hari kerja, 500 pcs dalam 7 hari kerja. Pesanan dengan custom label jadwalnya dikonfirmasi di penawaran.</dd>
+    </div>
+    <div class="term">
+      <dt>Pengiriman</dt>
+      <dd>Gratis ongkir untuk pesanan 100 pcs ke atas, wilayah Pulau Jawa. Luar Jawa dan pesanan 50 pcs dihitung terpisah, dicantumkan di penawaran.</dd>
+    </div>
+    <div class="term">
+      <dt>Sample</dt>
+      <dd>Satu botol gratis untuk calon pembeli, ongkir ditanggung penerima.</dd>
+    </div>
+    <div class="term">
+      <dt>Pembayaran</dt>
+      <dd>DP 50% saat pesanan dikonfirmasi, pelunasan sebelum barang dikirim. Invoice resmi disediakan.</dd>
+    </div>
+  </dl>
+
+  <div class="page-foot">
+    <span>Harga berlaku sampai Desember 2026</span>
+    <span>03</span>
+  </div>
+</div>
+
+<!-- ================= HALAMAN 4 — PENUTUP ================= -->
+<div class="page">
+  <div class="page-head">
+    <span class="wordmark">SCNTR</span>
+    <span class="sect">Kenapa Diffuser</span>
+  </div>
+
+  <h2>Kenapa diffuser lebih kuat<br>sebagai isian hampers</h2>
+
+  <div class="reasons">
+    <div class="reason">
+      <span class="reason-num">01</span>
+      <div>
+        <h3>Terpakai oleh semua penerima</h3>
+        <p>Hampers korporat dibagikan ke karyawan dan klien, laki-laki maupun perempuan. Produk perawatan diri selalu menyisakan sebagian penerima yang tidak memakainya. Pengharum ruangan tidak punya masalah itu — dipakai siapa pun, di mana pun mereka tinggal.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">02</span>
+      <div>
+        <h3>Mengisi keranjang, bukan tenggelam di dasarnya</h3>
+        <p>Botol 100 ml dengan batang reed punya tinggi dan volume. Dalam foto maupun saat dibuka, hamper terlihat berisi — dan bagi klien korporat, kesan pertama itu sebagian besar dari nilainya.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">03</span>
+      <div>
+        <h3>Bertahan 6–8 minggu di ruangan penerima</h3>
+        <p>Isian makanan habis dalam sepekan, merchandise berakhir di laci. Diffuser berdiri di meja kerja atau ruang tamu selama dua bulan, dan setiap kali terlihat, perusahaan pemberinya ikut teringat. Itu nilai yang jarang bisa dibeli semurah ini.</p>
+      </div>
+    </div>
+    <div class="reason">
+      <span class="reason-num">04</span>
+      <div>
+        <h3>Aman di perjalanan, tanpa masa kedaluwarsa</h3>
+        <p>Tidak butuh penanganan khusus, dan sisa stok musim ini masih layak jual di musim berikutnya. Isian F&amp;B tidak memberi keleluasaan yang sama.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="kontak">
+    <p class="eyebrow">Langkah berikutnya</p>
+    <h2>Minta sample atau penawaran</h2>
+    <p>Kirim pesan dengan jumlah dan tanggal acara yang dituju, penawaran resmi kami siapkan di hari yang sama. Sample satu botol tersedia gratis untuk calon pembeli.</p>
+    <dl class="kontak-grid">
+      <div><dt>WhatsApp</dt><dd>0898 4618 900</dd></div>
+      <div><dt>Situs</dt><dd>scntr.pages.dev</dd></div>
+      <div><dt>Balasan</dt><dd>Hari yang sama</dd></div>
+    </dl>
+  </div>
+
+  <div class="page-foot">
+    <span>SCNTR — Room Fragrance</span>
+    <span>04</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -6,4 +6,5 @@ cd "$(dirname "$0")"
 SITE=/Users/dani/Projects/scntr
 perl -0pe 's{\.\./assets/velour-night\.jpg}{assets/velour-night.jpg}g' web/index.html > "$SITE/index.html"
 cp index.html "$SITE/app.html"
-echo "tersalin ke $SITE (index.html + app.html)"
+cp orders.html "$SITE/orders.html"
+echo "tersalin ke $SITE (index.html + app.html + orders.html)"

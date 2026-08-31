@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCNTR — Catatan Pesanan</title>
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Catatan pesanan SCNTR — riwayat order yang masuk melalui WhatsApp.">
+<meta name="theme-color" content="#08080A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ink:#08080A;--panel:#131316;--panel-2:#1A1A1E;--line:#26262A;
+  --bone:#F3F1EC;--mute:#8C8C93;--dim:#5E5E66;
+  --fresh:#57A47C;--clean:#6D9DD1;--bold:#C8483E;--gold:#C9A961;
+  --danger:#D9564C;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Instrument Sans","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--ink);color:var(--bone);font-family:var(--body);
+  -webkit-font-smoothing:antialiased;line-height:1.6;
+  padding:clamp(28px,5vw,64px) clamp(18px,5vw,56px) 90px;
+}
+.wrap{max-width:900px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;letter-spacing:-.02em;font-weight:600}
+.eyebrow{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.lede{font-size:15.5px;color:var(--mute);max-width:62ch;margin-top:10px}
+
+header.top{border-bottom:1px solid var(--line);padding-bottom:30px;margin-bottom:36px}
+header.top h1{font-size:clamp(26px,4vw,40px);line-height:1.1;margin-top:12px;font-weight:500}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.tag{
+  font-family:var(--display);font-size:11.5px;font-weight:500;
+  padding:7px 12px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--mute);
+}
+
+/* ---------- ringkasan ---------- */
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:32px}
+.sum{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;
+}
+.sum dt{font-family:var(--display);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.sum dd{
+  margin:0;font-family:var(--display);font-weight:700;font-size:26px;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.sum.total dd{color:var(--gold)}
+.sum.count dd{color:var(--clean)}
+.sum.pending dd{color:var(--bold)}
+
+/* ---------- tabel ---------- */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:28px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{
+  font-family:var(--display);font-size:10px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);background:var(--panel-2);white-space:nowrap;
+}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.date{font-family:var(--display);font-size:12.5px;white-space:nowrap;color:var(--mute)}
+td.id{font-family:var(--display);font-size:12.5px;font-weight:600;white-space:nowrap}
+td.items{color:#C9C7C2;line-height:1.5}
+
+.pill{
+  display:inline-block;font-family:var(--display);font-size:9.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;padding:4.5px 9px;border-radius:7px;border:1px solid;white-space:nowrap;
+}
+.pill.baru{color:var(--clean);border-color:rgba(109,157,209,.36);background:rgba(109,157,209,.1)}
+.pill.dibayar{color:var(--fresh);border-color:rgba(87,164,124,.36);background:rgba(87,164,124,.1)}
+.pill.selesai{color:var(--gold);border-color:rgba(201,169,97,.4);background:rgba(201,169,97,.1)}
+.pill.batal{color:var(--danger);border-color:rgba(217,86,76,.34);background:rgba(217,86,76,.08)}
+
+/* ---------- aksi ---------- */
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:44px;padding:0 18px;border-radius:11px;background:var(--bone);color:#0B0B0C;
+  font-family:var(--display);font-weight:600;font-size:13px;cursor:pointer;
+  border:none;transition:opacity .16s ease;
+}
+.btn:hover{opacity:.88}
+.btn.ghost{background:transparent;color:var(--bone);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:#45454C}
+
+/* ---------- tombol status ---------- */
+.stat-btn{
+  width:30px;height:30px;border-radius:8px;display:inline-grid;place-items:center;
+  background:var(--panel-2);border:1px solid var(--line);color:var(--bone);
+  cursor:pointer;font-size:14px;margin-right:5px;transition:border-color .15s ease;
+}
+.stat-btn:hover{border-color:var(--fresh);color:var(--fresh)}
+.stat-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ---------- kosong ---------- */
+.empty{
+  border:1px dashed var(--line);border-radius:14px;padding:48px 24px;
+  text-align:center;color:var(--dim);font-size:14px;line-height:1.7;
+}
+.empty b{display:block;font-family:var(--display);color:var(--bone);font-size:16px;margin-bottom:8px}
+
+/* ---------- modal tambah ---------- */
+.modal{
+  position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:20px;
+  background:rgba(4,4,6,.72);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity .22s ease;
+}
+.modal.open{opacity:1;pointer-events:auto}
+.sheet{
+  width:min(500px,100%);max-height:88vh;overflow-y:auto;
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;
+  transform:translateY(10px);transition:transform .22s ease;padding:24px;
+}
+.modal.open .sheet{transform:none}
+.sheet h2{font-size:19px;margin-bottom:6px}
+.sheet .sub{font-size:13.5px;color:var(--mute);margin-bottom:20px}
+
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.field label{font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.field input,.field select,.field textarea{
+  background:var(--ink);border:1px solid var(--line);border-radius:10px;
+  padding:12px 13px;color:var(--bone);font-family:var(--body);font-size:14px;resize:vertical;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#4A4A52}
+.field .err{font-size:11.5px;color:var(--danger);display:none}
+.field.bad input,.field.bad textarea{border-color:var(--danger)}
+.field.bad .err{display:block}
+
+/* ---------- item list editor ---------- */
+.items-editor{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.item-row{
+  display:grid;grid-template-columns:1fr 90px 34px;gap:8px;align-items:center;
+  background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px;
+}
+.item-row select,.item-row input{
+  background:var(--ink);border:1px solid var(--line);border-radius:8px;
+  padding:9px 10px;color:var(--bone);font-family:var(--body);font-size:13px;
+}
+.item-row select:focus,.item-row input:focus{outline:none;border-color:#4A4A52}
+.item-row .del{
+  width:32px;height:32px;border-radius:8px;display:grid;place-items:center;
+  background:none;border:1px solid var(--line);color:var(--dim);cursor:pointer;font-size:15px;
+}
+.item-row .del:hover{color:var(--danger);border-color:var(--danger)}
+
+.btn-add{
+  align-self:flex-start;display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--display);font-size:12px;font-weight:600;color:var(--bone);
+  background:var(--panel-2);border:1px solid var(--line);border-radius:8px;
+  padding:9px 13px;cursor:pointer;transition:border-color .15s ease;
+}
+.btn-add:hover{border-color:#45454C}
+
+.sheet .go{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.sheet .go .btn{flex:1}
+
+/* ---------- tab ---------- */
+.tabnav{display:flex;gap:2px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.tabnav button{
+  font-family:var(--display);font-size:13px;font-weight:600;color:var(--mute);
+  background:none;border:none;padding:10px 16px 12px;cursor:pointer;
+  border-bottom:2px solid transparent;transition:color .15s ease;
+}
+.tabnav button:hover{color:var(--bone)}
+.tabnav button.on{color:var(--bone);border-bottom-color:var(--bone)}
+
+footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);padding-top:24px;max-width:70ch;margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <span class="eyebrow">SCNTR — Internal</span>
+  <h1>Catatan Pesanan</h1>
+  <p class="lede">Setiap order yang masuk lewat WhatsApp tercatat di sini — tersimpan di browser ini, tidak dikirim ke mana pun. Gunakan untuk 20 order pertama sebelum pindah ke sistem yang lebih besar.</p>
+  <div class="meta">
+    <span class="tag">Tersimpan lokal</span>
+    <span class="tag">Export ke CSV</span>
+    <span class="tag">Status: baru → dibayar → selesai</span>
+  </div>
+</header>
+
+<div class="summary" id="summary"></div>
+
+<div class="tabnav" id="tabnav">
+  <button class="on" data-tab="semua">Semua</button>
+  <button data-tab="baru">Perlu diproses</button>
+  <button data-tab="selesai">Selesai</button>
+</div>
+
+<div class="actions">
+  <button class="btn" id="btnTambah">+ Catat Order Baru</button>
+  <button class="btn ghost" id="btnExport">Export CSV</button>
+  <button class="btn ghost" id="btnHapusSemua">Hapus Semua</button>
+</div>
+
+<div class="scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tanggal</th>
+        <th>Nama</th>
+        <th>Isi Pesanan</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<div class="empty" id="empty" hidden>
+  <b>Belum ada pesanan</b>
+  Setelah pelanggan checkout via WhatsApp, catat order-nya di sini supaya tidak ada yang terlewat.
+</div>
+
+<!-- Modal tambah order -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <h2>Catat Order Baru</h2>
+    <p class="sub">Isi data dari chat WhatsApp yang masuk.</p>
+
+    <div class="field" id="f-nama">
+      <label for="i-nama">Nama pembeli</label>
+      <input id="i-nama" placeholder="Nama pelanggan">
+      <span class="err">Nama wajib diisi.</span>
+    </div>
+
+    <div class="field">
+      <label for="i-hp">Nomor HP (opsional)</label>
+      <input id="i-hp" placeholder="08xxxxxxxxxx">
+    </div>
+
+    <div class="field">
+      <label for="i-alamat">Alamat kirim (opsional)</label>
+      <textarea id="i-alamat" rows="2" placeholder="Kota, kecamatan"></textarea>
+    </div>
+
+    <div class="items-editor" id="itemsEditor">
+      <!-- item rows injected by JS -->
+    </div>
+    <button class="btn-add" id="btnAddItem">+ Tambah produk</button>
+
+    <div class="field">
+      <label for="i-status">Status</label>
+      <select id="i-status">
+        <option value="baru">Baru — perlu diproses</option>
+        <option value="dibayar">Dibayar — menunggu kirim</option>
+        <option value="selesai">Selesai — dikirim</option>
+        <option value="batal">Dibatalkan</option>
+      </select>
+    </div>
+
+    <div class="go">
+      <button class="btn" id="btnSimpan">Simpan Order</button>
+      <button class="btn ghost" id="btnBatal">Batal</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Data tersimpan di localStorage browser ini. Export CSV untuk cadangan atau dipindah ke spreadsheet. Halaman ini tidak perlu dibuka pelanggan — hanya untuk operasional toko.
+</footer>
+
+</div>
+
+<script>
+const PRICE = 169000, SHIP = 15000, FREE_MIN = 200000;
+const KEY = "scntr-orders";
+const rupiah = n => "Rp " + n.toLocaleString("id-ID");
+const $ = s => document.querySelector(s);
+
+const VARIANTS = [
+  {id:"fresh",  name:"SCNTR Fresh"},
+  {id:"clean",  name:"SCNTR Clean"},
+  {id:"bold",   name:"SCNTR Bold"},
+  {id:"velour", name:"SCNTR Velour Night"}
+];
+
+let orders = [];
+let filter = "semua";
+
+// ---- load / save ----
+function load(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if(raw) orders = JSON.parse(raw) || [];
+  } catch(e){ orders = []; }
+}
+function save(){
+  try { localStorage.setItem(KEY, JSON.stringify(orders)); }
+  catch(e){ /* tidak tersedia */ }
+}
+
+// ---- utils ----
+function genId(){
+  const n = Math.floor(1000 + Math.random() * 9000);
+  return "SCNTR-" + n;
+}
+function today(){
+  const d = new Date();
+  return d.getFullYear() + "-" +
+    String(d.getMonth()+1).padStart(2,"0") + "-" +
+    String(d.getDate()).padStart(2,"0");
+}
+function rupiahSemua(items){
+  const count = items.reduce((a,i) => a + i.qty, 0);
+  const subtotal = count * PRICE;
+  const disc = subtotal >= FREE_MIN ? SHIP : 0;
+  const total = subtotal ? subtotal + SHIP - disc : 0;
+  return total;
+}
+
+// ---- render ----
+function render(){
+  // summary
+  const total = orders.reduce((a,o) => a + o.total, 0);
+  const count = orders.length;
+  const pending = orders.filter(o => o.status === "baru" || o.status === "dibayar").length;
+
+  $("#summary").innerHTML =
+    `<div class="sum count"><dt>Total order</dt><dd>${count}</dd></div>` +
+    `<div class="sum pending"><dt>Perlu diproses</dt><dd>${pending}</dd></div>` +
+    `<div class="sum total"><dt>Omzet terkumpul</dt><dd>${rupiah(total)}</dd></div>`;
+
+  // filter
+  const filtered = orders.filter(o => {
+    if(filter === "semua") return true;
+    return o.status === filter;
+  });
+
+  // rows
+  const rows = $("#rows");
+  const empty = $("#empty");
+  rows.innerHTML = "";
+
+  if(!filtered.length){
+    empty.hidden = false;
+    rows.innerHTML = "";
+    return;
+  }
+  empty.hidden = true;
+
+  filtered.sort((a,b) => b.id.localeCompare(a.id));
+
+  filtered.forEach(o => {
+    const pill = `<span class="pill ${o.status}">` +
+      ({baru:"Baru",dibayar:"Dibayar",selesai:"Selesai",batal:"Batal"}[o.status] || o.status) + "</span>";
+
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      `<td class="id">#${o.id}</td>` +
+      `<td class="date">${o.tanggal}</td>` +
+      `<td><div>${o.nama}</div><div style="font-size:11px;color:var(--dim);margin-top:3px">${o.hp ? o.hp : ""}</div></td>` +
+      `<td class="items">${o.items.map(i => {
+        const v = VARIANTS.find(x => x.id === i.id);
+        return v.name + " ×" + i.qty;
+      }).join("<br>")}</td>` +
+      `<td class="num">${rupiah(o.total)}</td>` +
+      `<td>${pill}</td>` +
+      `<td style="white-space:nowrap">
+        <button class="stat-btn" data-id="${o.id}" data-s="dibayar" title="Tandai dibayar">✓</button>
+        <button class="stat-btn" data-id="${o.id}" data-s="selesai" title="Tandai selesai">📦</button>
+        <button class="stat-btn danger" data-id="${o.id}" data-s="hapus" title="Hapus">✕</button>
+      </td>`;
+
+    rows.appendChild(tr);
+  });
+
+  // event listeners untuk tombol status
+  rows.querySelectorAll(".stat-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.id;
+      const action = btn.dataset.s;
+      const order = orders.find(o => o.id === id);
+      if(!order) return;
+
+      if(action === "hapus"){
+        orders = orders.filter(o => o.id !== id);
+        save();
+        render();
+        return;
+      }
+      order.status = action;
+      save();
+      render();
+    });
+  });
+}
+
+// ---- ekspor CSV ----
+function exportCSV(){
+  if(!orders.length){ alert("Belum ada order untuk diexport."); return; }
+
+  const header = "ID,Tanggal,Nama,HP,Alamat,Isi Pesanan,Total,Status";
+  const rows = orders.map(o => {
+    const items = o.items.map(i => {
+      const v = VARIANTS.find(x => x.id === i.id);
+      return (v ? v.name : i.id) + " x" + i.qty;
+    }).join("; ");
+    return [
+      o.id,
+      o.tanggal,
+      '"' + o.nama.replace(/"/g,'""') + '"',
+      o.hp ? '"' + o.hp.replace(/"/g,'""') + '"' : "",
+      '"' + (o.alamat || "").replace(/"/g,'""') + '"',
+      '"' + items.replace(/"/g,'""') + '"',
+      o.total,
+      o.status
+    ].join(",");
+  });
+
+  const csv = [header, ...rows].join("\n");
+  const blob = new Blob(["\uFEFF" + csv], {type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "scntr-orders-" + new Date().toISOString().slice(0,10) + ".csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ---- modal ----
+function openModal(){
+  $("#modal").classList.add("open");
+  $("#i-nama").focus();
+  renderItemsEditor();
+}
+function closeModal(){
+  $("#modal").classList.remove("open");
+  clearForm();
+}
+function clearForm(){
+  $("#i-nama").value = "";
+  $("#i-hp").value = "";
+  $("#i-alamat").value = "";
+  $("#i-status").value = "baru";
+  document.getElementById("f-nama").classList.remove("bad");
+}
+function renderItemsEditor(){
+  const wrap = $("#itemsEditor");
+  const rows = wrap.querySelectorAll(".item-row");
+  if(!rows.length){
+    wrap.innerHTML = `
+      <div class="item-row">
+        <select>
+          ${VARIANTS.map(v => `<option value="${v.id}">${v.name}</option>`).join("")}
+        </select>
+        <input type="number" min="1" value="1" data-qty>
+        <button class="del" data-del>✕</button>
+      </div>`;
+    bindItemEvents();
+  }
+}
+function bindItemEvents(){
+  $("#itemsEditor").querySelectorAll("[data-del]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const rows = $("#itemsEditor").querySelectorAll(".item-row");
+      if(rows.length <= 1){ return; }
+      btn.closest(".item-row").remove();
+    });
+  });
+}
+
+// ---- simpan ----
+function simpan(){
+  const nama = $("#i-nama").value.trim();
+  if(!nama){
+    document.getElementById("f-nama").classList.add("bad");
+    return;
+  }
+  document.getElementById("f-nama").classList.remove("bad");
+
+  const items = [];
+  $("#itemsEditor").querySelectorAll(".item-row").forEach(row => {
+    const id = row.querySelector("select").value;
+    const qty = parseInt(row.querySelector("input[data-qty]").value) || 1;
+    items.push({id, qty});
+  });
+
+  const order = {
+    id: genId(),
+    tanggal: today(),
+    nama,
+    hp: $("#i-hp").value.trim(),
+    alamat: $("#i-alamat").value.trim(),
+    items,
+    total: rupiahSemua(items),
+    status: $("#i-status").value
+  };
+
+  orders.push(order);
+  save();
+  closeModal();
+  render();
+}
+
+// ---- events ----
+$("#btnTambah").addEventListener("click", openModal);
+$("#btnBatal").addEventListener("click", closeModal);
+$("#btnSimpan").addEventListener("click", simpan);
+$("#btnExport").addEventListener("click", exportCSV);
+$("#btnAddItem").addEventListener("click", () => {
+  const row = document.createElement("div");
+  row.className = "item-row";
+  row.innerHTML = `
+    <select>
+      ${VARIANTS.map(v => `<option value="${v.id}">${v.name}</option>`).join("")}
+    </select>
+    <input type="number" min="1" value="1" data-qty>
+    <button class="del" data-del>✕</button>`;
+  $("#itemsEditor").appendChild(row);
+  bindItemEvents();
+});
+
+$("#btnHapusSemua").addEventListener("click", () => {
+  if(!orders.length) return;
+  if(confirm("Hapus semua pesanan? Tindakan ini tidak bisa dibatalkan.")){
+    orders = [];
+    save();
+    render();
+  }
+});
+
+$("#modal").addEventListener("click", e => {
+  if(e.target.id === "modal") closeModal();
+});
+
+$("#tabnav").addEventListener("click", e => {
+  const btn = e.target.closest("[data-tab]");
+  if(!btn) return;
+  filter = btn.dataset.tab;
+  document.querySelectorAll("#tabnav button").forEach(b => b.classList.toggle("on", b === btn));
+  render();
+});
+
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") closeModal();
+});
+
+// ---- init ----
+load();
+render();
+</script>
+</body>
+</html>

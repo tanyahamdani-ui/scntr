@@ -20,8 +20,12 @@ fi
 inline index.html dist/scntr.html
 inline web/index.html dist/scntr-web.html
 
+# Salin orders.html apa adanya (tidak perlu inline foto)
+cp orders.html dist/orders.html
+
 # Folder siap-upload: web jadi halaman utama, prototipe HP di /app.html
 mkdir -p dist/site
 cp dist/scntr-web.html dist/site/index.html
 cp dist/scntr.html dist/site/app.html
-echo "dist/site/ siap di-upload (index.html + app.html)"
+cp orders.html dist/site/orders.html
+echo "dist/site/ siap di-upload (index.html + app.html + orders.html)"

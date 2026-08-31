@@ -1,6 +1,6 @@
 // Service worker SCNTR: app shell disimpan supaya aplikasi tetap terbuka tanpa sinyal.
 const CACHE = "scntr-v2";
-const SHELL = ["app.html", "assets/velour-night.jpg", "assets/icon-192.png", "assets/icon-512.png", "manifest.webmanifest"];
+const SHELL = ["app.html", "index.html", "orders.html", "assets/velour-night.jpg", "assets/icon-192.png", "assets/icon-512.png", "manifest.webmanifest"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));

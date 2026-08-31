@@ -1,4 +1,4 @@
-<!doctype html>
+ve y<!doctype html>
 <html lang="id">
 <head>
 <meta charset="utf-8">
@@ -732,6 +732,20 @@ const VARIANTS = [
 let active = VARIANTS[3];
 let cart = [];
 
+// ---- penyimpanan keranjang (localStorage) ----
+const CART_KEY = "scntr-cart";
+function saveCart(){
+  try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+  catch(e) { /* penyimpanan tidak tersedia */ }
+}
+function loadCart(){
+  try {
+    const raw = localStorage.getItem(CART_KEY);
+    if(raw){ cart = JSON.parse(raw) || []; }
+  } catch(e) { cart = []; }
+}
+loadCart();
+
 /* ---- toast ---- */
 let toastTimer;
 function toast(msg){
@@ -746,6 +760,7 @@ function add(id, qty = 1){
   const v = VARIANTS.find(x => x.id === id);
   const line = cart.find(l => l.id === id);
   if(line) line.qty += qty; else cart.push({id, qty});
+  saveCart();
   render();
   toast(v.title + " masuk keranjang");
 }
@@ -754,6 +769,7 @@ function setQty(id, delta){
   if(!line) return;
   line.qty += delta;
   if(line.qty < 1) cart = cart.filter(l => l.id !== id);
+  saveCart();
   render();
 }
 function openCart(open){
@@ -832,7 +848,7 @@ function renderCart(){
        <button class="kill" aria-label="Hapus ${v.title}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5h15M9.5 6.5V4.4h5v2.1M6.5 6.5 7.6 20h8.8l1.1-13.5M10 10v6.4M14 10v6.4"/></svg></button>`);
     row.querySelector("[data-minus]").addEventListener("click", () => setQty(l.id,-1));
     row.querySelector("[data-plus]").addEventListener("click", () => setQty(l.id,1));
-    row.querySelector(".kill").addEventListener("click", () => { cart = cart.filter(x => x.id !== l.id); render(); toast(v.title + " dihapus"); });
+    row.querySelector(".kill").addEventListener("click", () => { cart = cart.filter(x => x.id !== l.id); saveCart(); render(); toast(v.title + " dihapus"); });
     wrap.appendChild(row);
   });
 
