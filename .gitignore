@@ -1,1 +1,6 @@
 .DS_Store
+
+# dokumen internal — jangan pernah terbit ke web
+b2b/
+scntr-b2b/
+*-INTERNAL*
