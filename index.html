@@ -456,9 +456,9 @@ footer nav a:hover{color:var(--bone)}
 <section class="pad" id="koleksi">
   <div class="sechead">
     <div>
-      <span class="eyebrow">Empat karakter</span>
+      <span class="eyebrow">Empat karakter, dua ukuran</span>
       <h2 style="margin-top:12px">Pilih varian</h2>
-      <p>Satu formula dasar, empat arah karakter. Semua 50 ml, semua Rp 169.000.</p>
+      <p>Satu formula dasar, empat arah karakter. Ukuran 50 ml Rp 169.000, atau 100 ml Rp 259.000 — hemat Rp 79.000 dibanding dua botol kecil.</p>
     </div>
     <button class="btn ghost sm" id="addAll">Coba semua varian</button>
   </div>
@@ -577,7 +577,7 @@ footer nav a:hover{color:var(--bone)}
     {
       "@type": "ProductGroup",
       "name": "SCNTR Eau de Parfum 50 ml",
-      "description": "Parfum pria 50 ml dalam empat karakter: Fresh, Clean, Bold, dan Velour Night. Tahan 8-12 jam.",
+      "description": "Parfum pria dalam empat karakter: Fresh, Clean, Bold, dan Velour Night. Tersedia 50 ml dan 100 ml. Tahan 8-12 jam.",
       "brand": { "@id": "https://scntr.pages.dev/#brand" },
       "image": "https://scntr.pages.dev/assets/velour-night.jpg",
       "productGroupID": "scntr-50ml",
@@ -712,27 +712,39 @@ const $ = s => document.querySelector(s);
 const el = (t,c,h) => { const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; };
 
 const VARIANTS = [
-  {id:"fresh", price:169000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)", eyebrow:"Untuk pagi",
+  {id:"fresh", img:"assets/velour-night.jpg", price:169000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)", eyebrow:"Untuk pagi",
    title:"SCNTR Fresh", chips:["Citrus","Aquatic","Green"],
    desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.",
    notes:{Top:"Bergamot, lemon, daun mint", Heart:"Neroli, teh hijau", Base:"White musk, cedar"}},
-  {id:"clean", price:169000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)", eyebrow:"Untuk kantor",
+  {id:"clean", img:"assets/velour-night.jpg", price:169000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)", eyebrow:"Untuk kantor",
    title:"SCNTR Clean", chips:["Soapy","Powdery","Musk"],
    desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.",
    notes:{Top:"Aldehid, bergamot", Heart:"Iris, lily, kapas", Base:"White musk, amberwood"}},
-  {id:"bold", price:169000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)", eyebrow:"Untuk malam",
+  {id:"bold", img:"assets/velour-night.jpg", price:169000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)", eyebrow:"Untuk malam",
    title:"SCNTR Bold", chips:["Spicy","Woody","Amber"],
    desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.",
    notes:{Top:"Lada hitam, kapulaga", Heart:"Nutmeg, kulit", Base:"Amber, oud, patchouli"}},
-  {id:"velour", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
+  {id:"velour", img:"assets/velour-night.jpg", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
    title:"SCNTR Velour Night", chips:["Aromatic","Woody","Musk"],
    desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}},
-  {id:"velour100", price:259000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling hemat",
+  {id:"velour100", img:"assets/velour-night-100ml.jpg", price:259000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling hemat",
    title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
    desc:"Velour Night yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml, dan engga bolak-balik pesan.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}}
-
+,
+  {id:"fresh100", img:"assets/fresh-100ml.jpg", price:259000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
+   title:"SCNTR Fresh 100 ml", chips:["Citrus","Aquatic","Green"],
+   desc:"Fresh yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{Top:"Bergamot, lemon, daun mint", Heart:"Neroli, teh hijau", Base:"White musk, cedar"}},
+  {id:"clean100", img:"assets/clean-100ml.jpg", price:259000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
+   title:"SCNTR Clean 100 ml", chips:["Soapy","Powdery","Musk"],
+   desc:"Clean yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{Top:"Aldehid, bergamot", Heart:"Iris, lily, kapas", Base:"White musk, amberwood"}},
+  {id:"bold100", img:"assets/bold-100ml.jpg", price:259000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
+   title:"SCNTR Bold 100 ml", chips:["Spicy","Woody","Amber"],
+   desc:"Bold yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{Top:"Lada hitam, kapulaga", Heart:"Nutmeg, kulit", Base:"Amber, oud, patchouli"}}
 ];
 
 let active = VARIANTS[3];
@@ -790,7 +802,7 @@ function buildGrid(){
   grid.innerHTML = "";
   VARIANTS.forEach(v => {
     const tile = el("article","tile",
-      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}"></div>
+      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}" style="background-image:url('${v.img}')"></div>
        <div class="txt">
          <h3 style="color:${v.color}">${v.name}</h3>
          <div class="tag">${v.tag}</div>
