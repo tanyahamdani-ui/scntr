@@ -401,6 +401,14 @@ footer nav a:hover{color:var(--bone)}
 }
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .toast svg{width:17px;height:17px}
+
+.ulasan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.ulasan{margin:0;background:var(--card,#141416);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.ulasan .bintang{color:#e8b04b;letter-spacing:3px;font-size:15px}
+.ulasan blockquote{margin:0;font-size:17px;line-height:1.55}
+.ulasan-meta{display:flex;flex-wrap:wrap;gap:8px}
+.ulasan-meta span{font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:3px 10px}
+.ulasan figcaption{font-size:12.5px;color:var(--mute);margin-top:auto}
 </style>
 
 </head>
@@ -410,7 +418,8 @@ footer nav a:hover{color:var(--bone)}
   <menu>
     <li><a href="#koleksi">Koleksi</a></li>
     <li><a href="#spotlight">Velour Night</a></li>
-    <li><a href="#cerita">Cerita</a></li>
+    <li><a href="#ulasan">Ulasan</a>
+      <a href="#cerita">Cerita</a></li>
   </menu>
   <div class="right">
     <button class="cartbtn" id="openCart">
@@ -501,6 +510,31 @@ footer nav a:hover{color:var(--bone)}
     <div><span><b>Diracik di Indonesia</b><span>Batch kecil, kontrol ketat</span></span></div>
     <div><span><b>Tanpa hewan uji</b><span>Cruelty free, selalu</span></span></div>
     <div><span><b>Isi ulang</b><span>Program refill mulai 2027</span></span></div>
+  </div>
+</section>
+
+
+<section class="pad" id="ulasan">
+  <div class="sechead">
+    <div>
+      <span class="eyebrow">Kata pembeli</span>
+      <h2 style="margin-top:12px">Bukan kami yang bilang.</h2>
+      <p>Ulasan asli dari pembeli di Shopee, disalin apa adanya. Bisa dicek langsung di <a href="https://shopee.co.id/SCNTR-Velour-Night-EDP-Parfum-Pria-Woody-Maskulin-Tahan-Lama-Navy-Matte-i.19120332.55863748141" target="_blank" rel="noopener">halaman produk kami</a>.</p>
+    </div>
+  </div>
+  <div class="ulasan-grid">
+    <figure class="ulasan">
+      <div class="bintang" aria-label="Lima dari lima bintang">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote>Bagus banget, penjual ramah dan sangat response</blockquote>
+      <div class="ulasan-meta"><span>Ketahanan: lama</span><span>Cocok untuk: di luar rumah</span></div>
+      <figcaption>mtmaulana.it &middot; 25 Juli 2026 &middot; Shopee</figcaption>
+    </figure>
+    <figure class="ulasan">
+      <div class="bintang" aria-label="Lima dari lima bintang">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <blockquote>Parfumnya mantap, wanginya fresh dan awet. Seller ramah, pengiriman cepat. Recommended banget!</blockquote>
+      <div class="ulasan-meta"><span>Pembelian terverifikasi</span></div>
+      <figcaption>rendi2721 &middot; 26 Juli 2026 &middot; Shopee</figcaption>
+    </figure>
   </div>
 </section>
 
