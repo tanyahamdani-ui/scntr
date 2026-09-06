@@ -706,28 +706,33 @@ footer nav a:hover{color:var(--bone)}
 <div class="toast" id="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 7"/></svg><span id="toastMsg"></span></div>
 
 <script>
-const PRICE = 169000, SHIP = 15000, FREE_MIN = 200000;
+const SHIP = 15000, FREE_MIN = 200000;
 const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 const $ = s => document.querySelector(s);
 const el = (t,c,h) => { const n=document.createElement(t); if(c)n.className=c; if(h!=null)n.innerHTML=h; return n; };
 
 const VARIANTS = [
-  {id:"fresh", name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)", eyebrow:"Untuk pagi",
+  {id:"fresh", price:169000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)", eyebrow:"Untuk pagi",
    title:"SCNTR Fresh", chips:["Citrus","Aquatic","Green"],
    desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.",
    notes:{Top:"Bergamot, lemon, daun mint", Heart:"Neroli, teh hijau", Base:"White musk, cedar"}},
-  {id:"clean", name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)", eyebrow:"Untuk kantor",
+  {id:"clean", price:169000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)", eyebrow:"Untuk kantor",
    title:"SCNTR Clean", chips:["Soapy","Powdery","Musk"],
    desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.",
    notes:{Top:"Aldehid, bergamot", Heart:"Iris, lily, kapas", Base:"White musk, amberwood"}},
-  {id:"bold", name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)", eyebrow:"Untuk malam",
+  {id:"bold", price:169000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)", eyebrow:"Untuk malam",
    title:"SCNTR Bold", chips:["Spicy","Woody","Amber"],
    desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.",
    notes:{Top:"Lada hitam, kapulaga", Heart:"Nutmeg, kulit", Base:"Amber, oud, patchouli"}},
-  {id:"velour", name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
+  {id:"velour", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
    title:"SCNTR Velour Night", chips:["Aromatic","Woody","Musk"],
    desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.",
+   notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}},
+  {id:"velour100", price:259000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling hemat",
+   title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
+   desc:"Velour Night yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml, dan engga bolak-balik pesan.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}}
+
 ];
 
 let active = VARIANTS[3];
@@ -791,7 +796,7 @@ function buildGrid(){
          <div class="tag">${v.tag}</div>
          <div class="notes">${Object.values(v.notes).join(" · ")}</div>
          <div class="buy">
-           <span class="price">${rupiah(PRICE)}</span>
+           <span class="price">${rupiah(v.price)}</span>
            <button class="btn sm">Tambah</button>
          </div>
        </div>`);
@@ -843,7 +848,7 @@ function renderCart(){
              <span class="q">${l.qty}</span>
              <button data-plus aria-label="Tambah">+</button>
            </span>
-           <span class="amt">${rupiah(PRICE * l.qty)}</span>
+           <span class="amt">${rupiah(v.price * l.qty)}</span>
          </div>
        </div>
        <button class="kill" aria-label="Hapus ${v.title}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5h15M9.5 6.5V4.4h5v2.1M6.5 6.5 7.6 20h8.8l1.1-13.5M10 10v6.4M14 10v6.4"/></svg></button>`);
@@ -854,7 +859,7 @@ function renderCart(){
   });
 
   const count = cart.reduce((a,l) => a + l.qty, 0);
-  const subtotal = count * PRICE;
+  const subtotal = cart.reduce((a,l) => { const v = VARIANTS.find(x => x.id === l.id); return a + (v ? v.price : 0) * l.qty; }, 0);
   const freeShip = subtotal >= FREE_MIN;
   const disc = freeShip ? SHIP : 0;
   const total = subtotal ? subtotal + SHIP - disc : 0;
@@ -892,7 +897,7 @@ const WA_NUMBER = "628984618900";
 
 function totals(){
   const count = cart.reduce((a,l) => a + l.qty, 0);
-  const subtotal = count * PRICE;
+  const subtotal = cart.reduce((a,l) => { const v = VARIANTS.find(x => x.id === l.id); return a + (v ? v.price : 0) * l.qty; }, 0);
   const disc = subtotal >= FREE_MIN ? SHIP : 0;
   return {count, subtotal, disc, total: subtotal ? subtotal + SHIP - disc : 0};
 }
@@ -903,7 +908,7 @@ function openCheckout(){
   $("#recap").innerHTML =
     cart.map(l => {
       const v = VARIANTS.find(x => x.id === l.id);
-      return `<div class="r"><span>${v.title} · ${l.qty} pcs</span><span class="num">${rupiah(PRICE * l.qty)}</span></div>`;
+      return `<div class="r"><span>${v.title} · ${l.qty} pcs</span><span class="num">${rupiah(v.price * l.qty)}</span></div>`;
     }).join("") +
     `<div class="r"><span>Ongkir</span><span class="num">${rupiah(SHIP)}</span></div>` +
     (t.disc ? `<div class="r"><span>Diskon ongkir</span><span class="num">− ${rupiah(t.disc)}</span></div>` : "") +
@@ -930,7 +935,8 @@ function pesanWhatsApp(){
   const t = totals();
   const baris = cart.map((l,i) => {
     const v = VARIANTS.find(x => x.id === l.id);
-    return `${i+1}. ${v.title} 50 ml x${l.qty} — ${rupiah(PRICE * l.qty)}`;
+    const nm = v.title.replace(/\s+\d+\s*ml$/i, "");
+    return `${i+1}. ${nm} ${v.ml} ml x${l.qty} — ${rupiah(v.price * l.qty)}`;
   }).join("\n");
 
   const pesan =
