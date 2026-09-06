@@ -761,7 +761,7 @@ const VARIANTS = [
    title:"SCNTR Bold", chips:["Spicy","Woody","Amber"],
    desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.",
    notes:{Top:"Lada hitam, kapulaga", Heart:"Nutmeg, kulit", Base:"Amber, oud, patchouli"}},
-  {id:"velour", img:"assets/velour-night.jpg", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
+  {id:"velour", img:"assets/velour-night-50ml.jpg", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)", eyebrow:"Paling dicari",
    title:"SCNTR Velour Night", chips:["Aromatic","Woody","Musk"],
    desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}},
@@ -839,7 +839,7 @@ function buildGrid(){
   grid.innerHTML = "";
   VARIANTS.forEach(v => {
     const tile = el("article","tile",
-      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}" style="background-image:url('${v.img}')"></div>
+      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}" style="background-image:url('${v.img}');background-size:${v.zoom || '220%'} auto"></div>
        <div class="txt">
          <h3 style="color:${v.color}">${v.name}</h3>
          <div class="tag">${v.tag}</div>
