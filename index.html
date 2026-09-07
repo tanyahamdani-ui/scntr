@@ -410,6 +410,18 @@ footer nav a:hover{color:var(--bone)}
 .ulasan-meta span{font-size:12px;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:3px 10px}
 .ulasan-foto{width:100%;height:300px;border-radius:12px;border:1px solid var(--line);display:block;object-fit:cover;object-position:center 45%;background:#111}
 .ulasan figcaption{font-size:12.5px;color:var(--mute);margin-top:auto}
+
+.toko-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.toko{display:flex;flex-direction:column;gap:10px;padding:24px;border:1px solid var(--line);border-radius:16px;
+  background:var(--card,#141416);text-decoration:none;color:inherit;position:relative;overflow:hidden;
+  transition:border-color .18s ease,transform .18s ease}
+.toko:hover,.toko:focus-visible{border-color:var(--tone);transform:translateY(-2px)}
+.toko::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--tone)}
+.toko .nm{font-family:var(--display);font-size:19px;letter-spacing:-.01em}
+.toko .ket{font-size:14px;line-height:1.5;color:var(--mute)}
+.toko .go{margin-top:6px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--tone);font-weight:600}
+.toko .go span{display:inline-block;transition:transform .18s ease}
+.toko:hover .go span{transform:translateX(4px)}
 </style>
 
 </head>
@@ -419,8 +431,9 @@ footer nav a:hover{color:var(--bone)}
   <menu>
     <li><a href="#koleksi">Koleksi</a></li>
     <li><a href="#spotlight">Velour Night</a></li>
-    <li><a href="#ulasan">Ulasan</a>
-      <a href="#cerita">Cerita</a></li>
+    <li><a href="#ulasan">Ulasan</a></li>
+    <li><a href="#toko">Marketplace</a></li>
+    <li><a href="#cerita">Cerita</a></li>
   </menu>
   <div class="right">
     <button class="cartbtn" id="openCart">
@@ -541,6 +554,34 @@ footer nav a:hover{color:var(--bone)}
   </div>
 </section>
 
+
+<section class="pad" id="toko">
+  <div class="sechead">
+    <div>
+      <span class="eyebrow">Beli di tempat lain</span>
+      <h2 style="margin-top:12px">Belanja di marketplace langganan kamu.</h2>
+      <p>Produk, harga, dan botolnya sama persis. Pilih yang saldo, voucher, dan gratis ongkirnya lagi ada di kamu.</p>
+    </div>
+  </div>
+  <div class="toko-grid">
+    <a class="toko" style="--tone:#EE4D2D" href="https://shopee.co.id/scntr.id" target="_blank" rel="noopener">
+      <div class="nm">Shopee</div>
+      <div class="ket">Toko resmi SCNTR. Di sinilah ulasan pembeli di atas ditulis.</div>
+      <div class="go">Buka toko <span>&rarr;</span></div>
+    </a>
+    <a class="toko" style="--tone:#42B549" href="https://www.tokopedia.com/scntrid" target="_blank" rel="noopener">
+      <div class="nm">Tokopedia</div>
+      <div class="ket">Cocok kalau kamu terbiasa bayar pakai GoPay atau cicilan.</div>
+      <div class="go">Buka toko <span>&rarr;</span></div>
+    </a>
+    <a class="toko" style="--tone:#F3F1EC" href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">
+      <div class="nm">TikTok Shop</div>
+      <div class="ket">Ketuk tas kuning di profil @scntr.id, sambil lihat wanginya dipakai.</div>
+      <div class="go">Buka profil <span>&rarr;</span></div>
+    </a>
+  </div>
+</section>
+
 <section class="pad" id="tanya">
   <div class="sechead">
     <div>
@@ -583,9 +624,9 @@ footer nav a:hover{color:var(--bone)}
     <p>Parfum cowok yang ga drama. Jakarta, Indonesia. *Ketahanan wangi bervariasi tergantung jenis kulit dan cuaca.</p>
   </div>
   <nav>
-    <div><b>Belanja</b><a href="#koleksi">Semua varian</a><a href="#spotlight">Velour Night</a><a href="#koleksi">Kartu hadiah</a></div>
+    <div><b>Belanja</b><a href="#koleksi">Semua varian</a><a href="#spotlight">Velour Night</a><a href="#toko">Marketplace</a></div>
     <div><b>Bantuan</b><a href="#top">Lacak pesanan</a><a href="#top">Pengembalian</a><a href="#top">Hubungi kami</a></div>
-    <div><b>Ikuti</b><a href="#top">Instagram</a><a href="#top">TikTok</a><a href="#top">Newsletter</a></div>
+    <div><b>Marketplace</b><a href="https://shopee.co.id/scntr.id" target="_blank" rel="noopener">Shopee</a><a href="https://www.tokopedia.com/scntrid" target="_blank" rel="noopener">Tokopedia</a><a href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">TikTok Shop</a></div>
   </nav>
 </footer>
 
@@ -601,7 +642,12 @@ footer nav a:hover{color:var(--bone)}
       "url": "https://scntr.pages.dev/",
       "logo": "https://scntr.pages.dev/assets/icon-512.png",
       "image": "https://scntr.pages.dev/assets/velour-night.jpg",
-      "areaServed": "ID"
+      "areaServed": "ID",
+      "sameAs": [
+        "https://shopee.co.id/scntr.id",
+        "https://www.tokopedia.com/scntrid",
+        "https://www.tiktok.com/@scntr.id"
+      ]
     },
     {
       "@type": "WebSite",
