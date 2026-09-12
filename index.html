@@ -422,70 +422,207 @@ footer nav a:hover{color:var(--bone)}
 .toko .go{margin-top:6px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--tone);font-weight:600}
 .toko .go span{display:inline-block;transition:transform .18s ease}
 .toko:hover .go span{transform:translateX(4px)}
+
+/* ================= TAMPILAN V2 ================= */
+:root{
+  --v-dark:#0E0E10; --v-dark2:#141417; --v-dark3:#1B1B1F;
+  --v-cream:#F2F0EA; --v-cream2:#E7E4DC;
+  --v-onDark:#F6F5F2; --v-onDarkMute:#A6A29B;
+  --v-onCream:#17171A; --v-onCreamMute:#5E5B56;
+  --v-hair:rgba(246,245,242,.14); --v-hairDark:rgba(23,23,26,.14);
+}
+
+body.v2{background:var(--v-dark);color:var(--v-onDark)}
+.v2 .wrapx{max-width:1180px;margin:0 auto;padding:0 26px}
+@media(max-width:720px){.v2 .wrapx{padding:0 18px}}
+
+.v2 .eyb{font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--v-onDarkMute);margin:0}
+.v2 .eyb.on-cream{color:#8A857D}
+
+.v2 h1.dsp{font-family:var(--display);font-weight:700;font-size:clamp(38px,6.4vw,68px);line-height:1.02;letter-spacing:-.035em;margin:16px 0 18px;text-wrap:balance}
+.v2 h2.dsp{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,46px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 16px;text-wrap:balance}
+
+.v2 .lead{margin:0;color:var(--v-onDarkMute);font-size:16px;line-height:1.65;max-width:46ch}
+.v2 .lead.on-cream{color:var(--v-onCreamMute)}
+
+.v2 .pill{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:14.5px;padding:13px 22px;border-radius:999px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:opacity .15s ease,background .15s ease}
+.v2 .pill.light{background:var(--v-cream);color:#121214}
+.v2 .pill.dark{background:#17171A;color:var(--v-cream)}
+.v2 .pill.wire{background:transparent;color:var(--v-onDark);border-color:var(--v-hair)}
+.v2 .pill:hover{opacity:.86}
+.v2 .pill:focus-visible{outline:2px solid var(--v-cream);outline-offset:3px}
+
+/* ---------- nav ---------- */
+.v2nav{position:sticky;top:0;z-index:60;background:rgba(14,14,16,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--v-hair)}
+.v2nav .in{max-width:1180px;margin:0 auto;padding:16px 26px;display:flex;align-items:center;gap:24px}
+.v2nav .mark{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.2em;color:var(--v-onDark);text-decoration:none}
+.v2nav menu{flex:1;display:flex;gap:26px;margin:0;padding:0;list-style:none;justify-content:center}
+.v2nav menu a{color:var(--v-onDarkMute);text-decoration:none;font-size:14px}
+.v2nav menu a:hover{color:var(--v-onDark)}
+.v2nav .rt{display:flex;align-items:center;gap:14px}
+.v2nav .bag{position:relative;background:none;border:0;color:var(--v-onDark);cursor:pointer;padding:6px;display:flex}
+.v2nav .bag svg{width:21px;height:21px}
+.v2nav .bag b{position:absolute;top:-2px;right:-4px;min-width:17px;height:17px;border-radius:999px;background:var(--v-cream);color:#121214;font-size:10.5px;font-weight:700;display:grid;place-items:center;padding:0 4px}
+@media(max-width:880px){.v2nav menu{display:none}}
+
+/* ---------- hero ---------- */
+.v2hero{position:relative;background:var(--v-dark);overflow:hidden}
+.v2hero .bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.62}
+.v2hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--v-dark) 6%,rgba(14,14,16,.72) 42%,rgba(14,14,16,.18) 78%)}
+.v2hero .in{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:96px 26px 0;min-height:min(86vh,720px);display:flex;flex-direction:column}
+.v2hero .copy{max-width:560px}
+.v2hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.v2hero .side{position:absolute;right:26px;top:36%;font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.24em;line-height:2.1;text-transform:uppercase;color:var(--v-onDarkMute);text-align:right}
+.v2hero .side hr{border:0;border-top:1px solid var(--v-hair);width:34px;margin:14px 0 0 auto}
+@media(max-width:1000px){.v2hero .side{display:none}}
+.v2hero .foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px 34px;align-items:center;padding:26px 0;border-top:1px solid var(--v-hair)}
+.v2hero .foot div{font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--v-onDarkMute);line-height:1.8}
+.v2hero .foot b{color:var(--v-onDark);font-weight:600;display:block}
+@media(max-width:720px){.v2hero .in{padding-top:58px;min-height:auto}.v2hero .bg{opacity:.4}}
+
+/* ---------- split (about / why) ---------- */
+.v2split{display:grid;grid-template-columns:38% 1fr;align-items:stretch}
+@media(max-width:900px){.v2split{grid-template-columns:1fr}}
+.v2split .shotp{position:relative;min-height:420px;background-size:cover;background-position:center;background-color:#101012}
+.v2split .shotp span{position:absolute;left:26px;bottom:26px;font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.24em;line-height:2;text-transform:uppercase;color:#EDEAE4;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.v2split .panel{background:var(--v-cream);color:var(--v-onCream);padding:clamp(34px,5vw,68px);display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(24px,4vw,52px);align-items:start}
+@media(max-width:1040px){.v2split .panel{grid-template-columns:1fr}}
+.v2split .panel h2.dsp{color:var(--v-onCream)}
+.v2split .feat{display:flex;flex-direction:column;gap:22px;border-left:1px solid var(--v-hairDark);padding-left:clamp(20px,3vw,34px)}
+@media(max-width:1040px){.v2split .feat{border-left:0;padding-left:0;border-top:1px solid var(--v-hairDark);padding-top:24px}}
+.v2split .feat .it{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+.v2split .feat .ic{width:32px;height:32px;border-radius:999px;border:1px solid var(--v-hairDark);display:grid;place-items:center}
+.v2split .feat .ic svg{width:15px;height:15px;stroke:var(--v-onCream);fill:none;stroke-width:1.6}
+.v2split .feat h4{margin:0 0 3px;font-size:14.5px;font-weight:600;color:var(--v-onCream)}
+.v2split .feat p{margin:0;font-size:13.5px;color:var(--v-onCreamMute);line-height:1.55}
+
+.v2stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px;padding-top:26px;border-top:1px solid var(--v-hairDark)}
+.v2stats .s b{display:block;font-family:var(--display);font-weight:700;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.02em;color:var(--v-onCream)}
+.v2stats .s span{font-size:12.5px;color:var(--v-onCreamMute)}
+@media(max-width:520px){.v2stats{grid-template-columns:1fr 1fr}}
+
+/* ---------- trust strip ---------- */
+.v2trust{background:var(--v-cream2);color:var(--v-onCream)}
+.v2trust .in{max-width:1180px;margin:0 auto;padding:22px 26px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 38px;justify-content:space-between}
+.v2trust .lbl{font-family:var(--mono,ui-monospace,monospace);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#7C7871}
+.v2trust .it{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500}
+.v2trust .it svg{width:16px;height:16px;stroke:var(--v-onCream);fill:none;stroke-width:1.7;flex:none}
+
+/* ---------- band CTA ---------- */
+.v2band{position:relative;overflow:hidden;background:var(--v-dark2)}
+.v2band .bg{position:absolute;inset:0;background-size:cover;background-position:center 60%;opacity:.5}
+.v2band .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,14,16,.94),rgba(14,14,16,.55))}
+.v2band .in{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:74px 26px;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between}
+
+/* ---------- footer ---------- */
+.v2foot{background:var(--v-dark);border-top:1px solid var(--v-hair)}
+.v2foot .in{max-width:1180px;margin:0 auto;padding:56px 26px 26px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1.6fr;gap:36px}
+@media(max-width:900px){.v2foot .in{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.v2foot .in{grid-template-columns:1fr}}
+.v2foot .mark{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.2em}
+.v2foot p.tag{margin:10px 0 0;font-size:13.5px;color:var(--v-onDarkMute);max-width:26ch}
+.v2foot h5{margin:0 0 12px;font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--v-onDarkMute);font-weight:400}
+.v2foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.v2foot ul a{color:var(--v-onDark);text-decoration:none;font-size:13.5px;opacity:.8}
+.v2foot ul a:hover{opacity:1}
+.v2foot .wa{display:inline-flex;align-items:center;gap:9px;margin-top:12px;color:var(--v-onDark);text-decoration:none;font-size:13.5px;border:1px solid var(--v-hair);border-radius:999px;padding:10px 16px}
+.v2foot .wa svg{width:16px;height:16px;fill:currentColor}
+.v2foot .bar{max-width:1180px;margin:0 auto;padding:18px 26px 34px;border-top:1px solid var(--v-hair);display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--v-onDarkMute)}
+
+/* ---------- bagian gelap pembungkus koleksi & spotlight ---------- */
+.v2dark{background:var(--v-dark2);padding:clamp(52px,7vw,92px) 0}
+.v2dark .hd{max-width:1180px;margin:0 auto;padding:0 26px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+.v2dark .hd h2.dsp{margin-bottom:10px}
+@media(max-width:720px){.v2dark .hd{padding:0 18px}}
+
 </style>
 
 </head>
-<body>
-<nav class="nav">
-  <a class="wordmark" href="#top">SCNTR</a>
-  <menu>
-    <li><a href="#koleksi">Koleksi</a></li>
-    <li><a href="#spotlight">Velour Night</a></li>
-    <li><a href="#ulasan">Ulasan</a></li>
-    <li><a href="#toko">Marketplace</a></li>
-    <li><a href="#cerita">Cerita</a></li>
-  </menu>
-  <div class="right">
-    <button class="cartbtn" id="openCart">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.3 10.4h9.6L19 7.4H6"/><circle cx="9" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
-      Keranjang <span class="count" id="navCount">0</span>
-    </button>
+<body class="v2">
+<nav class="v2nav">
+  <div class="in">
+    <a class="mark" href="#top">SCNTR</a>
+    <menu>
+      <li><a href="#top">Beranda</a></li>
+      <li><a href="#cerita">Tentang</a></li>
+      <li><a href="#koleksi">Varian</a></li>
+      <li><a href="#spotlight">Detail</a></li>
+      <li><a href="#tanya">Tanya Jawab</a></li>
+    </menu>
+    <div class="rt">
+      <button class="bag" id="openCart" aria-label="Buka keranjang">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <b id="navCount">0</b>
+      </button>
+      <a class="pill light" href="#koleksi">Belanja</a>
+    </div>
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="copy">
-    <span class="eyebrow">Eau de Parfum · 50 ml</span>
-    <h1>Wangi yang kerja keras diam-diam.</h1>
-    <p>Parfum cowok yang ga drama. Dirancang untuk pria yang fokus dan tahu tujuan — hadir tanpa perlu mengumumkan diri.</p>
-    <div class="cta">
-      <a class="btn" href="#koleksi">Lihat Koleksi</a>
-      <button class="btn ghost" data-add="velour">Beli Velour Night</button>
+<header class="v2hero" id="top">
+  <div class="bg" style="background-image:url('assets/velour-night.jpg')"></div>
+  <div class="in">
+    <div class="copy">
+      <p class="eyb">Wangi untuk kamu yang lebih tenang</p>
+      <h1 class="dsp">Lebih dari<br>sekadar wangi.</h1>
+      <p class="lead">Parfum untuk orang yang bergerak dengan caranya sendiri. Halus, disengaja, dan selalu diingat.</p>
+      <div class="cta">
+        <a class="pill light" href="#koleksi">Lihat Varian <span aria-hidden="true">→</span></a>
+        <a class="pill wire" href="#cerita">Kenali SCNTR</a>
+      </div>
     </div>
-    <div class="marks">
-      <div class="mark">
-        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6M12 20c-2 0-3.5-1.5-3.5-3.4 0-3.6 5-5 5-11M16.5 20c-2 0-3.5-1.5-3.5-3.4 0-2.6 3.5-4.3 3.5-8.6"/></svg></span>
-        <span><b>Maskulin</b><span>Tegas dan berkarakter</span></span>
-      </div>
-      <div class="mark">
-        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.4"/><path d="M12 7.4V12l3 1.9"/></svg></span>
-        <span><b>Tahan Lama</b><span>8–12 jam*</span></span>
-      </div>
-      <div class="mark">
-        <span class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2 19 6v5.6c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V6l7-2.8Z"/></svg></span>
-        <span><b>Premium Quality</b><span>Bahan pilihan terbaik</span></span>
-      </div>
+
+    <div class="side">
+      ADA ORANG<br>YANG TAK PERLU<br>BERISIK<br>UNTUK<br>DIINGAT.
+      <hr>
+    </div>
+
+    <div class="foot">
+      <div><b>SCNTR</b>Est. 2024</div>
+      <div><b>12 Pilihan</b>Parfum &amp; pengharum ruangan</div>
+      <div><b>Kirim 1–2 Hari</b>Gratis ongkir dari Rp 200.000</div>
     </div>
   </div>
-  <div class="art" role="img" aria-label="Botol SCNTR Velour Night di atas batu gelap"></div>
 </header>
 
-<div class="strip">
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja Rp 200.000</span></span></div>
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 19 5.6v5.2c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V5.6L12 3Z"/><path d="m9 12 2.1 2.1L15.2 10"/></svg><span><b>100% Original</b><span>Garansi produk asli</span></span></div>
-  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h9v9h-9z"/><path d="M11.5 11.5h4.4l3.6 3.4v2.6h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="16" cy="18" r="1.7"/><path d="M1 6h5M2 11h3"/></svg><span><b>Pengiriman Cepat</b><span>Sampai dalam 1–2 hari</span></span></div>
-</div>
-
-<section class="pad" id="koleksi">
-  <div class="sechead">
-    <div>
-      <span class="eyebrow">Empat karakter, dua ukuran</span>
-      <h2 style="margin-top:12px">Pilih varian</h2>
-      <p>Satu formula dasar, empat arah karakter. Parfum 50 ml Rp 169.000 atau 100 ml Rp 259.000 — hemat Rp 79.000 dibanding dua botol kecil. Karakter yang sama juga tersedia sebagai pengharum ruangan, reed diffuser 100 ml Rp 199.000.</p>
-    </div>
-    <button class="btn ghost sm" id="addAll">Coba semua varian</button>
+<section class="v2split" id="cerita">
+  <div class="shotp" style="background-image:url('assets/bold-50ml.jpg')">
+    <span>ORANG BERBEDA<br>WANGI YANG SAMA</span>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="panel">
+    <div>
+      <p class="eyb on-cream">Tentang SCNTR</p>
+      <h2 class="dsp">Parfum untuk<br>orang sungguhan.</h2>
+      <p class="lead on-cream">SCNTR diracik sendiri dalam batch kecil di Indonesia — bukan parfum isi ulang, bukan tiruan merek lain. Kami percaya wangi itu bagian dari cerita kamu, suasana hati kamu, dan bagaimana kamu diingat orang.</p>
+      <p style="margin-top:22px"><a class="pill dark" href="#koleksi">Lihat Varian <span aria-hidden="true">→</span></a></p>
+    </div>
+    <div class="feat">
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <div><h4>Bahan Terpilih</h4><p>Konsentrat yang sama untuk setiap botol dalam satu batch.</p></div>
+      </div>
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span>
+        <div><h4>Bernotifikasi BPOM</h4><p>Aman dipakai dan aman untuk pengadaan perusahaan.</p></div>
+      </div>
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 14s2-6 8-6 8 6 8 6"/><circle cx="12" cy="16" r="2"/></svg></span>
+        <div><h4>Dibuat untuk Kamu</h4><p>Empat karakter, tinggal pilih yang paling kamu banget.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="v2dark" id="koleksi">
+  <div class="hd">
+    <div>
+      <p class="eyb">Empat karakter, tiga pilihan</p>
+      <h2 class="dsp">Empat sisi kamu.</h2>
+      <p class="lead">Suasana hati berbeda, identitas yang sama. Parfum 50 ml dan 100 ml, plus pengharum ruangan dengan karakter yang sama.</p>
+    </div>
+    <button class="pill wire" id="addAll">Coba semua varian</button>
+  </div>
+  <div class="wrapx"><div class="grid" id="grid"></div></div>
 </section>
 
 <section class="spot" id="spotlight">
@@ -493,13 +630,9 @@ footer nav a:hover{color:var(--bone)}
   <div class="detail">
     <span class="eyebrow" id="spotEyebrow">Paling dicari</span>
     <h2 id="spotTitle">SCNTR Velour Night</h2>
-    <div class="sub">Eau de Parfum · 50 ml</div>
+    <div class="sub" id="spotSub">Eau de Parfum · 50 ml</div>
     <div class="priceline">
-      <span class="price">Rp 169.000</span>
-      <span class="rating">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
-        <b>4.8</b> (126 ulasan)
-      </span>
+      <span class="price" id="spotPrice">Rp 169.000</span>
     </div>
     <div class="picker" id="picker"></div>
     <div class="chips" id="spotChips"></div>
@@ -512,124 +645,103 @@ footer nav a:hover{color:var(--bone)}
   </div>
 </section>
 
-<section class="pad" id="cerita">
-  <div class="sechead">
-    <div>
-      <span class="eyebrow">Cerita</span>
-      <h2 style="margin-top:12px">Dibuat untuk jarak satu meter.</h2>
-      <p>Kami tidak mengejar wangi yang mengisi ruangan. SCNTR dirancang untuk radius percakapan — cukup dekat untuk dikenali, cukup tenang untuk tidak mengganggu. Setiap batch diracik di Indonesia dengan bahan yang bisa kami sebut namanya satu per satu.</p>
-    </div>
+<section class="v2split" id="kenapa">
+  <div class="shotp" style="background-image:url('assets/velour-night-100ml.jpg')">
+    <span>WANGI YANG BAIK<br>BERTAHAN LEBIH LAMA<br>DARIPADA OBROLAN</span>
   </div>
-  <div class="strip" style="border:1px solid var(--line);border-radius:18px;overflow:hidden">
-    <div><span><b>Diracik di Indonesia</b><span>Batch kecil, kontrol ketat</span></span></div>
-    <div><span><b>Tanpa hewan uji</b><span>Cruelty free, selalu</span></span></div>
-    <div><span><b>Isi ulang</b><span>Program refill mulai 2027</span></span></div>
+  <div class="panel">
+    <div>
+      <p class="eyb on-cream">Kenapa SCNTR</p>
+      <h2 class="dsp">Ini soal rasa.</h2>
+      <p class="lead on-cream">Kami bukan sekadar jual parfum. Kami bangun perasaan — percaya diri, nyaman, dan versi kamu yang sedikit lebih baik dari kemarin.</p>
+      <div class="v2stats">
+        <div class="s"><b>12</b><span>Pilihan produk</span></div>
+        <div class="s"><b>8–12 jam</b><span>Ketahanan parfum</span></div>
+        <div class="s"><b>1–2 hari</b><span>Waktu pengiriman</span></div>
+      </div>
+    </div>
+    <div class="feat">
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="m4 12.5 5.5 5.5L20 7"/></svg></span>
+        <div><h4>Bayar pakai QRIS</h4><p>Scan dari bank atau e-wallet mana pun. Tanpa daftar akun.</p></div>
+      </div>
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg></span>
+        <div><h4>Rincian ke WhatsApp</h4><p>Pesanan tersusun otomatis, kamu tinggal kirim.</p></div>
+      </div>
+      <div class="it">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.2 8 9 4.6-.8 8-4 8-9V6z"/></svg></span>
+        <div><h4>100% original</h4><p>Diracik sendiri, bukan isi ulang dan bukan tiruan.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
-
-<section class="pad" id="ulasan">
-  <div class="sechead">
-    <div>
-      <span class="eyebrow">Kata pembeli</span>
-      <h2 style="margin-top:12px">Bukan kami yang bilang.</h2>
-      <p>Ulasan asli dari pembeli di Shopee, disalin apa adanya. Bisa dicek langsung di <a href="https://shopee.co.id/SCNTR-Velour-Night-EDP-Parfum-Pria-Woody-Maskulin-Tahan-Lama-Navy-Matte-i.19120332.55863748141" target="_blank" rel="noopener">halaman produk kami</a>.</p>
-    </div>
+<div class="v2trust">
+  <div class="in">
+    <span class="lbl">Kenapa aman belanja di sini</span>
+    <span class="it"><svg viewBox="0 0 24 24"><path d="m4 12.5 5.5 5.5L20 7"/></svg>Gratis ongkir dari Rp 200.000</span>
+    <span class="it"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3zM16 10h3l2 3v4h-5z"/></svg>Kirim 1–2 hari</span>
+    <span class="it"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/></svg>Bayar QRIS</span>
+    <span class="it"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8.2 8 9 4.6-.8 8-4 8-9V6z"/></svg>Bernotifikasi BPOM</span>
   </div>
-  <div class="ulasan-grid">
-    <figure class="ulasan">
-      <div class="bintang" aria-label="Lima dari lima bintang">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <blockquote>Bagus banget, penjual ramah dan sangat response</blockquote>
-      <div class="ulasan-meta"><span>Ketahanan: lama</span><span>Cocok untuk: di luar rumah</span></div>
-      <img class="ulasan-foto" src="assets/ulasan-mtmaulana.jpg" alt="Foto dari pembeli mtmaulana.it" width="505" height="340" decoding="async">
-      <figcaption>mtmaulana.it &middot; 25 Juli 2026 &middot; Shopee</figcaption>
-    </figure>
-    <figure class="ulasan">
-      <div class="bintang" aria-label="Lima dari lima bintang">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <blockquote>Parfumnya mantap, wanginya fresh dan awet. Seller ramah, pengiriman cepat. Recommended banget!</blockquote>
-      <div class="ulasan-meta"><span>Pembelian terverifikasi</span></div>
-      <img class="ulasan-foto" src="assets/ulasan-rendi2721.jpg" alt="Foto dari pembeli rendi2721" width="578" height="1015" decoding="async">
-      <figcaption>rendi2721 &middot; 26 Juli 2026 &middot; Shopee</figcaption>
-    </figure>
+</div>
+
+<section class="v2band">
+  <div class="bg" style="background-image:url('assets/velour-night.jpg')"></div>
+  <div class="in">
+    <div>
+      <p class="eyb">Jadi bagian ceritanya</p>
+      <h2 class="dsp" style="margin-bottom:8px">Temukan wangimu.</h2>
+      <p class="lead">Karena tiap momen pantas dapat wangi yang lebih baik.</p>
+    </div>
+    <a class="pill light" href="#koleksi">Belanja Sekarang <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
-
-<section class="pad" id="toko">
-  <div class="sechead">
+<footer class="v2foot" id="tanya">
+  <div class="in">
     <div>
-      <span class="eyebrow">Beli di tempat lain</span>
-      <h2 style="margin-top:12px">Belanja di marketplace langganan kamu.</h2>
-      <p>Produk, harga, dan botolnya sama persis. Pilih yang saldo, voucher, dan gratis ongkirnya lagi ada di kamu.</p>
+      <div class="mark">SCNTR</div>
+      <p class="tag">Wangi yang kerja keras diam-diam.</p>
+      <a class="wa" href="https://wa.me/628984618900" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.2 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1a14 14 0 0 1-6.4-5.6c-.5-.8-.8-1.7-.8-2.5 0-.9.5-1.6 1-1.9.2-.2.5-.2.6-.2h.5c.2 0 .4 0 .6.4l.8 2c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.5.9 1.2 1.6 2 2.1.3.2.5.2.6 0l.6-.7c.2-.2.3-.2.5-.1l1.9.9c.2.1.4.2.4.4v.5c0 .2 0 .4-.1.6Z"/></svg>
+        Tanya lewat WhatsApp
+      </a>
+    </div>
+    <div>
+      <h5>Jelajahi</h5>
+      <ul>
+        <li><a href="#top">Beranda</a></li>
+        <li><a href="#cerita">Tentang</a></li>
+        <li><a href="#koleksi">Varian</a></li>
+        <li><a href="#spotlight">Detail produk</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Produk</h5>
+      <ul>
+        <li><a href="#koleksi">Parfum 50 ml</a></li>
+        <li><a href="#koleksi">Parfum 100 ml</a></li>
+        <li><a href="diffuser.html">Pengharum ruangan</a></li>
+        <li><a href="app.html">Versi aplikasi</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Belanja grosir</h5>
+      <p class="tag" style="max-width:34ch">Untuk hampers korporat dan pembelian jumlah besar, harga khusus mulai 50 pcs.</p>
+      <a class="wa" href="https://wa.me/628984618900?text=Halo%20SCNTR%2C%20saya%20mau%20tanya%20harga%20grosir." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.2 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1a14 14 0 0 1-6.4-5.6c-.5-.8-.8-1.7-.8-2.5 0-.9.5-1.6 1-1.9.2-.2.5-.2.6-.2h.5c.2 0 .4 0 .6.4l.8 2c.1.2 0 .4-.1.5l-.4.5c-.1.2-.3.3-.1.6.5.9 1.2 1.6 2 2.1.3.2.5.2.6 0l.6-.7c.2-.2.3-.2.5-.1l1.9.9c.2.1.4.2.4.4v.5c0 .2 0 .4-.1.6Z"/></svg>
+        Tanya harga grosir
+      </a>
     </div>
   </div>
-  <div class="toko-grid">
-    <a class="toko" style="--tone:#EE4D2D" href="https://shopee.co.id/scntr.id" target="_blank" rel="noopener">
-      <div class="nm">Shopee</div>
-      <div class="ket">Toko resmi SCNTR. Di sinilah ulasan pembeli di atas ditulis.</div>
-      <div class="go">Buka toko <span>&rarr;</span></div>
-    </a>
-    <a class="toko" style="--tone:#42B549" href="https://www.tokopedia.com/scntrid" target="_blank" rel="noopener">
-      <div class="nm">Tokopedia</div>
-      <div class="ket">Cocok kalau kamu terbiasa bayar pakai GoPay atau cicilan.</div>
-      <div class="go">Buka toko <span>&rarr;</span></div>
-    </a>
-    <a class="toko" style="--tone:#F3F1EC" href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">
-      <div class="nm">TikTok Shop</div>
-      <div class="ket">Ketuk tas kuning di profil @scntr.id, sambil lihat wanginya dipakai.</div>
-      <div class="go">Buka profil <span>&rarr;</span></div>
-    </a>
+  <div class="bar">
+    <span>© 2026 SCNTR. Dibuat di Indonesia.</span>
+    <span>Hadir dengan lebih berarti</span>
   </div>
-</section>
-
-<section class="pad" id="tanya">
-  <div class="sechead">
-    <div>
-      <span class="eyebrow">Pertanyaan yang sering masuk</span>
-      <h2 style="margin-top:12px">Sebelum kamu pesan</h2>
-      <p>Kalau yang kamu cari nggak ada di sini, chat aja langsung lewat tombol checkout — yang balas aku sendiri.</p>
-    </div>
-  </div>
-  <div class="faq">
-    <details open>
-      <summary>Wanginya tahan berapa lama?</summary>
-      <p>Delapan sampai dua belas jam untuk kebanyakan orang. Angka ini bervariasi tergantung jenis kulit dan cuaca — kulit berminyak menahan wangi lebih lama daripada kulit kering, dan udara panas mempercepat penguapan. Semprot di titik nadi setelah pakai pelembap kalau kulitmu cenderung kering.</p>
-    </details>
-    <details>
-      <summary>Bedanya empat varian itu apa?</summary>
-      <p>Dibedakan dari kapan kamu memakainya, bukan dari istilah aroma. <strong>Fresh</strong> citrus untuk pagi dan aktivitas ringan. <strong>Clean</strong> wangi sabun untuk kantor dan pertemuan penting. <strong>Bold</strong> spicy woody untuk malam dan acara. <strong>Velour Night</strong> lembut dan sedikit misterius, paling luwes untuk sehari-hari.</p>
-    </details>
-    <details>
-      <summary>Ongkirnya berapa, dan berapa lama sampai?</summary>
-      <p>Ongkir Rp 15.000 ke seluruh Indonesia, dan gratis untuk pembelian mulai Rp 200.000 — artinya beli dua botol sudah gratis ongkir. Pengiriman 1–2 hari untuk kota besar, lebih lama untuk daerah yang jauh.</p>
-    </details>
-    <details>
-      <summary>Cara pesannya gimana?</summary>
-      <p>Pilih varian, masukkan keranjang, lalu tekan Checkout. Akan muncul kode QRIS yang bisa dibayar dari bank atau e-wallet mana pun. Setelah bayar, isi nama dan alamat, lalu pesananmu terkirim ke WhatsApp kami lengkap dengan rinciannya. Tidak perlu daftar akun dan tidak perlu memasang aplikasi.</p>
-    </details>
-    <details>
-      <summary>Ini parfum asli atau isi ulang?</summary>
-      <p>SCNTR diracik sendiri dalam batch kecil di Indonesia, bukan parfum isi ulang dan bukan tiruan merek lain. Eau de parfum 50 ml dengan konsentrat yang sama untuk setiap botol dalam satu batch.</p>
-    </details>
-    <details>
-      <summary>Kalau paketnya rusak atau salah kirim?</summary>
-      <p>Chat WhatsApp kami dengan foto paketnya. Yang membalas orangnya langsung, bukan bot, jadi urusannya bisa selesai di percakapan yang sama.</p>
-    </details>
-  </div>
-</section>
-
-<footer>
-  <div>
-    <div class="wordmark">SCNTR</div>
-    <p>Parfum cowok yang ga drama. Jakarta, Indonesia. *Ketahanan wangi bervariasi tergantung jenis kulit dan cuaca.</p>
-  </div>
-  <nav>
-    <div><b>Belanja</b><a href="#koleksi">Semua varian</a><a href="#spotlight">Velour Night</a><a href="#toko">Marketplace</a></div>
-    <div><b>Bantuan</b><a href="#tanya">Pertanyaan umum</a><a href="#tanya">Pengembalian</a><a href="#top">Hubungi kami</a></div>
-    <div><b>Ikuti</b><a href="https://www.instagram.com/scntr.id/" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">TikTok</a></div>
-    <div><b>Marketplace</b><a href="https://shopee.co.id/scntr.id" target="_blank" rel="noopener">Shopee</a><a href="https://www.tokopedia.com/scntrid" target="_blank" rel="noopener">Tokopedia</a><a href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">TikTok Shop</a></div>
-  </nav>
 </footer>
+
 
 <script type="application/ld+json">
 {
@@ -934,6 +1046,8 @@ function buildPicker(){
 }
 function renderSpot(){
   $("#spotTitle").textContent = active.title;
+  $("#spotSub").textContent = (active.tag === "Pengharum Ruangan" ? "Reed Diffuser" : "Eau de Parfum") + " · " + active.ml + " ml";
+  $("#spotPrice").textContent = rupiah(active.price);
   $("#spotEyebrow").textContent = active.eyebrow;
   $("#spotDesc").textContent = active.desc;
   $("#spotChips").innerHTML = active.chips.map(c => `<span class="chip">${c}</span>`).join("");
@@ -955,7 +1069,7 @@ function renderCart(){
       `<span class="thumb"></span>
        <div class="meta">
          <h4>${v.title}</h4>
-         <div class="ml">50 ml · ${v.tag}</div>
+         <div class="ml">${v.ml} ml · ${v.tag}</div>
          <div class="row">
            <span class="stepper">
              <button data-minus aria-label="Kurangi">−</button>
