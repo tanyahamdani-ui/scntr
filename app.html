@@ -719,18 +719,52 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
 </div>
 
 <script>
-const PRICE = 169000, SHIP = 15000, FREE_MIN = 200000;
+const SHIP = 15000, FREE_MIN = 200000;
 const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
 const VARIANTS = [
-  {id:"fresh", name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
+  {id:"fresh", price:169000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
    title:"SCNTR Fresh", desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.", chips:["Citrus","Aquatic","Green"]},
-  {id:"clean", name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
+  {id:"clean", price:169000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
    title:"SCNTR Clean", desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.", chips:["Soapy","Powdery","Musk"]},
-  {id:"bold", name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
+  {id:"bold", price:169000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
    title:"SCNTR Bold", desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.", chips:["Spicy","Woody","Amber"]},
-  {id:"velour", name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
-   title:"SCNTR Velour Night", desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.", chips:["Aromatic","Woody","Musk"]}
+  {id:"velour", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
+   title:"SCNTR Velour Night", desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.", chips:["Aromatic","Woody","Musk"]},
+
+  {id:"fresh100", price:259000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
+   title:"SCNTR Fresh 100 ml", chips:["Citrus","Aquatic","Green"],
+   desc:"Fresh yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{"Top":"Bergamot, lemon, daun mint","Heart":"Neroli, teh hijau","Base":"White musk, cedar"}},
+  {id:"clean100", price:259000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
+   title:"SCNTR Clean 100 ml", chips:["Soapy","Powdery","Musk"],
+   desc:"Clean yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{"Top":"Aldehid, bergamot","Heart":"Iris, lily, kapas","Base":"White musk, amberwood"}},
+  {id:"bold100", price:259000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
+   title:"SCNTR Bold 100 ml", chips:["Spicy","Woody","Amber"],
+   desc:"Bold yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{"Top":"Lada hitam, kapulaga","Heart":"Nutmeg, kulit","Base":"Amber, oud, patchouli"}},
+  {id:"velour100", price:259000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling dicari",
+   title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
+   desc:"Velour Night yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   notes:{"Top":"Bergamot, lada hitam, apel hijau","Heart":"Lavender, iris, nutmeg","Base":"Cedarwood, vetiver, white musk"}},
+
+  {id:"diff-fresh", price:199000, ml:100, name:"FRESH DIFFUSER", tag:"Pengharum Ruangan", color:"var(--fresh)", eyebrow:"Tahan 6–8 minggu",
+   title:"SCNTR Fresh Room Fragrance", chips:["Citrus","Aquatic","Green"],
+   desc:"Karakter Fresh untuk ruangan. Reed diffuser 100 ml, tanpa listrik dan tanpa api.",
+   notes:{"Top":"Bergamot, lemon, daun mint","Heart":"Neroli, teh hijau","Base":"White musk, cedar"}},
+  {id:"diff-clean", price:199000, ml:100, name:"CLEAN DIFFUSER", tag:"Pengharum Ruangan", color:"var(--clean)", eyebrow:"Tahan 6–8 minggu",
+   title:"SCNTR Clean Room Fragrance", chips:["Soapy","Powdery","Musk"],
+   desc:"Karakter Clean untuk ruangan. Reed diffuser 100 ml, tanpa listrik dan tanpa api.",
+   notes:{"Top":"Aldehid, bergamot","Heart":"Iris, lily, kapas","Base":"White musk, amberwood"}},
+  {id:"diff-bold", price:199000, ml:100, name:"BOLD DIFFUSER", tag:"Pengharum Ruangan", color:"var(--bold)", eyebrow:"Tahan 6–8 minggu",
+   title:"SCNTR Bold Room Fragrance", chips:["Spicy","Woody","Amber"],
+   desc:"Karakter Bold untuk ruangan. Reed diffuser 100 ml, tanpa listrik dan tanpa api.",
+   notes:{"Top":"Lada hitam, kapulaga","Heart":"Nutmeg, kulit","Base":"Amber, oud, patchouli"}},
+  {id:"diff-velour", price:199000, ml:100, name:"VELOUR NIGHT DIFFUSER", tag:"Pengharum Ruangan", color:"var(--bone)", eyebrow:"Tahan 6–8 minggu",
+   title:"SCNTR Velour Night Room Fragrance", chips:["Aromatic","Woody","Musk"],
+   desc:"Karakter Velour Night untuk ruangan. Reed diffuser 100 ml, tanpa listrik dan tanpa api.",
+   notes:{"Top":"Bergamot, lada hitam, apel hijau","Heart":"Lavender, iris, nutmeg","Base":"Cedarwood, vetiver, white musk"}}
 ];
 
 let active = VARIANTS[3];
@@ -848,14 +882,14 @@ function renderCart(){
       `<span class="thumb"><svg class="bottle" viewBox="0 0 120 210" width="40" height="70"><use href="#flacon"/></svg></span>
        <div class="meta">
          <h4>${v.title}</h4>
-         <div class="ml">50 ml · ${v.tag}</div>
+         <div class="ml">${v.ml} ml · ${v.tag}</div>
          <div class="row">
            <span class="stepper">
              <button data-minus aria-label="Kurangi">−</button>
              <span class="q num">${line.qty}</span>
              <button data-plus aria-label="Tambah">+</button>
            </span>
-           <span class="amt">${rupiah(PRICE * line.qty)}</span>
+           <span class="amt">${rupiah(v.price * line.qty)}</span>
          </div>
        </div>
        <button class="kill" aria-label="Hapus ${v.title}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 6.5h15M9.5 6.5V4.4h5v2.1M6.5 6.5 7.6 20h8.8l1.1-13.5M10 10v6.4M14 10v6.4"/></svg></button>`);
@@ -866,7 +900,7 @@ function renderCart(){
   });
 
   const count = cart.reduce((a,l) => a + l.qty, 0);
-  const subtotal = count * PRICE;
+  const subtotal = cart.reduce((a,l) => { const v = VARIANTS.find(x => x.id === l.id); return a + (v ? v.price * l.qty : 0); }, 0);
   const freeShip = subtotal >= FREE_MIN;
   const disc = freeShip ? SHIP : 0;
   const total = subtotal + SHIP - disc;
@@ -910,7 +944,7 @@ const WA_NUMBER = "628984618900";
 
 function totals(){
   const count = cart.reduce((a,l) => a + l.qty, 0);
-  const subtotal = count * PRICE;
+  const subtotal = cart.reduce((a,l) => { const v = VARIANTS.find(x => x.id === l.id); return a + (v ? v.price * l.qty : 0); }, 0);
   const disc = subtotal >= FREE_MIN ? SHIP : 0;
   return {count, subtotal, disc, total: subtotal ? subtotal + SHIP - disc : 0};
 }
@@ -920,7 +954,7 @@ function renderBayar(){
   $("#payRecap").innerHTML =
     cart.map(l => {
       const v = VARIANTS.find(x => x.id === l.id);
-      return `<div class="r"><span>${v.title} · ${l.qty} pcs</span><span class="num">${rupiah(PRICE * l.qty)}</span></div>`;
+      return `<div class="r"><span>${v.title} · ${l.qty} pcs</span><span class="num">${rupiah(v.price * l.qty)}</span></div>`;
     }).join("") +
     `<div class="r"><span>Ongkir</span><span class="num">${rupiah(SHIP)}</span></div>` +
     (t.disc ? `<div class="r"><span>Diskon ongkir</span><span class="num">− ${rupiah(t.disc)}</span></div>` : "") +
@@ -944,7 +978,7 @@ function kirimWhatsApp(){
   const t = totals();
   const baris = cart.map((l,i) => {
     const v = VARIANTS.find(x => x.id === l.id);
-    return `${i+1}. ${v.title} 50 ml x${l.qty} — ${rupiah(PRICE * l.qty)}`;
+    return `${i+1}. ${v.title} ${v.ml} ml x${l.qty} — ${rupiah(v.price * l.qty)}`;
   }).join("\n");
 
   const pesan =
