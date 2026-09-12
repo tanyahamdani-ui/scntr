@@ -529,6 +529,19 @@ body.v2{background:var(--v-dark);color:var(--v-onDark)}
 .v2foot .wa svg{width:16px;height:16px;fill:currentColor}
 .v2foot .bar{max-width:1180px;margin:0 auto;padding:18px 26px 34px;border-top:1px solid var(--v-hair);display:flex;flex-wrap:wrap;gap:10px 20px;justify-content:space-between;font-family:var(--mono,ui-monospace,monospace);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--v-onDarkMute)}
 
+.v2coll{display:grid;grid-template-columns:300px 1fr;gap:clamp(26px,3.4vw,54px);align-items:start}
+.v2coll .rail{position:sticky;top:92px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.v2coll .rail .lead{max-width:34ch}
+.v2coll .railnote{margin-top:10px;padding-top:18px;border-top:1px solid var(--v-hair);display:flex;flex-direction:column;gap:11px;width:100%}
+.v2coll .railnote div{display:flex;justify-content:space-between;gap:14px;font-size:13.5px}
+.v2coll .railnote b{font-weight:500;color:var(--v-onDark)}
+.v2coll .railnote span{color:var(--v-onDarkMute);font-variant-numeric:tabular-nums}
+.v2coll .grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1100px){.v2coll{grid-template-columns:260px 1fr}.v2coll .grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.v2coll{grid-template-columns:1fr}.v2coll .rail{position:static}.v2coll .railnote{max-width:420px}}
+@media(max-width:620px){.v2coll .grid{grid-template-columns:1fr}}
+.v2dark{padding:clamp(46px,6vw,78px) 0}
+
 /* ---------- bagian gelap pembungkus koleksi & spotlight ---------- */
 .v2dark{background:var(--v-dark2);padding:clamp(52px,7vw,92px) 0}
 .v2dark .hd{max-width:1180px;margin:0 auto;padding:0 26px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
@@ -614,15 +627,20 @@ body.v2{background:var(--v-dark);color:var(--v-onDark)}
 </section>
 
 <section class="v2dark" id="koleksi">
-  <div class="hd">
-    <div>
+  <div class="wrapx v2coll">
+    <div class="rail">
       <p class="eyb">Empat karakter, tiga pilihan</p>
       <h2 class="dsp">Empat sisi kamu.</h2>
       <p class="lead">Suasana hati berbeda, identitas yang sama. Parfum 50 ml dan 100 ml, plus pengharum ruangan dengan karakter yang sama.</p>
+      <button class="pill wire" id="addAll">Coba semua varian</button>
+      <div class="railnote">
+        <div><b>Parfum 50 ml</b><span>Rp 169.000</span></div>
+        <div><b>Parfum 100 ml</b><span>Rp 259.000</span></div>
+        <div><b>Pengharum ruangan</b><span>Rp 199.000</span></div>
+      </div>
     </div>
-    <button class="pill wire" id="addAll">Coba semua varian</button>
+    <div class="grid" id="grid"></div>
   </div>
-  <div class="wrapx"><div class="grid" id="grid"></div></div>
 </section>
 
 <section class="spot" id="spotlight">
