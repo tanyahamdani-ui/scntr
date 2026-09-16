@@ -100,6 +100,41 @@ h2{font-size:clamp(28px,3vw,40px);font-weight:500;max-width:680px;line-height:1.
 .tips p{font-size:14px;color:var(--mute);line-height:1.6}
 .num{font-size:12px;color:var(--accent);transition:color .6s}
 
+/* B2B */
+.biz-tabs{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:28px;flex-wrap:wrap}
+.biz-tabs button{border:none;background:transparent;color:var(--mute);padding:9px 18px;border-radius:999px;font-size:13px;cursor:pointer}
+.biz-tabs button.on{background:var(--bone);color:var(--ink)}
+.biz{display:none}
+.biz.on{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px}
+.card h3{font-size:20px;font-weight:500;margin-bottom:6px}
+.card .sm{font-size:14px;color:var(--mute);line-height:1.6}
+.tier{width:100%;border-collapse:collapse;margin-top:18px;font-size:14px}
+.tier th{text-align:left;font-weight:400;color:var(--dim);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:0 0 10px}
+.tier td{padding:13px 0;border-top:1px solid var(--line);color:var(--mute)}
+.tier td:nth-child(2),.tier th:nth-child(2){text-align:right}
+.tier td:last-child,.tier th:last-child{text-align:right}
+.tier .g{color:var(--fresh);font-family:Archivo,sans-serif}
+.tier tr.hl td{color:var(--bone)}
+.tier b{font-family:Archivo,sans-serif;font-weight:500}
+.sz-sw{display:flex;gap:6px;margin-top:14px}
+.sz-sw button{border:1px solid var(--line);background:transparent;color:var(--mute);border-radius:999px;padding:6px 14px;font-size:12px;cursor:pointer}
+.sz-sw button.on{border-color:var(--bone);color:var(--bone)}
+.calc label{display:block;font-size:12px;color:var(--mute);letter-spacing:.08em;margin:18px 0 8px}
+.calc input[type=range]{width:100%;accent-color:var(--accent)}
+.calc .qty{font-family:Archivo,sans-serif;font-size:40px;font-weight:500;margin-top:4px}
+.calc .qty small{font-size:14px;color:var(--mute);font-weight:400}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:18px 0}
+.res div{background:var(--panel-2);padding:14px 16px}
+.res span{display:block;font-size:11px;color:var(--mute);letter-spacing:.08em}
+.res b{display:block;font-family:Archivo,sans-serif;font-size:20px;font-weight:500;margin-top:4px}
+.res b.g{color:var(--fresh)}
+.facts{list-style:none;display:grid;gap:12px;margin-top:18px}
+.facts li{font-size:14px;color:var(--mute);line-height:1.55;padding-left:18px;position:relative}
+.facts li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.facts b{color:var(--bone);font-weight:500}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+@media (max-width:900px){.biz.on{grid-template-columns:1fr}.card{padding:22px}}
 footer{padding:30px 36px;border-top:1px solid var(--line);font-size:13px;color:var(--dim);display:flex;justify-content:space-between;gap:10px}
 
 @media (max-width:900px){
@@ -125,7 +160,7 @@ footer{padding:30px 36px;border-top:1px solid var(--line);font-size:13px;color:v
   <nav>
     <a class="logo" href="#top">SCNTR</a>
     <div class="links">
-      <a href="#aroma">Aroma</a><a href="#koleksi">Koleksi</a><a href="#beli">Harga</a><a href="#tips">Tips Pakai</a>
+      <a href="#aroma">Aroma</a><a href="#koleksi">Koleksi</a><a href="#beli">Harga</a><a href="#bisnis">Untuk Bisnis</a><a href="#tips">Tips Pakai</a>
     </div>
     <a class="pill" href="#beli">Beli sekarang</a>
   </nav>
@@ -175,6 +210,71 @@ footer{padding:30px 36px;border-top:1px solid var(--line);font-size:13px;color:v
     <a class="pill solid" href="https://www.tokopedia.com/scntrid" target="_blank" rel="noopener">Beli di Tokopedia</a>
     <a class="pill" href="https://shopee.co.id/scntr.id" target="_blank" rel="noopener">Beli di Shopee</a>
     <span class="muted" id="pick"></span>
+  </div>
+</section>
+
+<section class="block" id="bisnis">
+  <p class="tag">Untuk bisnis</p>
+  <h2>Jualan SCNTR, atau pakai untuk hampers kantor.</h2>
+  <div class="biz-tabs"><button class="on" data-biz="reseller">Reseller</button><button data-biz="grosir">Grosir &amp; Korporat</button></div>
+
+  <div class="biz on" id="biz-reseller">
+    <div class="card">
+      <h3>Skema reseller</h3>
+      <p class="sm">Makin banyak ambil, makin murah. Mulai dari 3 botol, tanpa target dan tanpa kewajiban jualan.</p>
+      <div class="sz-sw" id="rsSize"><button class="on" data-sz="50">50 ml</button><button data-sz="100">100 ml</button></div>
+      <table class="tier"><thead><tr><th>Ambil</th><th>Harga / botol</th><th>Untung / botol</th></tr></thead><tbody id="rsTable"></tbody></table>
+      <ul class="facts">
+        <li><b>Gratis ongkir</b> mulai ambil 5 botol.</li>
+        <li><b>Nggak mau keluar modal?</b> Pakai sistem komisi: kamu cari pembelinya, barang kami yang kirim, komisi Rp35.000 per botol 50 ml.</li>
+        <li><b>Harga jual tetap harga resmi</b> (Rp169.000 / Rp259.000), supaya semua reseller sama-sama untung.</li>
+        <li><b>Bayar dulu, barang dikirim.</b></li>
+      </ul>
+    </div>
+    <div class="card calc">
+      <h3>Hitung untungmu</h3>
+      <p class="sm">Geser untuk melihat modal dan untung kalau semua botol terjual di harga resmi.</p>
+      <label>JUMLAH BOTOL</label>
+      <div class="qty"><span id="rsQty">3</span> <small>botol · <span id="rsSzLbl">50 ml</span></small></div>
+      <input type="range" id="rsRange" min="3" max="30" value="3">
+      <div class="res">
+        <div><span>HARGA / BOTOL</span><b id="rsUnit">-</b></div>
+        <div><span>MODAL</span><b id="rsModal">-</b></div>
+        <div><span>OMZET</span><b id="rsOmzet">-</b></div>
+        <div><span>UNTUNG</span><b class="g" id="rsProfit">-</b></div>
+      </div>
+      <div class="cta-row"><a class="pill solid" id="rsWa" target="_blank" rel="noopener">Daftar jadi reseller</a><a class="pill" id="rsKomisi" target="_blank" rel="noopener">Tanya sistem komisi</a></div>
+    </div>
+  </div>
+
+  <div class="biz" id="biz-grosir">
+    <div class="card">
+      <h3>Grosir, hampers &amp; suplai ritel</h3>
+      <p class="sm">Minimum 50 pcs, boleh campur bebas keempat varian ukuran 50 ml. Harga retail di pasaran Rp169.000 per botol.</p>
+      <table class="tier"><thead><tr><th>Jumlah</th><th>Harga / botol</th><th>Margin penjual</th></tr></thead><tbody id="grTable"></tbody></table>
+      <ul class="facts">
+        <li><b>Custom label</b> mulai 100 pcs: logo perusahaan, nama acara, atau kartu ucapan. Desain gratis, biaya cetak menyesuaikan.</li>
+        <li><b>Dikirim dari stok:</b> 50–100 pcs siap 3 hari kerja, 250 pcs 5 hari kerja, 500 pcs 7 hari kerja.</li>
+        <li><b>Gratis ongkir</b> untuk 100 pcs ke atas di Pulau Jawa.</li>
+        <li><b>Sample gratis</b> 1 botol untuk calon pembeli, ongkir ditanggung penerima.</li>
+        <li><b>Pembayaran:</b> DP 50% saat konfirmasi, pelunasan sebelum kirim. Invoice resmi tersedia.</li>
+      </ul>
+    </div>
+    <div class="card calc">
+      <h3>Hitung penawaran</h3>
+      <p class="sm">Perkiraan total sebelum ongkir dan custom label. Di atas 500 pcs, harga dibicarakan tersendiri.</p>
+      <label>JUMLAH PCS</label>
+      <div class="qty"><span id="grQty">100</span> <small>pcs · 50 ml</small></div>
+      <input type="range" id="grRange" min="50" max="1000" step="10" value="100">
+      <div class="res">
+        <div><span>HARGA / BOTOL</span><b id="grUnit">-</b></div>
+        <div><span>TOTAL</span><b id="grTotal">-</b></div>
+        <div><span>DP 50%</span><b id="grDp">-</b></div>
+        <div><span>HEMAT DARI RETAIL</span><b class="g" id="grSave">-</b></div>
+      </div>
+      <div class="cta-row"><a class="pill solid" id="grWa" target="_blank" rel="noopener">Minta penawaran</a><a class="pill" href="/assets/SCNTR-Katalog-Grosir.pdf" target="_blank" rel="noopener">Unduh katalog (PDF)</a></div>
+      <p class="sm" style="margin-top:14px">Harga berlaku sampai Desember 2026.</p>
+    </div>
   </div>
 </section>
 
@@ -258,12 +358,60 @@ function render(){
   document.getElementById('hprice').textContent = `Pesan · ${PRICE[size]}`;
   document.getElementById('pick').textContent = `Pilihan: ${title(current)} · ${size} ml`;
 }
-function select(name){ current = name; render(); }
+function select(name){ current = name; render(); if(typeof renderReseller === "function") renderReseller(); }
 document.querySelectorAll('.opt').forEach(o => o.onclick = () => {
   size = +o.dataset.size;
   document.querySelectorAll('.opt').forEach(x => x.classList.toggle('on', x === o));
   render();
 });
+
+// ---- B2B ----
+const WA = "628984618900";
+const wa = t => "https://wa.me/" + WA + "?text=" + encodeURIComponent(t);
+const rupiah = n => "Rp" + Math.round(n).toLocaleString("id-ID");
+const RETAIL = { 50:169000, 100:259000 };
+const RS = { 50:[[3,120000],[5,110000],[10,99000]], 100:[[3,185000],[5,170000],[10,155000]] };
+const GR = [[50,115000,"coba dulu"],[100,105000,"paket standar"],[250,95000,""],[500,85000,"ke atas"]];
+let rsSize = 50;
+const tierFor = (list, q) => list.reduce((p, t) => q >= t[0] ? t : p, list[0]);
+
+function renderReseller(){
+  const q = +document.getElementById("rsRange").value, t = tierFor(RS[rsSize], q);
+  document.getElementById("rsTable").innerHTML = RS[rsSize].map(([n, p]) =>
+    `<tr class="${t[0] === n ? "hl" : ""}"><td>${n}${n === 10 ? "+" : ""} botol</td><td><b>${rupiah(p)}</b></td><td class="g">+${rupiah(RETAIL[rsSize] - p)}</td></tr>`).join("");
+  document.getElementById("rsQty").textContent = q;
+  document.getElementById("rsSzLbl").textContent = rsSize + " ml";
+  document.getElementById("rsUnit").textContent = rupiah(t[1]);
+  document.getElementById("rsModal").textContent = rupiah(t[1] * q);
+  document.getElementById("rsOmzet").textContent = rupiah(RETAIL[rsSize] * q);
+  document.getElementById("rsProfit").textContent = "+" + rupiah((RETAIL[rsSize] - t[1]) * q);
+  document.getElementById("rsWa").href = wa(`Halo SCNTR, saya mau jadi reseller. Rencana ambil ${q} botol ${rsSize} ml (${title(current)}). Boleh info langkah selanjutnya?`);
+  document.getElementById("rsKomisi").href = wa("Halo SCNTR, saya tertarik sistem komisi reseller (tanpa modal). Boleh dijelaskan?");
+}
+function renderGrosir(){
+  const q = +document.getElementById("grRange").value, t = tierFor(GR, q);
+  document.getElementById("grTable").innerHTML = GR.map(([n, p, note]) =>
+    `<tr class="${t[0] === n ? "hl" : ""}"><td>${n} pcs${note ? " · " + note : ""}</td><td><b>${rupiah(p)}</b></td><td class="g">${Math.round((169000 - p) / p * 100)}%</td></tr>`).join("");
+  document.getElementById("grQty").textContent = q.toLocaleString("id-ID") + (q >= 1000 ? "+" : "");
+  const total = t[1] * q;
+  document.getElementById("grUnit").textContent = q > 500 ? rupiah(t[1]) + "*" : rupiah(t[1]);
+  document.getElementById("grTotal").textContent = rupiah(total);
+  document.getElementById("grDp").textContent = rupiah(total / 2);
+  document.getElementById("grSave").textContent = rupiah((169000 - t[1]) * q);
+  document.getElementById("grWa").href = wa(`Halo SCNTR, saya mau minta penawaran grosir/korporat untuk sekitar ${q} pcs parfum 50 ml. Kebutuhan: `);
+}
+document.querySelectorAll(".biz-tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".biz-tabs button").forEach(x => x.classList.toggle("on", x === b));
+  document.querySelectorAll(".biz").forEach(x => x.classList.toggle("on", x.id === "biz-" + b.dataset.biz));
+});
+document.querySelectorAll("#rsSize button").forEach(b => b.onclick = () => {
+  rsSize = +b.dataset.sz;
+  document.querySelectorAll("#rsSize button").forEach(x => x.classList.toggle("on", x === b));
+  renderReseller();
+});
+document.getElementById("rsRange").oninput = renderReseller;
+document.getElementById("grRange").oninput = renderGrosir;
+renderReseller(); renderGrosir();
 
 // sound toggle: soft ambient pad
 const muteBtn = document.getElementById('mute');
