@@ -917,7 +917,7 @@ function buildPicker(){
 }
 function renderSpot(){
   $("#spotTitle").textContent = active.title;
-  $("#spotSub").textContent = (active.tag === "Pengharum Ruangan" ? "Reed Diffuser" : "Eau de Parfum") + " · " + active.ml + " ml";
+  $("#spotSub").textContent = "Eau de Parfum · " + active.ml + " ml";
   $("#spotPrice").textContent = rupiah(active.price);
   $("#spotEyebrow").textContent = active.eyebrow;
   $("#spotDesc").textContent = active.desc;
