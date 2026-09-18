@@ -605,7 +605,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
         <h1 id="dTitle">SCNTR Velour Night</h1>
         <div class="sub">Eau de Parfum · 50 ml</div>
         <div class="pricerow">
-          <span class="price">Rp 169.000</span>
+          <span class="price">Rp 99.000</span>
           <span class="rating">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
             <b>4.8</b> (126)
@@ -723,30 +723,30 @@ const SHIP = 15000, FREE_MIN = 200000;
 const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
 const VARIANTS = [
-  {id:"fresh", price:169000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
+  {id:"fresh", price:99000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
    title:"SCNTR Fresh", desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.", chips:["Citrus","Aquatic","Green"]},
-  {id:"clean", price:169000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
+  {id:"clean", price:99000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
    title:"SCNTR Clean", desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.", chips:["Soapy","Powdery","Musk"]},
-  {id:"bold", price:169000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
+  {id:"bold", price:99000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
    title:"SCNTR Bold", desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.", chips:["Spicy","Woody","Amber"]},
-  {id:"velour", price:169000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
+  {id:"velour", price:99000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
    title:"SCNTR Velour Night", desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.", chips:["Aromatic","Woody","Musk"]},
 
-  {id:"fresh100", price:259000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
+  {id:"fresh100", price:199000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
    title:"SCNTR Fresh 100 ml", chips:["Citrus","Aquatic","Green"],
-   desc:"Fresh yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   desc:"Fresh yang sama, botol dua kali lebih besar. Cocok buat yang sudah yakin sama wanginya.",
    notes:{"Top":"Bergamot, lemon, daun mint","Heart":"Neroli, teh hijau","Base":"White musk, cedar"}},
-  {id:"clean100", price:259000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
+  {id:"clean100", price:199000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
    title:"SCNTR Clean 100 ml", chips:["Soapy","Powdery","Musk"],
-   desc:"Clean yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   desc:"Clean yang sama, botol dua kali lebih besar. Cocok buat yang sudah yakin sama wanginya.",
    notes:{"Top":"Aldehid, bergamot","Heart":"Iris, lily, kapas","Base":"White musk, amberwood"}},
-  {id:"bold100", price:259000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
+  {id:"bold100", price:199000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
    title:"SCNTR Bold 100 ml", chips:["Spicy","Woody","Amber"],
-   desc:"Bold yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   desc:"Bold yang sama, botol dua kali lebih besar. Cocok buat yang sudah yakin sama wanginya.",
    notes:{"Top":"Lada hitam, kapulaga","Heart":"Nutmeg, kulit","Base":"Amber, oud, patchouli"}},
-  {id:"velour100", price:259000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling dicari",
+  {id:"velour100", price:199000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling dicari",
    title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
-   desc:"Velour Night yang sama, botol dua kali lebih besar. Hemat Rp79.000 dibanding beli dua botol 50 ml.",
+   desc:"Velour Night yang sama, botol dua kali lebih besar. Cocok buat yang sudah yakin sama wanginya.",
    notes:{"Top":"Bergamot, lada hitam, apel hijau","Heart":"Lavender, iris, nutmeg","Base":"Cedarwood, vetiver, white musk"}}
 ];
 
@@ -1000,7 +1000,7 @@ const ORDERS = [
    variant:"velour", qty:1, total:184000, cta:"Lacak Paket",
    note:"JNE REG, tiba 24–25 Agu"},
   {id:"SCNTR-2306", date:"9 Agu 2026", status:"selesai", label:"Selesai",
-   variant:"bold", qty:2, total:338000, cta:"Beli Lagi", note:"Diterima 12 Agu"},
+   variant:"bold", qty:2, total:198000, cta:"Beli Lagi", note:"Diterima 12 Agu"},
   {id:"SCNTR-2210", date:"27 Jul 2026", status:"batal", label:"Dibatalkan",
    variant:"clean", qty:1, total:184000, cta:"Beli Lagi", note:"Stok habis"}
 ];
