@@ -916,6 +916,8 @@ function buildPicker(){
   });
 }
 function renderSpot(){
+  const shot = document.querySelector("#spotlight .shot");
+  if(shot && active.img){ shot.style.setProperty("--shot", `url("${active.img}")`); shot.style.backgroundImage = `url("${active.img}")`; shot.setAttribute("aria-label", "Foto " + active.title + " " + active.ml + " ml"); }
   $("#spotTitle").textContent = active.title;
   $("#spotSub").textContent = "Eau de Parfum · " + active.ml + " ml";
   $("#spotPrice").textContent = rupiah(active.price);
