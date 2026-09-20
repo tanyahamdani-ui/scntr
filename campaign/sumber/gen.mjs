@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 const OUT = process.argv[2];
-const FOTO = 'file:///Users/dani/Projects/scntr/assets/velour-night.jpg';
+const FOTO = process.env.SCNTR_FOTO || 'file:///Users/dani/Projects/SCNTR_Projects/assets/velour-night.jpg';
 
 const SHELL = (w,h,isi,extra='') => `<!doctype html><html lang="id"><meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +47,7 @@ const kartuSituasi = s => SHELL(1080,1350,`
       <p class="ket">${s.isi}</p>
     </div></div>
   </div>
-  <div class="foot"><div class="harga">Rp 169.000 · 50 ml</div><div class="url">scntr.pages.dev</div></div>`,
+  <div class="foot"><div class="harga">Rp 99.000 · 50 ml</div><div class="url">scntr.pages.dev</div></div>`,
 `.isi{flex:1;display:flex;flex-direction:column;margin-top:96px}
 .atas{font-family:var(--display);font-size:44px;font-weight:400;color:var(--mute);letter-spacing:-.02em}
 h1{font-family:var(--display);font-size:104px;font-weight:600;letter-spacing:-.035em;line-height:1.02;margin-top:4px;text-wrap:balance}
@@ -66,7 +66,7 @@ const kartuEdukasi = SHELL(1080,1350,`
       <li><b>Salah titik.</b><span>Leher, belakang telinga, dada. Titik yang hangat dan bergerak, bukan baju.</span></li>
     </ol>
   </div>
-  <div class="foot"><div class="harga">Rp 169.000 · 50 ml</div><div class="url">scntr.pages.dev</div></div>`,
+  <div class="foot"><div class="harga">Rp 99.000 · 50 ml</div><div class="url">scntr.pages.dev</div></div>`,
 `.isi{flex:1;margin-top:80px}
 h1{font-family:var(--display);font-size:68px;font-weight:600;letter-spacing:-.035em;line-height:1.07;text-wrap:balance;max-width:16ch}
 ol{list-style:none;margin-top:72px;counter-reset:n}
@@ -81,7 +81,7 @@ const story = SHELL(1080,1920,`
   <div class="atas"><div class="logo">S C N T R</div></div>
   <div class="bawah">
     <h1>Wangi yang kerja keras diam-diam.</h1>
-    <p class="sub">Eau de parfum · 50 ml · Rp 169.000</p>
+    <p class="sub">Eau de parfum · 50 ml · Rp 99.000</p>
     <div class="cta">scntr.pages.dev</div>
     <p class="ong">Beli 2 varian, ongkirnya gratis.</p>
   </div>`,
