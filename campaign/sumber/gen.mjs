@@ -83,7 +83,7 @@ const story = SHELL(1080,1920,`
     <h1>Wangi yang kerja keras diam-diam.</h1>
     <p class="sub">Eau de parfum · 50 ml · Rp 99.000</p>
     <div class="cta">scntr.pages.dev</div>
-    <p class="ong">Beli 2 varian, ongkirnya gratis.</p>
+    <p class="ong">Gratis ongkir mulai Rp200 ribu.</p>
   </div>`,
 `.card{padding:0;background:#000 url('${FOTO}') center/cover no-repeat}
 .shade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,11,13,.80) 0%,rgba(11,11,13,.12) 28%,rgba(11,11,13,.50) 48%,rgba(11,11,13,.94) 62%,rgba(11,11,13,.99) 78%,rgba(11,11,13,1) 100%)}
