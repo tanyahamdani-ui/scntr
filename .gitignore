@@ -5,3 +5,15 @@ b2b/
 scntr-b2b/
 *-INTERNAL*
 *.bak-*
+
+# kerja internal — jangan ke-commit tidak sengaja
+Downloads/
+*.zip
+*.docx
+*.xlsx
+*.csv
+Maklon*
+SCNTR*/
+scntr-marketing/
+scntr-marketing-kit/
+scntr-saham/
