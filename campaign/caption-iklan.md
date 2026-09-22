@@ -18,7 +18,7 @@ Urutan unggah: `scntr-situasi-1` → `-2` → `-3` → `-4`.
 > BOLD — buat malam yang butuh kesan pertama.
 > VELOUR NIGHT — buat hari yang engga ada acaranya.
 >
-> Rp 169.000 per botol, 50 ml. Beli 2 varian, ongkirnya gratis.
+> Rp 99.000 per botol 50 ml (100 ml Rp 199.000). Beli 2 varian, ongkirnya gratis.
 > Link ada di bio.
 >
 > #parfumpria #parfumlokal #scntr #parfummurah #eaudeparfum
