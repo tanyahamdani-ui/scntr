@@ -5,3 +5,24 @@ b2b/
 scntr-b2b/
 *-INTERNAL*
 *.bak-*
+
+# kerja internal — jangan ke-commit tidak sengaja
+Downloads/
+*.zip
+*.docx
+*.xlsx
+*.csv
+Maklon*
+SCNTR*/
+Velour Night*/
+scntr-marketing/
+scntr-marketing-kit/
+scntr-saham/
+dist/
+video/
+
+# dokumen perencanaan internal — tetap di laptop, jangan ke-commit
+DRAFT-PESAN-PABRIK.md
+KEPUTUSAN-DIBUTUHKAN.md
+TARGET-30-HARI.md
+campaign/launch-ig.md

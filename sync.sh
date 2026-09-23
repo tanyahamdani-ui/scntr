@@ -1,10 +1,12 @@
 #!/bin/sh
-# Menyalin sumber dari worktree ini ke repo situs (/Users/dani/Projects/scntr),
-# sekaligus membetulkan path aset. Setelah ini tinggal push dari GitHub Desktop.
+# Menyalin halaman toko ke folder siap-upload (default: ./dist/site).
+# Bisa override target: ./sync.sh /path/ke/repo-situs
 set -e
 cd "$(dirname "$0")"
-SITE=/Users/dani/Projects/scntr
-perl -0pe 's{\.\./assets/velour-night\.jpg}{assets/velour-night.jpg}g' web/index.html > "$SITE/index.html"
-cp index.html "$SITE/app.html"
+SITE=${1:-"$PWD/dist/site"}
+mkdir -p "$SITE"
+cp index.html "$SITE/index.html"
+cp app.html "$SITE/app.html"
+cp katalog.html "$SITE/katalog.html"
 cp orders.html "$SITE/orders.html"
-echo "tersalin ke $SITE (index.html + app.html + orders.html)"
+echo "tersalin ke $SITE (index.html + app.html + katalog.html + orders.html)"
