@@ -570,7 +570,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
       </div>
 
       <div class="trust">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja 200rb</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja 198rb</span></span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 19 5.6v5.2c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V5.6L12 3Z"/><path d="m9 12 2.1 2.1L15.2 10"/></svg><span><b>100% Original</b><span>Garansi produk asli</span></span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h9v9h-9z"/><path d="M11.5 11.5h4.4l3.6 3.4v2.6h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="16" cy="18" r="1.7"/><path d="M1 6h5M2 11h3"/></svg><span><b>Pengiriman Cepat</b><span>1–2 hari sampai</span></span></div>
       </div>
@@ -608,7 +608,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
           <span class="price">Rp 99.000</span>
           <span class="rating">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
-            <b>4.8</b> (126)
+            <b>★</b> (3 di Shopee)
           </span>
         </div>
         <div class="chips" id="dChips"><span class="chip">Aromatic</span><span class="chip">Woody</span><span class="chip">Musk</span></div>
@@ -643,9 +643,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
       <div class="shipnote">
         <div class="top">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
-          <p id="shipMsg">Gratis ongkir untuk pembelian minimal Rp 200.000</p>
+          <p id="shipMsg">Gratis ongkir untuk pembelian minimal Rp 198.000</p>
         </div>
-        <div class="track"><span class="bar"><i id="shipBar" style="width:0%"></i></span><span class="lbl" id="shipLbl">Rp 0 / Rp 200.000</span></div>
+        <div class="track"><span class="bar"><i id="shipBar" style="width:0%"></i></span><span class="lbl" id="shipLbl">Rp 0 / Rp 198.000</span></div>
       </div>
       <div class="items" id="items"></div>
       <div id="summary"></div>
@@ -719,7 +719,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
 </div>
 
 <script>
-const SHIP = 15000, FREE_MIN = 200000;
+const SHIP = 15000, FREE_MIN = 198000;
 const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
 const VARIANTS = [
@@ -892,7 +892,7 @@ function renderCart(){
   $("#shipLbl").textContent = rupiah(subtotal) + " / " + rupiah(FREE_MIN);
   $("#shipMsg").textContent = freeShip
     ? "Ongkir kamu gratis. Nice."
-    : "Gratis ongkir untuk pembelian minimal Rp 200.000";
+    : "Gratis ongkir untuk pembelian minimal Rp 198.000";
 
   $("#summary").innerHTML = cart.length ? `
     <div class="totals">
