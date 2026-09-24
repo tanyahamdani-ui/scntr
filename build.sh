@@ -3,7 +3,8 @@
 # tiap file bisa dibuka atau dibagikan tanpa folder assets.
 #   index.html  -> halaman utama toko
 #   app.html    -> prototipe aplikasi mobile
-#   katalog.html, orders.html disalin apa adanya (tidak perlu inline foto)
+#   katalog.html disalin apa adanya (tidak perlu inline foto).
+#   orders.html SENGAJA tidak ikut: halaman operasional internal.
 set -e
 cd "$(dirname "$0")"
 sips -Z 1100 -s format jpeg -s formatOptions 72 assets/velour-night.jpg --out /tmp/scntr-shot.jpg >/dev/null
@@ -23,7 +24,7 @@ fi
 inline index.html dist/site/index.html
 inline app.html dist/site/app.html
 
-# Salin halaman lain apa adanya
+# Salin halaman lain apa adanya (orders.html dikecualikan: internal)
 cp katalog.html dist/site/katalog.html
-cp orders.html dist/site/orders.html
-echo "dist/site/ siap di-upload (index.html + app.html + katalog.html + orders.html)"
+rm -f dist/site/orders.html
+echo "dist/site/ siap di-upload (index.html + app.html + katalog.html)"
