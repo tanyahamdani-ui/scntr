@@ -210,6 +210,7 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
         <th>Nama</th>
         <th>Isi Pesanan</th>
         <th>Total</th>
+        <th>Kanal</th>
         <th>Status</th>
         <th>Aksi</th>
       </tr>
@@ -249,6 +250,18 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
       <!-- item rows injected by JS -->
     </div>
     <button class="btn-add" id="btnAddItem">+ Tambah produk</button>
+
+    <div class="field">
+      <label for="i-kanal">Kanal</label>
+      <select id="i-kanal">
+        <option value="whatsapp">WhatsApp</option>
+        <option value="shopee">Shopee</option>
+        <option value="tiktok">TikTok Shop</option>
+        <option value="instagram">Instagram</option>
+        <option value="langsung">Langsung / COD</option>
+        <option value="lainnya">Lainnya</option>
+      </select>
+    </div>
 
     <div class="field">
       <label for="i-status">Status</label>
@@ -366,6 +379,7 @@ function render(){
         return v.name + " ×" + i.qty;
       }).join("<br>")}</td>` +
       `<td class="num">${rupiah(o.total)}</td>` +
+      `<td style="font-size:12px;color:var(--mute)">${({whatsapp:"WhatsApp",shopee:"Shopee",tiktok:"TikTok Shop",instagram:"Instagram",langsung:"Langsung",lainnya:"Lainnya"}[o.kanal] || o.kanal || "—")}</td>` +
       `<td>${pill}</td>` +
       `<td style="white-space:nowrap">
         <button class="stat-btn" data-id="${o.id}" data-s="dibayar" title="Tandai dibayar">✓</button>
@@ -401,7 +415,7 @@ function render(){
 function exportCSV(){
   if(!orders.length){ alert("Belum ada order untuk diexport."); return; }
 
-  const header = "ID,Tanggal,Nama,HP,Alamat,Isi Pesanan,Total,Status";
+  const header = "ID,Tanggal,Nama,HP,Alamat,Kanal,Isi Pesanan,Total,Status";
   const rows = orders.map(o => {
     const items = o.items.map(i => {
       const v = VARIANTS.find(x => x.id === i.id);
@@ -413,6 +427,7 @@ function exportCSV(){
       '"' + o.nama.replace(/"/g,'""') + '"',
       o.hp ? '"' + o.hp.replace(/"/g,'""') + '"' : "",
       '"' + (o.alamat || "").replace(/"/g,'""') + '"',
+      o.kanal || "whatsapp",
       '"' + items.replace(/"/g,'""') + '"',
       o.total,
       o.status
@@ -442,6 +457,7 @@ function closeModal(){
 function clearForm(){
   $("#i-nama").value = "";
   $("#i-hp").value = "";
+  $("#i-kanal").value = "whatsapp";
   $("#i-alamat").value = "";
   $("#i-status").value = "baru";
   document.getElementById("f-nama").classList.remove("bad");
@@ -493,6 +509,7 @@ function simpan(){
     nama,
     hp: $("#i-hp").value.trim(),
     alamat: $("#i-alamat").value.trim(),
+    kanal: $("#i-kanal").value,
     items,
     total: rupiahSemua(items),
     status: $("#i-status").value
