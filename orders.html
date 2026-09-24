@@ -198,6 +198,7 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
 <div class="actions">
   <button class="btn" id="btnTambah">+ Catat Order Baru</button>
   <button class="btn ghost" id="btnExport">Export CSV</button>
+  <button class="btn ghost" id="btnExportKelolain">Export buat Kelola.in</button>
   <button class="btn ghost" id="btnHapusSemua">Hapus Semua</button>
 </div>
 
@@ -293,10 +294,11 @@ const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 const $ = s => document.querySelector(s);
 
 const VARIANTS = [
-  {id:"fresh",  name:"SCNTR Fresh"},
-  {id:"clean",  name:"SCNTR Clean"},
-  {id:"bold",   name:"SCNTR Bold"},
-  {id:"velour", name:"SCNTR Velour Night"}
+  {id:"fresh",  name:"SCNTR Fresh",  price:99000},
+  {id:"clean",  name:"SCNTR Clean",  price:99000},
+  {id:"bold",   name:"SCNTR Bold",   price:99000},
+  {id:"velour", name:"SCNTR Velour Night", price:99000}
+  // 100ml (199rb) + Couple (279rb) nyusul setelah HPP dikunci — tambah di sini + di editor
 ];
 
 let orders = [];
@@ -444,6 +446,48 @@ function exportCSV(){
   URL.revokeObjectURL(url);
 }
 
+// ---- export buat Kelola.in ----
+// 1 baris per item (Tanggal, No. Order, Produk, Channel, Qty, Harga Satuan,
+// Customer) — cocok dengan auto-mapping import CSV Kelola.in (csv-import.js).
+// Re-import aman: No. Order dipakai dedup di sana.
+function exportKelolain(){
+  if(!orders.length){ alert("Belum ada order untuk diexport."); return; }
+
+  const q = s => '"' + String(s ?? "").replace(/"/g,'""') + '"';
+  const hargaOf = id => {
+    const v = VARIANTS.find(x => x.id === id);
+    return v && v.price ? v.price : PRICE;
+  };
+  const namaOf = id => {
+    const v = VARIANTS.find(x => x.id === id);
+    return v ? v.name : id;
+  };
+  const header = "Tanggal,No. Order,Produk,Channel,Qty,Harga Satuan,Customer";
+  const rows = [];
+  orders.forEach(o => {
+    (o.items || []).forEach(i => {
+      rows.push([
+        o.tanggal,
+        o.id,
+        q(namaOf(i.id)),
+        o.kanal || "whatsapp",
+        i.qty,
+        hargaOf(i.id),
+        q(o.nama + (o.hp ? " (" + o.hp + ")" : ""))
+      ].join(","));
+    });
+  });
+
+  const csv = [header, ...rows].join("\n");
+  const blob = new Blob(["\uFEFF" + csv], {type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "scntr-kelolain-" + new Date().toISOString().slice(0,10) + ".csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 // ---- modal ----
 function openModal(){
   $("#modal").classList.add("open");
@@ -526,6 +570,7 @@ $("#btnTambah").addEventListener("click", openModal);
 $("#btnBatal").addEventListener("click", closeModal);
 $("#btnSimpan").addEventListener("click", simpan);
 $("#btnExport").addEventListener("click", exportCSV);
+$("#btnExportKelolain").addEventListener("click", exportKelolain);
 $("#btnAddItem").addEventListener("click", () => {
   const row = document.createElement("div");
   row.className = "item-row";
