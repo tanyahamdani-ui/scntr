@@ -4,6 +4,7 @@ Situs statis untuk SCNTR — parfum cowok yang ga drama.
 
 - `index.html` — toko versi web (desktop dan mobile).
 - `app.html` — prototipe aplikasi mobile: onboarding, home, detail produk, keranjang, riwayat pesanan.
+- `dashboard.html` — dashboard internal (omzet, aroma terlaris, ritme harian, kanal, alur pesanan). Membaca data yang sama dengan `orders.html` dari localStorage browser; tidak ikut `build.sh`.
 - `assets/velour-night.jpg` — foto produk yang dipakai kedua halaman.
 
 Tidak ada build step dan tidak ada dependensi selain Google Fonts. Buka `index.html`
