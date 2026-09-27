@@ -1,6 +1,54 @@
+# Laporan Copilot — Karosel Oktober–November 2026
+
+| Tanggal | Platform | Judul | Slide |
+|---|---|---|---:|
+| 2026-10-02 | Instagram | 5 Kesalahan Pakai Parfum | 10 |
+| 2026-10-03 | TikTok | 5 Kesalahan Pakai Parfum | 10 |
+| 2026-10-06 | Instagram | Layering Parfum SCNTR | 6 |
+| 2026-10-07 | TikTok | Layering Parfum SCNTR | 6 |
+| 2026-10-09 | Instagram | Simpan Parfum Benar | 7 |
+| 2026-10-10 | TikTok | Simpan Parfum dengan Benar | 7 |
+| 2026-10-13 | Instagram | Parfum Bukan Deodoran | 6 |
+| 2026-10-14 | TikTok | Parfum Bukan Deodoran | 6 |
+| 2026-10-16 | Instagram | Titik Semprot Parfum | 6 |
+| 2026-10-17 | TikTok | Titik Semprot Parfum | 6 |
+| 2026-10-20 | Instagram | Cara Pilih Parfum Harian | 6 |
+| 2026-10-21 | TikTok | Cara Pilih Parfum Harian | 6 |
+| 2026-10-23 | Instagram | Etika Pakai Parfum | 6 |
+| 2026-10-24 | TikTok | Etika Pakai Parfum | 6 |
+| 2026-10-27 | Instagram | Fresh vs Clean Pagi Mana | 6 |
+| 2026-10-28 | TikTok | Fresh vs Clean: Pagi Mana? | 6 |
+| 2026-10-30 | Instagram | Bold vs Velour Night | 6 |
+| 2026-10-31 | TikTok | Bold vs Velour Night: Malam Mana? | 6 |
+| 2026-11-03 | Instagram | Hujan Deras Pilih Parfum Apa | 6 |
+| 2026-11-04 | TikTok | Hujan Deras: Pilih Parfum Apa? | 6 |
+| 2026-11-06 | Instagram | Presentasi Besok Parfum Apa | 6 |
+| 2026-11-07 | TikTok | Presentasi Besok: Pilih Parfum | 6 |
+| 2026-11-10 | Instagram | SCNTR EDP 99rb Harga Jujur | 6 |
+| 2026-11-11 | TikTok | POV: Crush Bilang Wangi | 5 |
+
+- 4 topik edukasi baru selesai dirender; total 24 folder (153 PNG) dengan caption. Softsell berharga hanya di Instagram; materi TikTok tidak memuat angka harga, klaim ketahanan, atau notes yang tidak dikunci.
+- Kelola.in: 24 baris `Review`/`Carousel` pada jam 11:00, masing-masing 12 Instagram dan 12 TikTok. `import-karosel-kelolain.mjs` diuji ulang: 24 folder dikenali, 0 baris baru (anti-dobel). Sinkron media `--apply` selesai; semua 24 baris berisi 153 URL media. Perbaikan sinkron media mencocokkan judul folder dan membatch update agar tidak ambigu/kena rate limit.
+- Dry-run IG berhasil untuk 2 Okt, berhenti sebelum tombol Schedule. Dry-run TikTok gagal memvalidasi jam (`jam salah: 00:20`); tidak menekan Jadwal dan tidak ada posting yang dijadwalkan.
+
 # Sinkron foto karosel ke Kelola.in — 27 September 2026
 - Skrip `content-tracker/scripts/sync-media-kelolain.mjs` kini menyiapkan upload idempoten ber-`upsert` ke bucket `media` pada `carousel/<nama-folder>/<nama-file>` dan menambahkan URL publik berurutan ke planner berdasarkan tanggal/platform (Feed IG → Instagram, Carousel TikTok → TikTok). Folder tanpa planner yang cocok atau dengan planner ambigu dilewati dan dicatat.
 - Dry-run lalu `--apply` berhasil. Saat pemeriksaan, kedua folder karosel kosong; tidak ada foto yang diunggah atau baris planner yang diubah. URL video yang ada sudah tercatat anti-dobel.
+
+# Tambahan Brief Approve Autopost — 27 September 2026
+
+## A. Preview media
+- Menambahkan `media_urls text[]` ke `planner_entries` di `supabase/schema.sql` dan menjalankan migrasi idempoten `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` melalui Management API; tidak mengubah kolom schema lain.
+- Menambahkan `content-tracker/scripts/sync-media-kelolain.mjs`. Jalankan tanpa opsi untuk dry-run/SELECT; `--apply` hanya menulis `media_urls`, aman diulang, mencocokkan video berdasarkan tanggal + platform dan memastikan judul Reels Instagram cocok agar tidak memasang video ke konten lain.
+- Sinkronisasi video terisi pada 51 baris planner. Verifikasi SELECT: 113 baris planner SCNTR, 51 memiliki `media_urls`. Reels Instagram dan TikTok pada tanggal yang sama memakai URL video yang sama bila judulnya cocok.
+- 10 URL video di CSV tidak memiliki tanggal pada nama (aset kampanye/versi tulisan), jadi belum dipetakan tanpa menebak. Folder `SCNTR Feed IG` dan `SCNTR Carousel TikTok` saat ini berisi 0 file foto, sehingga tidak ada foto yang diunggah. Jika foto ditambahkan, upload membutuhkan kredensial Storage dengan izin tulis; kredensial tersebut tidak tersedia. Skrip berhenti dan menjelaskan kebutuhan itu bila menemukan foto, tanpa mencari kredensial lain.
+- UI planner mengambil `media_urls` untuk workspace aktif, menampilkan pemutar video atau galeri swipe horizontal pada kartu kalender dan daftar. Catatan HP: galeri memakai scroll sentuh + snap dan ukuran responsif. Belum ada screenshot tampilan berisi data aktual; 10 URL kampanye masih belum dipetakan.
+
+## B. Caption Kelola.in
+- Ketiga skrip menerima `--caption-file`; caption itu menggantikan caption lokal. Jembatan meneruskan `planner_entries.caption`; bila kosong skrip tetap memakai caption file folder. Untuk karosel TikTok, judul planner diteruskan terpisah dengan `--title`.
+- Jembatan menolak TikTok dengan pola harga `Rp`, `rb`, atau `ribu` disertai angka, membiarkan status Approved dan mencatat `caption TikTok berisi harga`.
+- Hasil `node tools/upload-tiktok/jembatan-kelolain.mjs --dry-run`: `[DRY-RUN] Approved SCNTR 2026-09-28 s.d. 2026-10-25: 0 baris.` Tidak ada data Approved dalam rentang itu, jadi penerusan caption Kelola.in belum dapat diuji pada baris nyata; tidak ada perubahan status/catatan planner dan tidak ada penjadwalan.
+- Validasi: build lokal Kelola.in berhasil (`dist siap — 75 file`); pemeriksaan sintaks dan 5 kasus pola harga berhasil. Dry-run sinkron media menemukan 51 target video dan 0 foto; setelah `--apply`, SELECT mengonfirmasi 51 baris terisi. Tidak ada tombol Schedule/Jadwal/Posting yang ditekan dan tidak ada deploy.
 
 # Laporan Copilot
 
