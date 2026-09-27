@@ -7,6 +7,7 @@
 //   node tt-carousel.mjs --dry-run          -> isi semua sampai jadwal, TIDAK menekan "Jadwalkan"
 //   node tt-carousel.mjs                    -> jadwalkan beneran (default 3 postingan, jam 11:00 WIB)
 //   node tt-carousel.mjs --count 5 --jam 11:00
+//   node tt-carousel.mjs --only 2026-10-03 -> hanya satu karosel pada tanggal tersebut
 //
 // Yang sudah terjadwal dicatat di scntr-marketing/.tt-carousel-state.json supaya tidak dobel.
 import fs from 'fs';
@@ -25,6 +26,11 @@ const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[
 const DRY = args.includes('--dry-run');
 const COUNT = Number(opt('--count', 3));
 const JAM = opt('--jam', '11:00');
+const ONLY_INDEX = args.indexOf('--only');
+const ONLY_DATE = ONLY_INDEX >= 0 ? args[ONLY_INDEX + 1] : '';
+if (ONLY_INDEX >= 0 && (!ONLY_DATE || !/^\d{4}-\d{2}-\d{2}$/.test(ONLY_DATE) || new Date(`${ONLY_DATE}T00:00:00Z`).toISOString().slice(0, 10) !== ONLY_DATE)) {
+  throw new Error('--only harus berisi tanggal valid berformat YYYY-MM-DD');
+}
 const besok = new Date(Date.now() + 86400000);
 const FROM = opt('--from', `${besok.getFullYear()}-${String(besok.getMonth() + 1).padStart(2, '0')}-${String(besok.getDate()).padStart(2, '0')}`);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -113,10 +119,10 @@ async function jadwalkan(k) {
 }
 
 const state = loadState();
-const antre = daftarKarosel().filter(k => k.date >= FROM && !state.posted.some(p => p.id === k.id));
+const antre = daftarKarosel().filter(k => (ONLY_DATE ? k.date === ONLY_DATE && k.date >= FROM : k.date >= FROM) && !state.posted.some(p => p.id === k.id));
 const salah = antre.filter(k => !k.foto.length || k.foto.length > 35);
-const jalan = antre.filter(k => k.foto.length && k.foto.length <= 35).slice(0, COUNT);
-console.log(`${DRY ? '[DRY-RUN] ' : ''}Karosel TikTok mulai ${FROM}, jam ${JAM} WIB. Antre ${antre.length}, dikerjakan ${jalan.length}.`);
+const jalan = antre.filter(k => k.foto.length && k.foto.length <= 35).slice(0, ONLY_DATE ? 1 : COUNT);
+console.log(`${DRY ? '[DRY-RUN] ' : ''}Karosel TikTok mulai ${ONLY_DATE || FROM}, jam ${JAM} WIB. Antre ${antre.length}, dikerjakan ${jalan.length}.`);
 if (salah.length) console.log(`Folder tanpa foto / lebih dari 35 foto (dilewati): ${salah.map(k => k.dir).join(', ')}`);
 
 let sukses = 0;
@@ -133,7 +139,7 @@ for (const k of jalan) {
   }
 }
 console.log(DRY ? 'Dry-run selesai.' : `Selesai: ${sukses}/${jalan.length} terjadwal.`);
-if (!DRY && sukses) { // catat ke Kelola.in
+if (!DRY && sukses && !args.includes('--skip-sync')) { // catat ke Kelola.in
   const { execFileSync } = await import('child_process');
   try { console.log(execFileSync('node', ['/Users/dani/Projects/content-tracker/scripts/sync-jadwal-ke-kelolain.mjs'], { encoding: 'utf8' }).trim()); }
   catch (e) { console.log('Gagal catat ke Kelola.in:', e.message.slice(0, 200)); }

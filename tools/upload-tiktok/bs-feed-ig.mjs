@@ -7,6 +7,7 @@
 //   node bs-feed-ig.mjs --dry-run      -> isi semua sampai tahap Schedule, TIDAK menekan tombol akhir
 //   node bs-feed-ig.mjs                -> jadwalkan beneran (default 3 postingan, jam 11:00 WIB)
 //   node bs-feed-ig.mjs --count 5 --jam 11:00
+//   node bs-feed-ig.mjs --only 2026-10-03 -> hanya satu posting feed pada tanggal tersebut
 //
 // Yang sudah terjadwal dicatat di scntr-marketing/.ig-feed-state.json, lalu otomatis dicatat ke Kelola.in.
 import fs from 'fs';
@@ -28,6 +29,11 @@ const opt = (name, def) => { const i = args.indexOf(name); return i >= 0 ? args[
 const DRY = args.includes('--dry-run');
 const COUNT = Number(opt('--count', 3));
 const JAM = opt('--jam', '11:00');
+const ONLY_INDEX = args.indexOf('--only');
+const ONLY_DATE = ONLY_INDEX >= 0 ? args[ONLY_INDEX + 1] : '';
+if (ONLY_INDEX >= 0 && (!ONLY_DATE || !/^\d{4}-\d{2}-\d{2}$/.test(ONLY_DATE) || new Date(`${ONLY_DATE}T00:00:00Z`).toISOString().slice(0, 10) !== ONLY_DATE)) {
+  throw new Error('--only harus berisi tanggal valid berformat YYYY-MM-DD');
+}
 const besok = new Date(Date.now() + 86400000);
 const FROM = opt('--from', `${besok.getFullYear()}-${String(besok.getMonth() + 1).padStart(2, '0')}-${String(besok.getDate()).padStart(2, '0')}`);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -150,10 +156,10 @@ const state = loadState();
 const semua = daftarKonten();
 // Meta cuma bisa menjadwalkan maksimal ~29 hari ke depan; sisanya menunggu jalan berikutnya
 const batas = new Date(Date.now() + 28 * 86400000).toISOString().slice(0, 10);
-const antre = semua.filter(k => k.date >= FROM && k.date <= batas && !state.posted.some(p => p.id === k.id));
+const antre = semua.filter(k => (ONLY_DATE ? k.date === ONLY_DATE && k.date >= FROM && k.date <= batas : k.date >= FROM && k.date <= batas) && !state.posted.some(p => p.id === k.id));
 const hilang = antre.filter(k => !k.file);  // folder kosong atau lebih dari 10 foto
-const jalan = antre.filter(k => k.file).slice(0, COUNT);
-console.log(`${DRY ? '[DRY-RUN] ' : ''}Mulai ${FROM}, jam ${JAM} WIB. Antre ${antre.length}, dikerjakan ${jalan.length}.`);
+const jalan = antre.filter(k => k.file).slice(0, ONLY_DATE ? 1 : COUNT);
+console.log(`${DRY ? '[DRY-RUN] ' : ''}Mulai ${ONLY_DATE || FROM}, jam ${JAM} WIB. Antre ${antre.length}, dikerjakan ${jalan.length}.`);
 if (hilang.length) console.log(`Folder tanpa foto / lebih dari 10 foto (dilewati): ${hilang.map(k => k.name).join(', ')}`);
 
 let sukses = 0;
@@ -171,7 +177,7 @@ for (const k of jalan) {
 }
 fs.rmSync(TMP, { recursive: true, force: true });
 console.log(DRY ? 'Dry-run selesai.' : `Selesai: ${sukses}/${jalan.length} terjadwal.`);
-if (!DRY && sukses) { // catat ke Kelola.in
+if (!DRY && sukses && !args.includes('--skip-sync')) { // catat ke Kelola.in
   const { execFileSync } = await import('child_process');
   try { console.log(execFileSync('node', ['/Users/dani/Projects/content-tracker/scripts/sync-jadwal-ke-kelolain.mjs'], { encoding: 'utf8' }).trim()); }
   catch (e) { console.log('Gagal catat ke Kelola.in:', e.message.slice(0, 200)); }
