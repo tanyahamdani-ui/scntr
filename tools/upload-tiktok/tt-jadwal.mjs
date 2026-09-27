@@ -42,16 +42,25 @@ export async function setTanggal(c, iso) {
 
 async function bukaJam(c) {
   for (let a = 0; a < 3; a++) {
+    const terbuka = await evalJs(c, `(() => [...document.querySelectorAll('.tiktok-timepicker-option-list')].some(e => {
+      const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    }))()`);
+    if (terbuka) return;
     const r = await evalJs(c, `(() => { const i = [...document.querySelectorAll('input[type=text]')].find(x => /^\\d{2}:\\d{2}$/.test(x.value));
       const b = i.getBoundingClientRect(); return { x: Math.round(b.x + b.width / 2), y: Math.round(b.y + b.height / 2) }; })()`);
     await click(c, r.x, r.y); await sleep(2000);
-    if (await evalJs(c, `[...document.querySelectorAll('.tiktok-timepicker-option-item')].some(e => e.innerText.trim() !== '')`)) return;
+    if (await evalJs(c, `(() => [...document.querySelectorAll('.tiktok-timepicker-option-list')].some(e => {
+      const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0;
+    }))()`)) return;
   }
   throw new Error('pemilih jam tidak terbuka');
 }
 async function pilih(c, target, kolom) {
-  const p = await evalJs(c, `(async () => { const cols = [...document.querySelectorAll('.tiktok-timepicker-option-list, [class*=timepicker-option-list]')];
-    const scope = cols[${kolom}] || document; const h = [...scope.querySelectorAll('.tiktok-timepicker-option-item')].find(e => e.innerText.trim() === ${JSON.stringify(target)});
+  const p = await evalJs(c, `(async () => { const visible = el => { const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0; };
+    const lists = [...document.querySelectorAll('.tiktok-timepicker-option-list')].filter(visible)
+      .sort((a, b) => a.getBoundingClientRect().left - b.getBoundingClientRect().left);
+    if (lists.length !== 2) return { err: 'kolom jam/menit tidak dikenali (' + lists.length + ')' };
+    const scope = lists[${kolom}]; const h = [...scope.querySelectorAll('.tiktok-timepicker-option-item')].find(e => e.innerText.trim() === ${JSON.stringify(target)});
     if (!h) return { err: 'opsi ${target} tidak ada' }; h.scrollIntoView({ block: 'center' }); await new Promise(r => setTimeout(r, 600));
     const rb = h.getBoundingClientRect(); return { x: Math.round(rb.x + rb.width / 2), y: Math.round(rb.y + rb.height / 2) }; })()`);
   if (p.err) throw new Error(p.err);

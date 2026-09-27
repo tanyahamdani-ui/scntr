@@ -1,3 +1,7 @@
+- Bug pemilih waktu TikTok diperbaiki: kolom jam dan menit ditentukan dengan posisi visual, dan picker yang masih terbuka tidak ditoggle.
+- Dry-run `node tools/upload-tiktok/tt-carousel.mjs --dry-run --count 1` berhasil menampilkan `siap (tidak ditekan)` untuk jam 11:00.
+- Hanya mode `--dry-run` yang dijalankan; tombol Jadwal/Posting tidak ditekan.
+
 # Laporan Copilot — Karosel Oktober–November 2026
 
 | Tanggal | Platform | Judul | Slide |
