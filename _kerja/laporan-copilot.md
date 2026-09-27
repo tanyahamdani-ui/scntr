@@ -6,7 +6,7 @@
 - Kelola.in menampilkan catatan autopost yang relevan di kartu kalender dan daftar planner, termasuk catatan gagal/lewati selama statusnya masih Approved.
 - Cara menjalankan: `node tools/upload-tiktok/jembatan-kelolain.mjs --dry-run` untuk melihat rencana; tanpa `--dry-run` menjalankan penjadwalan sungguhan dan mengubah hanya baris terkait.
 - Hasil dry-run: `[DRY-RUN] Approved SCNTR 2026-09-28 s.d. 2026-10-25: 0 baris. Tidak ada rencana autopost.` Dry-run hanya menjalankan SELECT; tidak menjalankan skrip browser, tidak mengubah database, dan tidak menekan tombol penjadwalan.
-- Belum bisa diverifikasi: belum ada baris Approved pada rentang tersebut, jadi jalur penjadwalan, pembaruan status/catatan, dan tampilan terhadap data riil belum diuji. Tidak memasang launchd/cron dan tidak push ke production. Semua perubahan kode akan di-commit lokal saja.
+- Belum bisa diverifikasi: belum ada baris Approved pada rentang tersebut, jadi jalur penjadwalan, pembaruan status/catatan, dan tampilan terhadap data riil belum diuji. Tidak memasang launchd/cron dan tidak push ke production. Perubahan kode di-commit lokal saja.
 
 ## Pemantauan login — 27 September 2026
 - 05:56 WIB: membuka Seller Center di tab 1 dan TikTok for Developers di tab 2. Keduanya saat ini belum login; Seller Center berada di halaman login dan TikTok Developers memberi HTTP 401. Mulai pemantauan berkala 30 detik, batas 8 menit.
