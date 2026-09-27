@@ -1,3 +1,7 @@
+# Sinkron foto karosel ke Kelola.in — 27 September 2026
+- Skrip `content-tracker/scripts/sync-media-kelolain.mjs` kini menyiapkan upload idempoten ber-`upsert` ke bucket `media` pada `carousel/<nama-folder>/<nama-file>` dan menambahkan URL publik berurutan ke planner berdasarkan tanggal/platform (Feed IG → Instagram, Carousel TikTok → TikTok). Folder tanpa planner yang cocok atau dengan planner ambigu dilewati dan dicatat.
+- Dry-run lalu `--apply` berhasil. Saat pemeriksaan, kedua folder karosel kosong; tidak ada foto yang diunggah atau baris planner yang diubah. URL video yang ada sudah tercatat anti-dobel.
+
 # Laporan Copilot
 
 ## Jembatan Approve → autopost — 27 September 2026
