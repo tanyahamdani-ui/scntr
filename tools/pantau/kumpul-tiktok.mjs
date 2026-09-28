@@ -100,10 +100,5 @@ const summary = hasil.map(h => `${h.handle}: ${h.followers} followers, ${h.posts
 console.log(`Ringkasan: ${summary}`);
 
 // Tambahkan ke laporan qwen
-const laporanFile = `${K}/laporan-qwen.md`;
-const existingContent = fs.existsSync(laporanFile) ? fs.readFileSync(laporanFile, 'utf8') : '';
-const newContent = `# Ringkasan Tugas Pengumpul TikTok - ${today}\n\n${summary}\n\n${existingContent}`;
-fs.writeFileSync(laporanFile, newContent);
-console.log(`Laporan diperbarui: ${laporanFile}`);
 
 process.exit(0);
