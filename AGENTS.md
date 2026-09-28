@@ -34,6 +34,8 @@ Langkah setelah konten jadi (naskah + video + `CAPTION & JADWAL.txt` di folder `
   - OpenCode `--agent livestream-coach` — jualan live
   - Copilot — kode, website Kelola.in/scntr.pages.dev, pekerjaan teknis cepat
   - ChatGPT — gambar & desain visual
+- WAJIB baca `BRAND-SCNTR.md` (visual hitam-putih, nada bicara) dan `_kerja/PANDUAN-STAF.md` (aturan jujur + resep yang terbukti) sebelum mengerjakan tugas.
+- Pembagian beban: OpenCode untuk tugas ringan & jelas (jalankan skrip jadi, rapikan file, teks pendek). Tugas berlapis, debugging, dan kode → Copilot. Urutan eskalasi: Qwen / Copilot / Codex → Claude (manajer, paling akhir). OpenCode = cadangan TERAKHIR, hanya tugas gampang, lewat `tools/staf-opencode.sh` (otomatis berhenti 15 menit). Qwen Code (`qwen --yolo -i "..."`) dan Gemini CLI (`gemini --yolo -i "..."`, kunci AI Studio gratis) dipakai setara Copilot, terutama saat kuota Copilot habis.
 - Definisi peran ada di `~/.config/opencode/agent/*.md`. Jangan membuat peran baru yang namanya sama.
 - Cara lapor: tulis hasil ke `_kerja/laporan-<nama-staf>.md` (apa yang selesai, apa yang gagal, di langkah mana).
 

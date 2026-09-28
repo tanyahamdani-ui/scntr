@@ -11,7 +11,7 @@ const W = 1080;
 const H = 1350;
 
 const BG = '#0e0e11';
-const EMAS = '#ffffff'; // aksen putih — identitas SCNTR hitam-putih (versi emas: bikin-carousel.versi-emas.js)
+const EMAS = '#c8a96a';
 const TEKS = '#eceaf0';
 const REDUP = '#6f6c79';
 
