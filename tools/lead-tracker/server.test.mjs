@@ -23,7 +23,9 @@ test('serves dashboard and local API with persistent lead data', async t => {
   const base = `http://127.0.0.1:${address.port}`;
   const page = await fetch(base);
   assert.equal(page.status, 200);
-  assert.match(await page.text(), /Lead tracker/);
+  const html = await page.text();
+  assert.match(html, /Lead tracker/);
+  assert.match(html, /import-threads\.mjs/);
   assert.match(await (await fetch(`${base}/app.js`)).text(), /lead-form/);
 
   const created = await fetch(`${base}/api/leads`, {

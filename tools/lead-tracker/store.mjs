@@ -115,6 +115,57 @@ export function createLead(input, filePath) {
   return lead;
 }
 
+export function parseThreadsExport(input) {
+  const content = Buffer.isBuffer(input) ? input.toString('utf8') : String(input);
+  const marker = content.indexOf('LEADS_JSON:');
+  let parsed;
+  try {
+    parsed = JSON.parse(marker >= 0 ? content.slice(marker + 'LEADS_JSON:'.length).trim() : content);
+  } catch {
+    throw new Error('File bukan ekspor Threads JSON yang valid.');
+  }
+  if (Array.isArray(parsed)) return parsed;
+  if (parsed && Array.isArray(parsed.leads)) return parsed.leads;
+  if (parsed && Array.isArray(parsed.lapor)) {
+    return parsed.lapor.map(url => ({
+      url,
+      context: 'Konteks tidak tersedia di state lama. Buka posting publik dan tinjau manual.',
+      notes: 'Diimpor dari daftar URL lama; isi konteks setelah pemeriksaan manual.',
+    }));
+  }
+  throw new Error('Ekspor harus berisi daftar lead, properti leads, atau daftar lapor lama.');
+}
+
+export function importThreadsLeads(items, filePath) {
+  if (!Array.isArray(items)) throw new Error('Daftar lead untuk impor tidak valid.');
+  const leads = load(filePath);
+  const existing = new Set(leads.map(lead => normalizePublicUrl(lead.url)));
+  const timestamp = new Date().toISOString();
+  const candidates = items.map((item, index) => {
+    const url = normalizePublicUrl(item?.url);
+    const context = requiredText(item?.context ?? item?.text, `Konteks lead ${index + 1}`, 1000);
+    return {
+      id: randomUUID(),
+      source: 'Threads',
+      url,
+      context,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      status: 'new',
+      notes: typeof item?.notes === 'string' && item.notes.trim()
+        ? item.notes.slice(0, 2000)
+        : 'Impor hasil pencarian Threads; tinjau posting secara manual sebelum tindak lanjut.',
+    };
+  });
+  const additions = candidates.filter(lead => {
+    if (existing.has(lead.url)) return false;
+    existing.add(lead.url);
+    return true;
+  });
+  if (additions.length) save(filePath, [...additions, ...leads]);
+  return { imported: additions.length, duplicates: candidates.length - additions.length, leads: additions };
+}
+
 export function updateLead(id, patch, filePath) {
   if (!/^[0-9a-f-]{36}$/i.test(id || '')) throw new Error('ID lead tidak valid.');
   const leads = load(filePath);

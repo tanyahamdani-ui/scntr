@@ -16,9 +16,27 @@ const NEXT = {
   no_response: ['reviewed', 'dismissed'],
   dismissed: [],
 };
+const NEXT_ACTION = {
+  new: 'Buka posting publik, pastikan pertanyaannya relevan, lalu tandai sudah ditinjau.',
+  reviewed: 'Jika Anda sudah menjawab secara manual, catat balasan. Jangan kirim dari tracker.',
+  replied: 'Catat minat/klik yang terlihat secara publik, atau tandai tidak ada respons.',
+  interested: 'Tunggu konfirmasi pembelian; tandai order hanya setelah terkonfirmasi.',
+  ordered: 'Selesai: order terkonfirmasi.',
+  no_response: 'Belum ada respons. Tinjau kembali nanti secara manual atau tutup lead.',
+  dismissed: 'Ditutup: lead tidak relevan.',
+};
+const NEXT_LABEL = {
+  reviewed: 'Catat sudah ditinjau',
+  replied: 'Catat sudah dibalas manual',
+  interested: 'Catat tertarik / klik',
+  ordered: 'Catat order terkonfirmasi',
+  no_response: 'Catat tidak ada respons',
+  dismissed: 'Tutup: tidak relevan',
+};
 const $ = selector => document.querySelector(selector);
 const metrics = $('#metrics');
 const list = $('#lead-list');
+const onboarding = $('#onboarding');
 let leads = [];
 
 async function request(url, options) {
@@ -83,7 +101,7 @@ function transitionSelect(lead) {
   current.selected = true;
   select.append(current);
   for (const status of NEXT[lead.status] || []) {
-    const option = element('option', '', `→ ${STATUS_LABELS[status]}`);
+    const option = element('option', '', NEXT_LABEL[status]);
     option.value = status;
     select.append(option);
   }
@@ -118,6 +136,9 @@ function leadCard(lead) {
   url.rel = 'noopener noreferrer';
   head.append(heading, url);
   card.append(head, element('p', 'context', lead.context));
+  const nextAction = element('div', 'next-action');
+  nextAction.append(element('b', '', 'Langkah berikutnya'), document.createTextNode(NEXT_ACTION[lead.status] || 'Tinjau lead secara manual.'));
+  card.append(nextAction);
 
   const actions = element('div', 'lead-actions');
   actions.append(transitionSelect(lead));
@@ -150,6 +171,7 @@ function leadCard(lead) {
 function render() {
   renderMetrics();
   const visible = filteredLeads();
+  onboarding.hidden = leads.length > 0;
   if (!visible.length) {
     const empty = element('div', 'empty');
     empty.append(element('strong', '', leads.length ? 'Tidak ada lead yang cocok' : 'Belum ada lead'));
