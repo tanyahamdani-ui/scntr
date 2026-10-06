@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#08080a">
+  <title>SCNTR — Lead Tracker</title>
+  <style>
+    :root{color-scheme:dark;--bg:#08080a;--panel:#141417;--line:#2b2b30;--text:#f3f1ec;--muted:#929198;--dim:#66656d;--good:#8fbd9f;--bad:#e18c83;--display:Arial,sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.55 Arial,sans-serif}main{max-width:1160px;margin:auto;padding:42px 24px 70px}
+    header{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}.eyebrow,label,.metric span{font:600 10px var(--display);letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}h1,h2,h3{font-family:var(--display);letter-spacing:-.03em}h1{font-size:clamp(30px,5vw,46px);font-weight:500;margin:6px 0}.lede{max-width:58ch;color:var(--muted);margin:0}.private{border:1px solid var(--line);border-radius:99px;padding:8px 12px;color:var(--muted);font-size:12px}
+    .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin:26px 0}.metric,.panel,.lead{background:var(--panel);border:1px solid var(--line);border-radius:14px}.metric{padding:16px}.metric strong{display:block;font-size:26px;margin-top:6px;font-variant-numeric:tabular-nums}
+    .panel{padding:20px;margin:14px 0}.panel h2{font-size:17px;margin:0}.sub{color:var(--muted);font-size:12px;margin:5px 0 17px}
+    form.grid{display:grid;grid-template-columns:1fr 2fr;gap:12px}.field{display:grid;gap:7px}.field.wide{grid-column:1/-1}input,select,textarea,button{font:inherit}input,select,textarea{width:100%;background:#09090b;border:1px solid var(--line);border-radius:9px;padding:11px 12px;color:var(--text)}textarea{resize:vertical;min-height:74px}input:focus,select:focus,textarea:focus{outline:2px solid #64646d;outline-offset:1px}.btn{border:1px solid var(--line);border-radius:9px;background:#f3f1ec;color:#08080a;padding:10px 15px;font-weight:700;cursor:pointer}.btn:hover{opacity:.88}.btn.secondary{background:transparent;color:var(--text)}.form-actions{grid-column:1/-1;display:flex;align-items:center;gap:12px}.message{min-height:20px;color:var(--muted);font-size:12px}.message.error{color:var(--bad)}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}.toolbar select,.toolbar input{width:auto;min-width:160px}.leads{display:grid;gap:11px}.lead{padding:17px}.lead-head{display:flex;justify-content:space-between;gap:12px;align-items:start}.lead h3{font-size:16px;margin:0 0 4px}.meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:11px}.pill{border:1px solid var(--line);border-radius:99px;padding:4px 9px;font-size:10px;color:var(--muted);white-space:nowrap}.context{margin:14px 0;color:#dcdae0;white-space:pre-wrap;overflow-wrap:anywhere}.lead a{color:#ddd;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}.lead-actions{display:grid;grid-template-columns:minmax(150px,.7fr) 2fr auto;gap:8px;margin-top:14px;align-items:end}.note-save{height:40px}.empty{padding:35px 12px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.empty strong{display:block;color:var(--text);margin-bottom:5px}.foot{font-size:11px;color:var(--dim);margin-top:16px}
+    @media(max-width:760px){main{padding:28px 16px 50px}.metrics{grid-template-columns:repeat(2,1fr)}.lead-actions{grid-template-columns:1fr}.note-save{width:100%}.private{margin-top:3px}}@media(max-width:460px){form.grid{grid-template-columns:1fr}.field.wide,.form-actions{grid-column:auto}.toolbar>*{flex:1}.lead-head{align-items:start}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div><div class="eyebrow">SCNTR · Internal</div><h1>Lead tracker</h1><p class="lede">Catat pertanyaan publik yang ditangani manual. Tidak ada DM, balasan, atau tindakan otomatis.</p></div>
+    <span class="private">Tersimpan lokal di perangkat ini</span>
+  </header>
+  <section class="metrics" id="metrics" aria-label="Ringkasan lead"></section>
+  <section class="panel">
+    <h2>Catat lead</h2><p class="sub">Simpan hanya konteks posting publik dan URL-nya. Jangan masukkan data pribadi yang tidak diperlukan.</p>
+    <form id="lead-form" class="grid">
+      <div class="field"><label for="source">Sumber</label><select id="source" required>
+        <option value="">Pilih platform</option><option>Threads</option><option>TikTok</option><option>Instagram</option><option>Facebook</option><option>Shopee</option><option>Lainnya</option>
+      </select></div>
+      <div class="field"><label for="url">URL posting publik</label><input id="url" type="url" inputmode="url" placeholder="https://…" required></div>
+      <div class="field wide"><label for="context">Konteks / pertanyaan</label><textarea id="context" maxlength="1000" required placeholder="Ringkas isi pertanyaan yang relevan"></textarea></div>
+      <div class="form-actions"><button class="btn" type="submit">Simpan lead</button><span id="form-message" class="message" role="status"></span></div>
+    </form>
+  </section>
+  <section class="panel">
+    <h2>Daftar lead</h2><p class="sub">Pindahkan status setelah tindakan manual benar-benar dilakukan.</p>
+    <div class="toolbar">
+      <select id="filter-status" aria-label="Filter status"><option value="">Semua status</option></select>
+      <select id="filter-source" aria-label="Filter sumber"><option value="">Semua sumber</option><option>Threads</option><option>TikTok</option><option>Instagram</option><option>Facebook</option><option>Shopee</option><option>Lainnya</option></select>
+      <input id="filter-text" type="search" placeholder="Cari konteks atau URL" aria-label="Cari lead">
+    </div>
+    <div id="lead-list" class="leads" aria-live="polite"></div>
+    <p class="foot">Database file: <code>_kerja/lead-tracker/leads.json</code> · Data tidak dikirim ke layanan eksternal.</p>
+  </section>
+</main>
+<script src="/app.js" defer></script>
+</body>
+</html>
