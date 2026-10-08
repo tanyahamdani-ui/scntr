@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SCNTR — Kuis Varian</title>
+<meta name="description" content="5 pertanyaan, 30 detik. Cari parfum SCNTR yang cocok buat kamu: Fresh, Clean, Bold, atau Velour Night.">
+<meta name="theme-color" content="#08080A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#08080A; --panel:#131316; --line:#26262A; --bone:#F3F1EC; --mute:#8C8C93;
+  --fresh:#57A47C; --clean:#6D9DD1; --bold:#C8483E; --velour:#8E7CC3;
+  --accent:var(--bone);
+  --sans:"Instrument Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --disp:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --pad:20px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  min-height:100dvh;
+  background:var(--ink);
+  color:var(--bone);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+*,*::before,*::after{box-sizing:border-box}
+img{max-width:100%}
+button{font:inherit;color:inherit}
+
+.wrap{
+  width:100%;
+  max-width:460px;
+  margin:0 auto;
+  padding:calc(24px + env(safe-area-inset-top)) var(--pad) calc(28px + env(safe-area-inset-bottom));
+}
+.screen{display:none}
+.screen.is-active{display:flex;flex-direction:column;min-height:calc(100dvh - 52px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
+.screen.is-in{animation:rise .32s cubic-bezier(.2,.7,.3,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+h1,h2{margin:0;font-family:var(--disp);font-weight:600;line-height:1.12;letter-spacing:-.015em}
+h1:focus,h2:focus{outline:none}
+
+/* ---------- intro ---------- */
+.intro{justify-content:center;gap:0}
+.brand{
+  font-family:var(--disp);font-weight:600;
+  font-size:13px;letter-spacing:.44em;text-indent:.44em;
+  color:var(--mute);
+}
+.intro h1{margin:18px 0 0;font-size:clamp(1.9rem,9.2vw,2.5rem)}
+.intro__sub{margin:12px 0 0;color:var(--mute);font-size:15px;max-width:30ch}
+.intro__note{margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;line-height:1.6}
+.intro .btn{margin-top:26px}
+
+/* ---------- quiz ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.back{
+  display:inline-flex;align-items:center;gap:6px;
+  min-height:44px;padding:10px 14px 10px 8px;margin-left:-10px;
+  background:none;border:0;border-radius:10px;
+  color:var(--mute);font-size:14px;cursor:pointer;
+}
+.back:hover{color:var(--bone)}
+.count{
+  font-family:var(--disp);font-weight:600;font-size:13px;
+  letter-spacing:.14em;color:var(--mute);
+}
+.bar{margin-top:14px;height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar__fill{display:block;height:100%;width:20%;background:var(--bone);transition:width .35s ease}
+.q{margin:26px 0 0;font-size:clamp(1.35rem,6.4vw,1.6rem);max-width:22ch}
+.opts{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:13px;width:100%;
+  min-height:62px;padding:13px 15px;text-align:left;
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  cursor:pointer;
+  transition:border-color .16s ease,background .16s ease,transform .12s ease;
+}
+.opt:active{border-color:var(--bone);transform:scale(.99)}
+.opt__key{
+  flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;
+  border:1px solid var(--line);border-radius:8px;
+  font-family:var(--disp);font-weight:600;font-size:11px;color:var(--mute);
+}
+.opt__text{font-weight:500;font-size:15.5px;line-height:1.35}
+.q-hint{margin:16px 0 0;color:var(--mute);font-size:12.5px}
+
+/* ---------- result ---------- */
+.res{padding-top:6px}
+.res__eyebrow{margin:0;color:var(--mute);font-size:14px}
+.res__name{
+  margin:6px 0 0;
+  font-size:clamp(2.4rem,12.5vw,3.2rem);
+  letter-spacing:-.025em;
+  color:var(--accent);
+}
+.shot{
+  display:block;width:100%;height:auto;aspect-ratio:4/3;max-height:34vh;object-fit:cover;object-position:center 40%;
+  margin-top:20px;background:var(--panel);
+  border:1px solid var(--line);border-radius:18px;
+}
+.res__desc{margin:18px 0 0;font-size:15.5px;line-height:1.55;color:var(--bone)}
+.price{margin:16px 0 0;font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:.01em}
+.ship{margin:6px 0 0;color:var(--mute);font-size:12.5px}
+.cta{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.row{margin-top:10px;display:flex;gap:10px}
+.alt{margin:20px 0 0;padding-top:16px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;text-align:center}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;
+  min-height:58px;padding:0 18px;border:1px solid transparent;border-radius:14px;
+  font-family:var(--disp);font-weight:600;font-size:16px;letter-spacing:.01em;
+  text-align:center;text-decoration:none;cursor:pointer;
+  transition:transform .12s ease,background .16s ease,border-color .16s ease;
+}
+.btn:active{transform:scale(.99)}
+.btn--primary{background:var(--bone);color:var(--ink)}
+.btn--ghost{background:transparent;border-color:var(--line);color:var(--bone)}
+.btn--sm{
+  flex:1;min-height:50px;font-family:var(--sans);font-weight:500;font-size:15px;
+  background:transparent;border-color:var(--line);color:var(--bone);
+}
+.share-note{min-height:18px;margin:12px 0 0;text-align:center;font-size:12.5px;color:var(--mute)}
+
+@media (min-width:720px){
+  :root{--pad:28px}
+  .wrap{max-width:480px}
+}
+@media (max-height:700px){
+  .q{margin-top:20px}
+  .opts{margin-top:16px;gap:8px}
+  .opt{min-height:58px}
+  .shot{margin-top:16px}
+  .res__desc{margin-top:14px}
+  .cta{margin-top:18px}
+  .alt{margin-top:16px;padding-top:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <section class="screen intro" id="screen-intro" aria-labelledby="intro-title">
+    <p class="brand">SCNTR</p>
+    <h1 id="intro-title" tabindex="-1">Parfum mana yang cocok buat kamu?</h1>
+    <p class="intro__sub">5 pertanyaan, 30 detik.</p>
+    <p class="intro__note">Jawab jujur, bukan asal pilih. Hasilnya keluar dalam 30 detik.</p>
+    <button class="btn btn--primary" id="start" type="button">Mulai</button>
+  </section>
+
+  <section class="screen" id="screen-quiz" aria-labelledby="q-title">
+    <div class="top">
+      <button class="back" id="back" type="button"><span aria-hidden="true">&#8592;</span> Kembali</button>
+      <span class="count" id="count">1/5</span>
+    </div>
+    <div class="bar" role="presentation"><span class="bar__fill" id="bar-fill"></span></div>
+    <h2 class="q" id="q-title" tabindex="-1"></h2>
+    <div class="opts" id="opts" role="group" aria-labelledby="q-title"></div>
+    <p class="q-hint" id="q-hint">Pilih satu, langsung lanjut.</p>
+  </section>
+
+  <section class="screen res" id="screen-result" aria-labelledby="res-name">
+    <p class="res__eyebrow">Kamu cocok pakai</p>
+    <h2 class="res__name" id="res-name" tabindex="-1"></h2>
+    <img class="shot" id="res-shot" alt="" width="1086" height="1086" decoding="async">
+    <p class="res__desc" id="res-desc"></p>
+    <p class="price">50 ml Rp99.000 &middot; 100 ml Rp199.000</p>
+    <p class="ship">Gratis ongkir mulai Rp198.000</p>
+    <div class="cta">
+      <a class="btn btn--primary" href="https://shopee.co.id/scntr.id">Beli di Shopee</a>
+      <a class="btn btn--ghost" href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">Lihat di TikTok</a>
+    </div>
+    <div class="row">
+      <button class="btn btn--sm" id="share" type="button">Bagikan hasil</button>
+      <button class="btn btn--sm" id="retry" type="button">Ulangi kuis</button>
+    </div>
+    <p class="share-note" id="share-note" role="status" aria-live="polite"></p>
+    <p class="alt" id="res-alt"></p>
+  </section>
+
+</main>
+<script>
+(function(){
+  "use strict";
+
+  var VARIANTS = {
+    "fresh":{
+      name:"Fresh", color:"var(--fresh)", file:"fresh",
+      desc:"Segar dan ringan, cocok buat pagi dan aktivitas di luar. Nggak bikin sesak meski cuaca panas."
+    },
+    "clean":{
+      name:"Clean", color:"var(--clean)", file:"clean",
+      desc:"Wangi bersih ala baru mandi. Aman buat kantor, kampus, dan ketemu orang penting."
+    },
+    "bold":{
+      name:"Bold", color:"var(--bold)", file:"bold",
+      desc:"Tegas dan hangat, buat malam dan acara. Buat kamu yang nggak takut diperhatiin."
+    },
+    "velour-night":{
+      name:"Velour Night", color:"var(--velour)", file:"velour-night",
+      desc:"Lembut dan sedikit misterius. Paling luwes, cocok dipakai kapan aja."
+    }
+  };
+
+  /* seri kalau poin sama: V, C, F, B */
+  var PRIORITY = ["velour-night","clean","fresh","bold"];
+
+  var QUESTIONS = [
+    { q:"Kamu paling sering pakai parfum kapan?",
+      o:[ {t:"Pagi sebelum aktivitas", p:{fresh:2}},
+          {t:"Jam kerja atau kuliah", p:{clean:2}},
+          {t:"Malam, acara atau nongkrong", p:{bold:2}},
+          {t:"Santai, kapan aja", p:{"velour-night":2}} ] },
+    { q:"Kesan yang mau kamu tinggalin?",
+      o:[ {t:"Segar dan energik", p:{fresh:2}},
+          {t:"Rapi dan bisa dipercaya", p:{clean:2}},
+          {t:"Tegas dan berani", p:{bold:2}},
+          {t:"Tenang tapi diingat", p:{"velour-night":2}} ] },
+    { q:"Aktivitas harianmu lebih banyak di mana?",
+      o:[ {t:"Di luar, panas-panasan", p:{fresh:2, clean:1}},
+          {t:"Di ruangan ber-AC", p:{clean:2, "velour-night":1}},
+          {t:"Pindah-pindah sampai malam", p:{bold:1, "velour-night":2}},
+          {t:"Tergantung hari", p:{fresh:1, "velour-night":1}} ] },
+    { q:"Gaya pakaian favorit?",
+      o:[ {t:"Kaos dan sneakers", p:{fresh:2}},
+          {t:"Kemeja rapi", p:{clean:2}},
+          {t:"Serba hitam", p:{bold:2}},
+          {t:"Knit atau outer santai", p:{"velour-night":2}} ] },
+    { q:"Soal wangi, kamu lebih suka?",
+      o:[ {t:"Ringan, nggak kecium dari jauh", p:{fresh:1, clean:2}},
+          {t:"Yang langsung kerasa", p:{bold:2}},
+          {t:"Lembut tapi ada karakternya", p:{"velour-night":2}},
+          {t:"Belum tahu, pengin coba", p:{fresh:1, "velour-night":1}} ] }
+  ];
+
+  var KEYS = ["A","B","C","D"];
+  var LINK_SHOPEE = "https://shopee.co.id/scntr.id";
+  var LINK_TIKTOK = "https://www.tiktok.com/@scntr.id";
+
+  var screens = {
+    intro: document.getElementById("screen-intro"),
+    quiz:  document.getElementById("screen-quiz"),
+    result:document.getElementById("screen-result")
+  };
+  var el = {
+    start: document.getElementById("start"),
+    back: document.getElementById("back"),
+    count: document.getElementById("count"),
+    fill: document.getElementById("bar-fill"),
+    title: document.getElementById("q-title"),
+    opts: document.getElementById("opts"),
+    name: document.getElementById("res-name"),
+    shot: document.getElementById("res-shot"),
+    desc: document.getElementById("res-desc"),
+    alt: document.getElementById("res-alt"),
+    share: document.getElementById("share"),
+    retry: document.getElementById("retry"),
+    note: document.getElementById("share-note")
+  };
+  el.shopee = screens.result.querySelector('a[href="' + LINK_SHOPEE + '"]');
+  el.tiktok = screens.result.querySelector('a[href="' + LINK_TIKTOK + '"]');
+
+  var step = 0;
+  var picks = [];
+  var current = null;
+  var noteTimer = null;
+
+  function clearHash(){
+    try{
+      history.replaceState(null, "", location.pathname + location.search);
+    }catch(e){}
+  }
+
+  function show(name, focusEl){
+    Object.keys(screens).forEach(function(k){
+      var s = screens[k];
+      s.classList.toggle("is-active", k === name);
+      s.classList.remove("is-in");
+    });
+    var s = screens[name];
+    void s.offsetWidth;
+    s.classList.add("is-in");
+    if(focusEl) focusEl.focus();
+  }
+
+  function renderQuestion(){
+    var item = QUESTIONS[step];
+    current = item;
+    el.count.textContent = (step + 1) + "/" + QUESTIONS.length;
+    el.fill.style.width = Math.round((step + 1) / QUESTIONS.length * 100) + "%";
+    el.title.textContent = item.q;
+    el.opts.textContent = "";
+    item.o.forEach(function(opt, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "opt";
+      b.setAttribute("data-step", String(i));
+      var k = document.createElement("span");
+      k.className = "opt__key";
+      k.setAttribute("aria-hidden","true");
+      k.textContent = KEYS[i];
+      var t = document.createElement("span");
+      t.className = "opt__text";
+      t.textContent = opt.t;
+      b.appendChild(k);
+      b.appendChild(t);
+      b.addEventListener("click", function(){ answer(i); });
+      el.opts.appendChild(b);
+    });
+  }
+
+  function answer(i){
+    if(!current) return;
+    picks[step] = current.o[i];
+    if(step + 1 < QUESTIONS.length){
+      step += 1;
+      renderQuestion();
+      el.title.focus();
+    }else{
+      finish();
+    }
+  }
+
+  function tally(){
+    var score = {fresh:0, clean:0, bold:0, "velour-night":0};
+    picks.forEach(function(opt){
+      if(!opt) return;
+      for(var k in opt.p){ if(score[k] !== undefined) score[k] += opt.p[k]; }
+    });
+    return PRIORITY.slice().sort(function(a,b){
+      if(score[b] !== score[a]) return score[b] - score[a];
+      return PRIORITY.indexOf(a) - PRIORITY.indexOf(b);
+    });
+  }
+
+  function resultLink(slug){
+    return location.href.split("#")[0] + "#hasil=" + slug;
+  }
+
+  function render(win, second){
+    var v = VARIANTS[win];
+    screens.result.style.setProperty("--accent", v.color);
+    el.name.textContent = v.name;
+    el.desc.textContent = v.desc;
+    el.shot.src = "assets/" + v.file + "-50ml.jpg";
+    el.shot.alt = "Parfum SCNTR " + v.name + " ukuran 50 ml";
+    el.alt.textContent = second ? "Pilihan kedua kamu: " + VARIANTS[second].name : "";
+    el.alt.hidden = !second;
+    el.note.textContent = "";
+  }
+
+  function finish(){
+    var ranked = tally();
+    render(ranked[0], ranked[1]);
+    try{ history.replaceState(null, "", "#hasil=" + ranked[0]); }catch(e){}
+    show("result", el.name);
+  }
+
+  function openResult(slug){
+    var second = null;
+    if(picks.length){
+      var rest = tally().filter(function(k){ return k !== slug; });
+      second = rest[0] || null;
+    }
+    render(slug, second);
+    show("result", el.name);
+  }
+
+  function slugFromHash(){
+    var m = /^#hasil=([a-z-]+)$/.exec(location.hash || "");
+    if(!m) return null;
+    return VARIANTS[m[1]] ? m[1] : null;
+  }
+
+  function startQuiz(){
+    step = 0;
+    picks = [];
+    clearHash();
+    renderQuestion();
+    show("quiz", el.title);
+  }
+
+  el.start.addEventListener("click", startQuiz);
+  el.retry.addEventListener("click", startQuiz);
+  el.back.addEventListener("click", function(){
+    if(step > 0){
+      step -= 1;
+      renderQuestion();
+    }else{
+      clearHash();
+      show("intro", document.getElementById("intro-title"));
+    }
+  });
+
+  function note(text){
+    el.note.textContent = text;
+    if(noteTimer) clearTimeout(noteTimer);
+    if(text) noteTimer = setTimeout(function(){ el.note.textContent = ""; }, 2600);
+  }
+
+  function copyLink(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(resolve, reject){
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly","");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try{ ok = document.execCommand("copy"); }catch(e){ ok = false; }
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error("copy failed"));
+    });
+  }
+
+  el.share.addEventListener("click", function(){
+    var slug = (location.hash.match(/^#hasil=([a-z-]+)$/) || [])[1];
+    if(!slug || !VARIANTS[slug]) return;
+    var url = resultLink(slug);
+    var data = {
+      title:"Kuis Varian SCNTR",
+      text:"Aku cocok pakai SCNTR " + VARIANTS[slug].name + ". Coba kuisnya juga.",
+      url:url
+    };
+    if(navigator.share){
+      navigator.share(data).catch(function(){});
+      return;
+    }
+    copyLink(url + " " + data.text).then(function(){
+      note("Link disalin");
+    }).catch(function(){
+      note("Salin manual: " + url);
+    });
+  });
+
+  window.addEventListener("hashchange", function(){
+    var slug = slugFromHash();
+    if(slug) openResult(slug);
+  });
+
+  var deep = slugFromHash();
+  if(deep) openResult(deep);
+  else show("intro", null);
+})();
+</script>
+</body>
+</html>

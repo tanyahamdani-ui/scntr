@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SCNTR Aqua — Segera Hadir</title>
+  <meta name="description" content="Kenalan dulu dengan SCNTR AQUA, eau de parfum pria dengan karakter segar bernuansa air. Segera hadir.">
+  <meta property="og:title" content="SCNTR Aqua — Segera Hadir">
+  <meta property="og:description" content="YOU SMELL LIKE AQUA. Kenalan dulu dengan eau de parfum pria terbaru dari SCNTR.">
+  <meta property="og:image" content="assets/aqua/air-3-closeup.jpg">
+  <meta property="og:image:alt" content="SCNTR Aqua, eau de parfum dalam botol kaca frosted biru muda">
+  <meta name="theme-color" content="#E6EFF5">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --sky: #E6EFF5;
+      --white: #fff;
+      --ink: #2B2F33;
+      --muted: #68747D;
+      --silver: #A9B5BE;
+      --blue: #A8C6D9;
+      --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+      --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+      --gutter: clamp(20px, 6vw, 88px);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--sky);
+      color: var(--ink);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+    .shell { width: min(100%, 1600px); margin-inline: auto; }
+    .topbar {
+      min-height: 66px;
+      padding: 0 var(--gutter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .back {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: underline;
+      text-decoration-color: var(--silver);
+      text-underline-offset: 4px;
+    }
+    .wordmark { font: 600 14px/1 var(--display); letter-spacing: .2em; }
+    .edition { font-size: 11px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+    .hero {
+      padding: 0 var(--gutter) clamp(64px, 9vw, 128px);
+      display: grid;
+      gap: 24px;
+    }
+    .hero-image {
+      min-height: 420px;
+      height: min(70vh, 760px);
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .hero-image img { object-position: center 53%; }
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 17px;
+      padding: 12px 0 0;
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--muted);
+      font: 600 11px/1.4 var(--display);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1, h2, p { margin: 0; }
+    h1, h2 { font-family: var(--display); font-weight: 500; letter-spacing: -.045em; }
+    h1 { max-width: 9ch; font-size: clamp(48px, 12vw, 88px); line-height: .96; }
+    .hero-copy .lead { max-width: 38ch; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .hero-copy .product-line { font-size: 12px; letter-spacing: .08em; }
+    .features { padding: 0 var(--gutter); }
+    .feature {
+      display: grid;
+      gap: 24px;
+      margin-bottom: clamp(72px, 11vw, 152px);
+      align-items: center;
+    }
+    .feature-photo {
+      min-height: 310px;
+      height: min(78vw, 560px);
+      overflow: hidden;
+      background: var(--blue);
+    }
+    .feature-photo.duo { position: relative; }
+    .feature-photo.duo > img:first-child { width: 100%; height: 100%; }
+    .feature-photo.duo > img:last-child {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 34%;
+      height: 40%;
+      border: 5px solid var(--white);
+    }
+    .feature-copy { padding: 4px 0; }
+    .feature-copy h2 { max-width: 12ch; margin: 12px 0 14px; font-size: clamp(34px, 6vw, 58px); line-height: 1.02; }
+    .feature-copy p:last-child { max-width: 39ch; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .feature:nth-child(2) .feature-photo { order: 0; }
+    .feature:nth-child(2) .feature-copy { order: 1; }
+    .box-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--silver);
+      font: 500 13px/1.5 var(--display);
+    }
+    .box-note span {
+      display: grid;
+      flex: 0 0 38px;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--silver);
+      border-radius: 50%;
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .cta {
+      margin: 0 var(--gutter) clamp(64px, 10vw, 140px);
+      padding: clamp(30px, 7vw, 76px) clamp(22px, 7vw, 76px);
+      background: var(--white);
+      text-align: center;
+    }
+    .cta h2 { margin: 12px auto; font-size: clamp(36px, 7vw, 66px); line-height: 1; }
+    .cta > p:not(.eyebrow) { max-width: 42ch; margin: 0 auto; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 25px; }
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      background: var(--ink);
+      color: var(--white);
+      font: 600 12px/1 var(--display);
+      letter-spacing: .04em;
+      transition: background .18s ease, color .18s ease;
+    }
+    .button:hover { background: transparent; color: var(--ink); }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--silver); }
+    .button.secondary:hover { background: var(--sky); }
+    .faq {
+      width: calc(100% - var(--gutter) - var(--gutter));
+      max-width: 800px;
+      margin: 0 auto clamp(72px, 11vw, 144px);
+    }
+    .faq > h2 { margin-bottom: 20px; font-size: clamp(32px, 6vw, 52px); }
+    details { border-top: 1px solid var(--silver); }
+    details:last-child { border-bottom: 1px solid var(--silver); }
+    summary {
+      position: relative;
+      padding: 19px 30px 19px 0;
+      cursor: pointer;
+      list-style: none;
+      font: 500 15px/1.45 var(--display);
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; right: 3px; color: var(--muted); font: 400 22px/1 var(--body); }
+    details[open] summary::after { content: "−"; }
+    details p { max-width: 55ch; padding: 0 25px 19px 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    footer {
+      padding: 22px var(--gutter) 30px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid rgba(169, 181, 190, .65);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    @media (min-width: 760px) {
+      .topbar { min-height: 78px; }
+      .hero { grid-template-columns: 1.08fr .92fr; align-items: center; gap: clamp(32px, 6vw, 90px); }
+      .hero-image { height: min(72vh, 760px); min-height: 520px; }
+      .hero-copy { padding: 30px 0; }
+      .feature { grid-template-columns: 1fr 1fr; gap: clamp(32px, 8vw, 120px); }
+      .feature:nth-child(2) .feature-photo { order: 1; }
+      .feature:nth-child(2) .feature-copy { order: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <nav class="topbar" aria-label="Navigasi utama">
+      <a class="back" href="/">← Kembali ke SCNTR</a>
+      <a class="wordmark" href="/" aria-label="SCNTR beranda">SCNTR</a>
+      <span class="edition">Segera hadir</span>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-image">
+        <img src="assets/aqua/air-3-closeup.jpg" alt="Botol SCNTR Aqua dengan nuansa biru dan air" fetchpriority="high">
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Eau de parfum pria · segera hadir</p>
+        <h1>YOU SMELL LIKE AQUA</h1>
+        <p class="lead">Segar, tenang, dan punya cara sendiri buat hadir. Dalam botol kaca frosted biru muda dengan tutup bola silver.</p>
+        <p class="product-line">LESS NOISE. MORE PRESENCE.</p>
+      </div>
+    </header>
+
+    <main class="features">
+      <section class="feature" aria-labelledby="aqua-character">
+        <div class="feature-photo">
+          <img src="assets/aqua/air-2-mengapung.jpg" alt="Botol Aqua tampak mengapung dalam suasana biru" loading="lazy">
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">01 / Karakter</p>
+          <h2 id="aqua-character">Segar dengan nuansa air.</h2>
+          <p>SCNTR AQUA membawa kesan bersih dan segar yang terasa ringan. Simpel, santai, tetap berkarakter.</p>
+        </div>
+      </section>
+
+      <section class="feature" aria-labelledby="tropical">
+        <div class="feature-photo">
+          <img src="assets/aqua/kolam-1-lebar.jpg" alt="Permukaan kolam biru yang luas dan tenang" loading="lazy">
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">02 / Dibuat untuk keseharian</p>
+          <h2 id="tropical">MADE FOR TROPICAL CLIMATES</h2>
+          <p>Hari panas, agenda padat, tetap jalan. Aqua dirancang untuk menemani ritme hidup di iklim tropis.</p>
+        </div>
+      </section>
+
+      <section class="feature" aria-labelledby="discovery">
+        <div class="feature-photo duo">
+          <img src="assets/aqua/kolam-5-tangan.jpg" alt="Tangan menyentuh air biru yang tenang" loading="lazy">
+          <img src="assets/aqua/angle-1-depan.jpg" alt="Tampilan depan botol kaca frosted biru muda SCNTR Aqua" loading="lazy">
+        </div>
+        <div class="feature-copy">
+          <p class="eyebrow">03 / Di dalam box</p>
+          <h2 id="discovery">TAKE THE 1 ML WITH YOU.</h2>
+          <p>Di dalam box ada eau de parfum 50 ml dan discovery vial 1 ml varian lain. Bawa vial-nya, coba karakter berbeda kapan saja.</p>
+          <div class="box-note"><span>50<br>ML</span> Eau de parfum + 1 ml discovery vial varian lain</div>
+        </div>
+      </section>
+    </main>
+
+    <section class="cta" aria-labelledby="updates">
+      <p class="eyebrow">Tetap dekat</p>
+      <h2 id="updates">Mau dikabari?</h2>
+      <p>Tinggalkan pesan lewat WhatsApp, atau ikuti TikTok SCNTR untuk kabar terbaru soal Aqua.</p>
+      <div class="actions">
+        <a class="button" href="https://wa.me/628984618900?text=Halo%20SCNTR%2C%20kabari%20saya%20waktu%20Aqua%20rilis%20ya." target="_blank" rel="noopener">Kabari saya di WhatsApp</a>
+        <a class="button secondary" href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">Ikuti @scntr.id di TikTok</a>
+      </div>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-title">
+      <p class="eyebrow">Info singkat</p>
+      <h2 id="faq-title">Yang sering ditanya.</h2>
+      <details>
+        <summary>Kapan SCNTR AQUA rilis?</summary>
+        <p>Info rilis akan diumumkan di TikTok <a href="https://www.tiktok.com/@scntr.id" target="_blank" rel="noopener">@scntr.id</a>.</p>
+      </details>
+      <details>
+        <summary>Berapa harganya?</summary>
+        <p>Harga akan diumumkan saat rilis.</p>
+      </details>
+      <details>
+        <summary>Apa saja isi box-nya?</summary>
+        <p>1 eau de parfum 50 ml dan 1 discovery vial 1 ml varian lain.</p>
+      </details>
+      <details>
+        <summary>Seperti apa karakter Aqua?</summary>
+        <p>Segar dengan nuansa air, dalam format eau de parfum pria.</p>
+      </details>
+    </section>
+
+    <footer>
+      <span>SCNTR AQUA · Segera hadir</span>
+      <a href="/">scntr.id</a>
+    </footer>
+  </div>
+</body>
+</html>

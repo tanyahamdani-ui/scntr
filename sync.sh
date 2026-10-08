@@ -8,5 +8,6 @@ mkdir -p "$SITE"
 cp index.html "$SITE/index.html"
 cp app.html "$SITE/app.html"
 cp katalog.html "$SITE/katalog.html"
-cp orders.html "$SITE/orders.html"
-echo "tersalin ke $SITE (index.html + app.html + katalog.html + orders.html)"
+# orders.html SENGAJA tidak ikut: halaman operasional internal (data toko).
+# Bukanya dari file lokal / repo, bukan dari web publik.
+echo "tersalin ke $SITE (index.html + app.html + katalog.html)"

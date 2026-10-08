@@ -198,6 +198,7 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
 <div class="actions">
   <button class="btn" id="btnTambah">+ Catat Order Baru</button>
   <button class="btn ghost" id="btnExport">Export CSV</button>
+  <button class="btn ghost" id="btnExportKelolain">Export buat Kelola.in</button>
   <button class="btn ghost" id="btnHapusSemua">Hapus Semua</button>
 </div>
 
@@ -210,6 +211,7 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
         <th>Nama</th>
         <th>Isi Pesanan</th>
         <th>Total</th>
+        <th>Kanal</th>
         <th>Status</th>
         <th>Aksi</th>
       </tr>
@@ -251,6 +253,18 @@ footer{font-size:12.5px;color:var(--dim);border-top:1px solid var(--line);paddin
     <button class="btn-add" id="btnAddItem">+ Tambah produk</button>
 
     <div class="field">
+      <label for="i-kanal">Kanal</label>
+      <select id="i-kanal">
+        <option value="whatsapp">WhatsApp</option>
+        <option value="shopee">Shopee</option>
+        <option value="tiktok">TikTok Shop</option>
+        <option value="instagram">Instagram</option>
+        <option value="langsung">Langsung / COD</option>
+        <option value="lainnya">Lainnya</option>
+      </select>
+    </div>
+
+    <div class="field">
       <label for="i-status">Status</label>
       <select id="i-status">
         <option value="baru">Baru — perlu diproses</option>
@@ -280,10 +294,11 @@ const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 const $ = s => document.querySelector(s);
 
 const VARIANTS = [
-  {id:"fresh",  name:"SCNTR Fresh"},
-  {id:"clean",  name:"SCNTR Clean"},
-  {id:"bold",   name:"SCNTR Bold"},
-  {id:"velour", name:"SCNTR Velour Night"}
+  {id:"fresh",  name:"SCNTR Fresh",  price:99000},
+  {id:"clean",  name:"SCNTR Clean",  price:99000},
+  {id:"bold",   name:"SCNTR Bold",   price:99000},
+  {id:"velour", name:"SCNTR Velour Night", price:99000}
+  // 100ml (199rb) + Couple (279rb) nyusul setelah HPP dikunci — tambah di sini + di editor
 ];
 
 let orders = [];
@@ -366,6 +381,7 @@ function render(){
         return v.name + " ×" + i.qty;
       }).join("<br>")}</td>` +
       `<td class="num">${rupiah(o.total)}</td>` +
+      `<td style="font-size:12px;color:var(--mute)">${({whatsapp:"WhatsApp",shopee:"Shopee",tiktok:"TikTok Shop",instagram:"Instagram",langsung:"Langsung",lainnya:"Lainnya"}[o.kanal] || o.kanal || "—")}</td>` +
       `<td>${pill}</td>` +
       `<td style="white-space:nowrap">
         <button class="stat-btn" data-id="${o.id}" data-s="dibayar" title="Tandai dibayar">✓</button>
@@ -401,7 +417,7 @@ function render(){
 function exportCSV(){
   if(!orders.length){ alert("Belum ada order untuk diexport."); return; }
 
-  const header = "ID,Tanggal,Nama,HP,Alamat,Isi Pesanan,Total,Status";
+  const header = "ID,Tanggal,Nama,HP,Alamat,Kanal,Isi Pesanan,Total,Status";
   const rows = orders.map(o => {
     const items = o.items.map(i => {
       const v = VARIANTS.find(x => x.id === i.id);
@@ -413,6 +429,7 @@ function exportCSV(){
       '"' + o.nama.replace(/"/g,'""') + '"',
       o.hp ? '"' + o.hp.replace(/"/g,'""') + '"' : "",
       '"' + (o.alamat || "").replace(/"/g,'""') + '"',
+      o.kanal || "whatsapp",
       '"' + items.replace(/"/g,'""') + '"',
       o.total,
       o.status
@@ -425,6 +442,48 @@ function exportCSV(){
   const a = document.createElement("a");
   a.href = url;
   a.download = "scntr-orders-" + new Date().toISOString().slice(0,10) + ".csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ---- export buat Kelola.in ----
+// 1 baris per item (Tanggal, No. Order, Produk, Channel, Qty, Harga Satuan,
+// Customer) — cocok dengan auto-mapping import CSV Kelola.in (csv-import.js).
+// Re-import aman: No. Order dipakai dedup di sana.
+function exportKelolain(){
+  if(!orders.length){ alert("Belum ada order untuk diexport."); return; }
+
+  const q = s => '"' + String(s ?? "").replace(/"/g,'""') + '"';
+  const hargaOf = id => {
+    const v = VARIANTS.find(x => x.id === id);
+    return v && v.price ? v.price : PRICE;
+  };
+  const namaOf = id => {
+    const v = VARIANTS.find(x => x.id === id);
+    return v ? v.name : id;
+  };
+  const header = "Tanggal,No. Order,Produk,Channel,Qty,Harga Satuan,Customer";
+  const rows = [];
+  orders.forEach(o => {
+    (o.items || []).forEach(i => {
+      rows.push([
+        o.tanggal,
+        o.id,
+        q(namaOf(i.id)),
+        o.kanal || "whatsapp",
+        i.qty,
+        hargaOf(i.id),
+        q(o.nama + (o.hp ? " (" + o.hp + ")" : ""))
+      ].join(","));
+    });
+  });
+
+  const csv = [header, ...rows].join("\n");
+  const blob = new Blob(["\uFEFF" + csv], {type:"text/csv;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "scntr-kelolain-" + new Date().toISOString().slice(0,10) + ".csv";
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -442,6 +501,7 @@ function closeModal(){
 function clearForm(){
   $("#i-nama").value = "";
   $("#i-hp").value = "";
+  $("#i-kanal").value = "whatsapp";
   $("#i-alamat").value = "";
   $("#i-status").value = "baru";
   document.getElementById("f-nama").classList.remove("bad");
@@ -493,6 +553,7 @@ function simpan(){
     nama,
     hp: $("#i-hp").value.trim(),
     alamat: $("#i-alamat").value.trim(),
+    kanal: $("#i-kanal").value,
     items,
     total: rupiahSemua(items),
     status: $("#i-status").value
@@ -509,6 +570,7 @@ $("#btnTambah").addEventListener("click", openModal);
 $("#btnBatal").addEventListener("click", closeModal);
 $("#btnSimpan").addEventListener("click", simpan);
 $("#btnExport").addEventListener("click", exportCSV);
+$("#btnExportKelolain").addEventListener("click", exportKelolain);
 $("#btnAddItem").addEventListener("click", () => {
   const row = document.createElement("div");
   row.className = "item-row";
