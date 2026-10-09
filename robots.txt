@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /app.html
 
-Sitemap: https://scntr.pages.dev/sitemap.xml
+Sitemap: https://scntr.biz.id/sitemap.xml
