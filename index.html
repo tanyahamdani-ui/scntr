@@ -174,25 +174,34 @@ section.pad{padding:clamp(56px,7vw,104px) var(--pad)}
 .sechead p{margin-top:12px;font-size:14.5px;color:var(--mute);max-width:52ch;line-height:1.6}
 
 /* ---------- grid koleksi ---------- */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.size-group{margin-top:34px}
+.size-group:first-child{margin-top:0}
+.size-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding-bottom:12px;margin-bottom:16px;border-bottom:1px solid var(--line);
+}
+.size-head h3{font-family:var(--display);font-size:18px;font-weight:700;letter-spacing:-.01em;color:#F4F4F5}
+.size-head span{font-size:12.5px;color:var(--mute);letter-spacing:.04em}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 @media (max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:560px){.grid{grid-template-columns:1fr}}
 .tile{
-  border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
   background:var(--panel);display:flex;flex-direction:column;
   transition:border-color .2s ease,transform .2s ease;
 }
 .tile:hover{border-color:#3E3E45;transform:translateY(-3px)}
 .tile .art{
-  aspect-ratio:4/5;background:var(--shot) 55% 42%/220% auto no-repeat;
+  aspect-ratio:1/1;background-color:#111114;background-position:center;background-size:cover;background-repeat:no-repeat;
   border-bottom:1px solid var(--line);cursor:pointer;
 }
-.tile .txt{padding:18px 18px 20px;display:flex;flex-direction:column;gap:7px;flex:1}
-.tile h3{font-size:15px;font-weight:700;letter-spacing:.1em}
-.tile .tag{font-size:12.5px;color:var(--mute)}
-.tile .notes{font-size:12px;color:var(--dim);line-height:1.5;margin-top:2px}
-.tile .buy{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:16px}
-.tile .price{font-family:var(--display);font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.tile .txt{padding:14px 14px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tile h3{font-size:13.5px;font-weight:700;letter-spacing:.08em;line-height:1.25}
+.tile .tag{font-size:11.5px;color:var(--mute)}
+.tile .notes{font-size:11.5px;color:var(--dim);line-height:1.45;margin-top:2px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tile .buy{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px}
+.tile .price{font-family:var(--display);font-size:13.5px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tile .buy .btn.sm{padding:7px 11px;font-size:11.5px}
 
 /* ---------- spotlight ---------- */
 .spot{
@@ -523,13 +532,13 @@ footer nav a:hover{color:var(--bone)}
 <section class="pad" id="koleksi">
   <div class="sechead">
     <div>
-      <span class="eyebrow">Empat karakter, dua ukuran</span>
+      <span class="eyebrow">Lima karakter, tiga ukuran</span>
       <h2 style="margin-top:12px">Pilih varian</h2>
       <p>Satu formula dasar, lima karakter. Mulai dari Mini 5 ml Rp 19.900 untuk coba di kulit, 50 ml Rp 129.000, atau 100 ml Rp 199.000.</p>
     </div>
     <button class="btn ghost sm" id="addAll">Coba semua varian</button>
   </div>
-  <div class="grid" id="grid"></div>
+  <div id="grid"></div>
 </section>
 
 <section class="spot" id="spotlight">
@@ -1085,27 +1094,41 @@ function openCart(open){
   if(open) $("#closeCart").focus();
 }
 
-/* ---- koleksi ---- */
+/* ---- koleksi (1 baris = 5 varian sesuai ukurannya masing-masing) ---- */
 function buildGrid(){
-  const grid = $("#grid");
-  grid.innerHTML = "";
-  VARIANTS.forEach(v => {
-    const tile = el("article","tile",
-      `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}" style="background-image:url('${v.img}');background-size:${v.zoom || '220%'} auto"></div>
-       <div class="txt">
-         <h3 style="color:${v.color}">${v.name}</h3>
-         <div class="tag">${v.tag}</div>
-         <div class="notes">${Object.values(v.notes).join(" · ")}</div>
-         <div class="buy">
-           <span class="price">${rupiah(v.price)}</span>
-           <button class="btn sm">Tambah</button>
-         </div>
-       </div>`);
-    const show = () => { active = v; renderSpot(); $("#spotlight").scrollIntoView({block:"start"}); };
-    tile.querySelector(".art").addEventListener("click", show);
-    tile.querySelector(".art").addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
-    tile.querySelector(".buy button").addEventListener("click", () => add(v.id));
-    grid.appendChild(tile);
+  const root = $("#grid");
+  root.innerHTML = "";
+  const GROUPS = [
+    { ml: 5,   title: "Mini 5 ml — Coba Satuan", sub: "Rp 19.900 · Travel spray, pas buat tes langsung di kulit" },
+    { ml: 50,  title: "Eau de Parfum 50 ml",     sub: "Rp 129.000 · Ukuran standar harian" },
+    { ml: 100, title: "Eau de Parfum 100 ml",    sub: "Rp 199.000 · Isi dua kali lipat, paling hemat per ml" }
+  ];
+  GROUPS.forEach(g => {
+    const items = VARIANTS.filter(v => v.ml === g.ml);
+    if (!items.length) return;
+    const sec = el("div", "size-group");
+    sec.appendChild(el("div", "size-head", `<h3>${g.title}</h3><span>${g.sub}</span>`));
+    const grid = el("div", "grid");
+    items.forEach(v => {
+      const tile = el("article","tile",
+        `<div class="art" role="button" tabindex="0" aria-label="Lihat ${v.title}" style="background-image:url('${v.img}')"></div>
+         <div class="txt">
+           <h3 style="color:${v.color}">${v.name}</h3>
+           <div class="tag">${v.tag}</div>
+           <div class="notes">${Object.values(v.notes).join(" · ")}</div>
+           <div class="buy">
+             <span class="price">${rupiah(v.price)}</span>
+             <button class="btn sm">Tambah</button>
+           </div>
+         </div>`);
+      const show = () => { active = v; renderSpot(); $("#spotlight").scrollIntoView({block:"start"}); };
+      tile.querySelector(".art").addEventListener("click", show);
+      tile.querySelector(".art").addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); show(); } });
+      tile.querySelector(".buy button").addEventListener("click", () => add(v.id));
+      grid.appendChild(tile);
+    });
+    sec.appendChild(grid);
+    root.appendChild(sec);
   });
 }
 

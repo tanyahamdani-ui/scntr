@@ -15,7 +15,7 @@
 @media(prefers-color-scheme:dark){:root{--bg:#121010;--card:#1b1817;--ink:#f4efe9;--muted:#a49b92;--line:#2c2624;--accent:#cf9663;--soft:#272019}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-.wrap{max-width:820px;margin:0 auto;padding:36px 18px 90px}
+.wrap{max-width:1180px;margin:0 auto;padding:36px 20px 90px}
 header{text-align:center;margin-bottom:34px}
 .logo{font-size:13px;letter-spacing:.42em;color:var(--accent);font-weight:600}
 h1{font-size:30px;margin:10px 0 8px;letter-spacing:-.02em}
@@ -23,21 +23,23 @@ h1{font-size:30px;margin:10px 0 8px;letter-spacing:-.02em}
 .claim{margin:22px auto 0;max-width:520px;background:var(--soft);border-radius:12px;padding:13px 16px;font-size:14px;color:var(--ink)}
 h2{font-size:19px;margin:38px 0 3px;letter-spacing:-.01em}
 .cap{color:var(--muted);font-size:14px;margin:0 0 16px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.grid.grid-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1024px){.grid,.grid.grid-4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.grid,.grid.grid-4{grid-template-columns:1fr}}
 .p{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column}
 .ph{aspect-ratio:1/1;background:var(--soft);max-width:100%}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.pb{padding:16px;display:flex;flex-direction:column;flex:1}
-.pn{font-size:17px;font-weight:600;letter-spacing:.02em}
-.pt{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
-.pd{font-size:14px;color:var(--muted);margin:0 0 12px}
-.nt{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-bottom:12px}
-.nt b{color:var(--ink);font-weight:600;margin-right:5px}
-.pr{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;margin-bottom:12px;gap:8px;flex-wrap:wrap}
-.hg{font-size:20px;font-weight:600}
-.ml{font-size:12.5px;color:var(--muted)}
-.btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;padding:11px;border-radius:10px;font-size:14.5px;font-weight:500}
+.pb{padding:13px;display:flex;flex-direction:column;flex:1}
+.pn{font-size:14.5px;font-weight:700;letter-spacing:.02em;line-height:1.25}
+.pt{color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin:3px 0 8px}
+.pd{font-size:12.5px;color:var(--muted);margin:0 0 10px;line-height:1.45}
+.nt{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px;margin-bottom:10px;line-height:1.4}
+.nt b{color:var(--ink);font-weight:600;margin-right:4px}
+.pr{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto;margin-bottom:10px;gap:6px;flex-wrap:wrap}
+.hg{font-size:17px;font-weight:700}
+.ml{font-size:11.5px;color:var(--muted)}
+.btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;padding:9px 10px;border-radius:9px;font-size:13px;font-weight:600}
 .btn:hover{opacity:.9}
 footer{margin-top:52px;text-align:center;color:var(--muted);font-size:14px}
 footer a{color:var(--accent)}
@@ -185,7 +187,7 @@ footer a{color:var(--accent)}
     <div class="nt"><span><b>Awal</b> Jeruk segar tipis</span><span><b>Akhir</b> Kayu hangat tenang</span></div>
     <div class="pr"><span class="hg">Rp199.000</span><span class="ml">100 ml · Rp1.990/ml</span></div>
     <a class="btn" href="https://wa.me/628984618900?text=Halo%20SCNTR%2C%20saya%20mau%20pesan%20CEDAR%20100ml%20(Rp199.000).%20Masih%20ready%3F" target="_blank" rel="noopener">Pesan lewat WhatsApp</a>
-  </div></article></div><h2>Diffuser Ruangan</h2><p class="cap">Wangi yang sama, buat kamar atau ruang tamu</p><div class="grid"><article class="p">
+  </div></article></div><h2>Diffuser Ruangan</h2><p class="cap">Wangi yang sama, buat kamar atau ruang tamu</p><div class="grid grid-4"><article class="p">
   <div class="ph"><img src="assets/diffuser-fresh.jpg" alt="FRESH DIFFUSER" loading="lazy"></div>
   <div class="pb">
     <div class="pn">FRESH</div>
