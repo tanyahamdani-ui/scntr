@@ -827,17 +827,17 @@ footer nav a:hover{color:var(--bone)}
             "availability": "https://schema.org/InStock", "url": "https://scntr.biz.id/" }
         },
         {
-          "@type": "Product", "name": "SCNTR Cedar", "sku": "SCNTR-CEDAR-50",
+          "@type": "Product", "name": "SCNTR Calm", "sku": "SCNTR-CALM-50",
           "description": "Wangi kayu hangat yang kalem untuk kerja dan acara santai. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
-          "image": "https://scntr.biz.id/assets/cedar-50ml.jpg",
+          "image": "https://scntr.biz.id/assets/calm-50ml.jpg",
           "brand": { "@id": "https://scntr.biz.id/#brand" },
           "offers": { "@type": "Offer", "price": "129000", "priceCurrency": "IDR",
             "availability": "https://schema.org/InStock", "url": "https://scntr.biz.id/" }
         },
         {
-          "@type": "Product", "name": "SCNTR Cedar 100 ml", "sku": "SCNTR-CEDAR-100",
-          "description": "SCNTR Cedar ukuran 100 ml. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
-          "image": "https://scntr.biz.id/assets/cedar-100ml.jpg",
+          "@type": "Product", "name": "SCNTR Calm 100 ml", "sku": "SCNTR-CALM-100",
+          "description": "SCNTR Calm ukuran 100 ml. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
+          "image": "https://scntr.biz.id/assets/calm-100ml.jpg",
           "brand": { "@id": "https://scntr.biz.id/#brand" },
           "offers": { "@type": "Offer", "price": "199000", "priceCurrency": "IDR",
             "availability": "https://schema.org/InStock", "url": "https://scntr.biz.id/" }
@@ -875,8 +875,8 @@ footer nav a:hover{color:var(--bone)}
             "availability": "https://schema.org/InStock", "url": "https://scntr.biz.id/" }
         },
         {
-          "@type": "Product", "name": "SCNTR Cedar Mini 5 ml", "sku": "SCNTR-5ML-CEDAR",
-          "description": "Parfum pria SCNTR Cedar EDP ukuran mini 5 ml travel spray. Jeruk segar tipis di awal dan kayu hangat tenang di akhir.",
+          "@type": "Product", "name": "SCNTR Calm Mini 5 ml", "sku": "SCNTR-5ML-CALM",
+          "description": "Parfum pria SCNTR Calm EDP ukuran mini 5 ml travel spray. Jeruk segar tipis di awal dan kayu hangat tenang di akhir.",
           "image": "https://scntr.biz.id/assets/vial-5ml.jpg",
           "brand": { "@id": "https://scntr.biz.id/#brand" },
           "offers": { "@type": "Offer", "price": "19900", "priceCurrency": "IDR",
@@ -998,8 +998,8 @@ const VARIANTS = [
    title:"SCNTR Velour Night", chips:["Aromatic","Woody","Musk"],
    desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}},
-  {id:"cedar", img:"assets/cedar-50ml.jpg", price:129000, ml:50, name:"CEDAR", tag:"Kayu Hangat & Kalem", color:"var(--bone)", eyebrow:"Varian baru · Kerja & Santai",
-   title:"SCNTR Cedar", chips:["Citrus","Woody","Calm"],
+  {id:"calm", img:"assets/calm-50ml.jpg", price:129000, ml:50, name:"CALM", tag:"Kayu Hangat & Kalem", color:"var(--bone)", eyebrow:"Varian baru · Kerja & Santai",
+   title:"SCNTR Calm", chips:["Citrus","Woody","Calm"],
    desc:"Wangi kayu yang kalem untuk cowok tenang dan dewasa. Jeruk segar tipis di awal, kayu hangat tenang di akhir. Nyaman untuk kerja, rapat, dan acara santai.",
    notes:{Top:"Jeruk segar tipis", Heart:"Kayu hangat", Base:"Kayu tenang"}},
   {id:"fresh100", img:"assets/fresh-100ml.jpg", price:199000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
@@ -1018,9 +1018,9 @@ const VARIANTS = [
    title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
    desc:"Velour Night yang sama, botol dua kali lebih besar. Isi dua kali lipat, cukup untuk berbulan-bulan, dan engga bolak-balik pesan.",
    notes:{Top:"Bergamot, lada hitam, apel hijau", Heart:"Lavender, iris, nutmeg", Base:"Cedarwood, vetiver, white musk"}},
-  {id:"cedar100", img:"assets/cedar-100ml.jpg", price:199000, ml:100, name:"CEDAR 100 ML", tag:"Varian Baru · Isi 2× Lipat", color:"var(--bone)", eyebrow:"Varian baru · 100 ml",
-   title:"SCNTR Cedar 100 ml", chips:["Citrus","Woody","Calm"],
-   desc:"Cedar yang sama dalam botol 100 ml dua kali lebih besar. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
+  {id:"calm100", img:"assets/calm-100ml.jpg", price:199000, ml:100, name:"CALM 100 ML", tag:"Varian Baru · Isi 2× Lipat", color:"var(--bone)", eyebrow:"Varian baru · 100 ml",
+   title:"SCNTR Calm 100 ml", chips:["Citrus","Woody","Calm"],
+   desc:"Calm yang sama dalam botol 100 ml dua kali lebih besar. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
    notes:{Top:"Jeruk segar tipis", Heart:"Kayu hangat", Base:"Kayu tenang"}},
   {id:"fresh5", img:"assets/vial-5ml.jpg", zoom:"100%", price:19900, ml:5, name:"FRESH MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--fresh)", eyebrow:"Mini 5 ml · Pagi & Outdoor",
    title:"SCNTR Fresh Mini 5 ml", chips:["Citrus","Marine","Woody"],
@@ -1038,9 +1038,9 @@ const VARIANTS = [
    title:"SCNTR Velour Night Mini 5 ml", chips:["Amber","Vanilla","Musk"],
    desc:"Ukuran mini 5 ml travel spray untuk coba langsung di kulit. Hangat, lembut, dan tenang untuk malam hari atau suasana santai.",
    notes:{Top:"Jeruk mandarin", Heart:"Markisa, bunga tiare", Base:"Amber, vanila, musk"}},
-  {id:"cedar5", img:"assets/vial-5ml.jpg", zoom:"100%", price:19900, ml:5, name:"CEDAR MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml · Kayu & Tenang",
-   title:"SCNTR Cedar Mini 5 ml", chips:["Citrus","Woody","Calm"],
-   desc:"Ukuran mini 5 ml travel spray untuk coba varian Cedar di kulit. Pembuka jeruk segar tipis dengan akhir kayu hangat yang tenang.",
+  {id:"calm5", img:"assets/vial-5ml.jpg", zoom:"100%", price:19900, ml:5, name:"CALM MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml · Kayu & Tenang",
+   title:"SCNTR Calm Mini 5 ml", chips:["Citrus","Woody","Calm"],
+   desc:"Ukuran mini 5 ml travel spray untuk coba varian Calm di kulit. Pembuka jeruk segar tipis dengan akhir kayu hangat yang tenang.",
    notes:{Top:"Jeruk segar tipis", Heart:"Kayu hangat", Base:"Kayu tenang"}}
 
 ];
