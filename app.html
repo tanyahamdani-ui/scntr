@@ -570,7 +570,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
       </div>
 
       <div class="trust">
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja 198rb</span></span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span><b>Gratis Ongkir</b><span>Min. belanja 150rb</span></span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 19 5.6v5.2c0 4-2.9 7.5-7 9.2-4.1-1.7-7-5.2-7-9.2V5.6L12 3Z"/><path d="m9 12 2.1 2.1L15.2 10"/></svg><span><b>100% Original</b><span>Garansi produk asli</span></span></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 8.5h9v9h-9z"/><path d="M11.5 11.5h4.4l3.6 3.4v2.6h-8z"/><circle cx="6" cy="18" r="1.7"/><circle cx="16" cy="18" r="1.7"/><path d="M1 6h5M2 11h3"/></svg><span><b>Pengiriman Cepat</b><span>1–2 hari sampai</span></span></div>
       </div>
@@ -605,7 +605,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
         <h1 id="dTitle">SCNTR Velour Night</h1>
         <div class="sub">Eau de Parfum · 50 ml</div>
         <div class="pricerow">
-          <span class="price">Rp 129.000</span>
+          <span class="price">Rp 75.000</span>
           <span class="rating">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
             <b>★</b> (3 di Shopee)
@@ -643,9 +643,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
       <div class="shipnote">
         <div class="top">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M2.5 7h11v10h-11z"/><path d="M13.5 10.5h4l3 3.2V17h-7z"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>
-          <p id="shipMsg">Gratis ongkir untuk pembelian minimal Rp 198.000</p>
+          <p id="shipMsg">Gratis ongkir untuk pembelian minimal Rp 150.000</p>
         </div>
-        <div class="track"><span class="bar"><i id="shipBar" style="width:0%"></i></span><span class="lbl" id="shipLbl">Rp 0 / Rp 198.000</span></div>
+        <div class="track"><span class="bar"><i id="shipBar" style="width:0%"></i></span><span class="lbl" id="shipLbl">Rp 0 / Rp 150.000</span></div>
       </div>
       <div class="items" id="items"></div>
       <div id="summary"></div>
@@ -719,58 +719,58 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--bone);outline-offse
 </div>
 
 <script>
-const SHIP = 15000, FREE_MIN = 198000;
+const SHIP = 15000, FREE_MIN = 150000;
 const rupiah = n => "Rp " + n.toLocaleString("id-ID");
 
 const VARIANTS = [
-  {id:"fresh", price:129000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
+  {id:"fresh", price:75000, ml:50, name:"FRESH", tag:"Segar & Energi", color:"var(--fresh)",
    title:"SCNTR Fresh", desc:"Citrus yang bangunin mood dari pagi sampai sore. Ringan, bersih, dan bikin betah dideketin.", chips:["Citrus","Aquatic","Green"]},
-  {id:"clean", price:129000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
+  {id:"clean", price:75000, ml:50, name:"CLEAN", tag:"Bersih & Rapi", color:"var(--clean)",
    title:"SCNTR Clean", desc:"Wangi sabun mahal yang nempel halus. Cocok buat kantor, meeting, dan hari-hari yang harus rapi.", chips:["Soapy","Powdery","Musk"]},
-  {id:"bold", price:129000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
+  {id:"bold", price:75000, ml:50, name:"BOLD", tag:"Kuat & Berkarakter", color:"var(--bold)",
    title:"SCNTR Bold", desc:"Spicy woody yang berani dan tahan lama. Buat malam yang butuh kesan pertama kuat.", chips:["Spicy","Woody","Amber"]},
-  {id:"velour", price:129000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
+  {id:"velour", price:75000, ml:50, name:"VELOUR NIGHT", tag:"Tenang & Misterius", color:"var(--bone)",
    title:"SCNTR Velour Night", desc:"Wangi lembut yang misterius dengan sentuhan woody dan musk. Memberi kesan tenang, percaya diri, dan berkelas tanpa banyak bicara.", chips:["Aromatic","Woody","Musk"]},
-  {id:"calm", price:129000, ml:50, name:"CALM", tag:"Kayu Hangat & Kalem", color:"var(--bone)",
+  {id:"calm", price:75000, ml:50, name:"CALM", tag:"Kayu Hangat & Kalem", color:"var(--bone)",
    title:"SCNTR Calm", desc:"Wangi kayu yang kalem untuk cowok tenang dan dewasa. Jeruk segar tipis di awal, kayu hangat tenang di akhir.", chips:["Citrus","Woody","Calm"]},
 
-  {id:"fresh100", price:199000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
+  {id:"fresh100", price:119000, ml:100, name:"FRESH 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--fresh)", eyebrow:"Untuk pagi",
    title:"SCNTR Fresh 100 ml", chips:["Citrus","Aquatic","Green"],
    desc:"Fresh yang sama, botol dua kali lebih besar. Isi dua kali lipat, cukup untuk berbulan-bulan tanpa bolak-balik pesan.",
    notes:{"Top":"Bergamot, lemon, daun mint","Heart":"Neroli, teh hijau","Base":"White musk, cedar"}},
-  {id:"clean100", price:199000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
+  {id:"clean100", price:119000, ml:100, name:"CLEAN 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--clean)", eyebrow:"Untuk kantor",
    title:"SCNTR Clean 100 ml", chips:["Soapy","Powdery","Musk"],
    desc:"Clean yang sama, botol dua kali lebih besar. Isi dua kali lipat, cukup untuk berbulan-bulan tanpa bolak-balik pesan.",
    notes:{"Top":"Aldehid, bergamot","Heart":"Iris, lily, kapas","Base":"White musk, amberwood"}},
-  {id:"bold100", price:199000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
+  {id:"bold100", price:119000, ml:100, name:"BOLD 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bold)", eyebrow:"Untuk malam",
    title:"SCNTR Bold 100 ml", chips:["Spicy","Woody","Amber"],
    desc:"Bold yang sama, botol dua kali lebih besar. Isi dua kali lipat, cukup untuk berbulan-bulan tanpa bolak-balik pesan.",
    notes:{"Top":"Lada hitam, kapulaga","Heart":"Nutmeg, kulit","Base":"Amber, oud, patchouli"}},
-  {id:"velour100", price:199000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling dicari",
+  {id:"velour100", price:119000, ml:100, name:"VELOUR NIGHT 100 ML", tag:"Isi Dua Kali Lipat", color:"var(--bone)", eyebrow:"Paling dicari",
    title:"SCNTR Velour Night 100 ml", chips:["Aromatic","Woody","Musk"],
    desc:"Velour Night yang sama, botol dua kali lebih besar. Isi dua kali lipat, cukup untuk berbulan-bulan tanpa bolak-balik pesan.",
    notes:{"Top":"Bergamot, lada hitam, apel hijau","Heart":"Lavender, iris, nutmeg","Base":"Cedarwood, vetiver, white musk"}},
-  {id:"calm100", price:199000, ml:100, name:"CALM 100 ML", tag:"Varian Baru · Isi 2× Lipat", color:"var(--bone)", eyebrow:"Varian baru",
+  {id:"calm100", price:119000, ml:100, name:"CALM 100 ML", tag:"Varian Baru · Isi 2× Lipat", color:"var(--bone)", eyebrow:"Varian baru",
    title:"SCNTR Calm 100 ml", chips:["Citrus","Woody","Calm"],
    desc:"Calm yang sama dalam botol dua kali lebih besar. Jeruk segar tipis di awal, kayu hangat tenang di akhir.",
    notes:{"Top":"Jeruk segar tipis","Heart":"Kayu hangat","Base":"Kayu tenang"}},
-  {id:"fresh5", price:19900, ml:5, name:"FRESH MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--fresh)", eyebrow:"Mini 5 ml",
+  {id:"fresh5", price:14900, ml:5, name:"FRESH MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--fresh)", eyebrow:"Mini 5 ml",
    title:"SCNTR Fresh Mini 5 ml", chips:["Citrus","Marine","Woody"],
    desc:"Ukuran mini 5 ml travel spray untuk tes langsung di kulit sebelum beli botol besar. Segar dan bersih untuk aktivitas pagi.",
    notes:{"Top":"Lavender, grapefruit, pir, garam laut","Heart":"Aroma laut, bunga air, rhubarb","Base":"Karamel, kayu, moss"}},
-  {id:"clean5", price:19900, ml:5, name:"CLEAN MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--clean)", eyebrow:"Mini 5 ml",
+  {id:"clean5", price:14900, ml:5, name:"CLEAN MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--clean)", eyebrow:"Mini 5 ml",
    title:"SCNTR Clean Mini 5 ml", chips:["Clean","Citrus","Musk"],
    desc:"Ukuran mini 5 ml travel spray untuk tes di kulit. Wangi rapi dan bersih, nyaman dipakai di kantor dan ruang AC.",
    notes:{"Top":"Leci, jeruk mandarin, lotus, bergamot","Heart":"Aroma laut, jeruk, rosewood","Base":"Tonka, musk, amber, benzoin"}},
-  {id:"bold5", price:19900, ml:5, name:"BOLD MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bold)", eyebrow:"Mini 5 ml",
+  {id:"bold5", price:14900, ml:5, name:"BOLD MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bold)", eyebrow:"Mini 5 ml",
    title:"SCNTR Bold Mini 5 ml", chips:["Spicy","Leather","Woody"],
    desc:"Ukuran mini 5 ml travel spray untuk coba karakter tegas di kulit. Hangat, rempah, dan berkarakter untuk malam atau acara.",
    notes:{"Top":"Cengkeh, pala, bergamot, elemi","Heart":"Lavender, lily of the valley, pir hijau, marigold","Base":"Leather, musk, driftwood, cendana"}},
-  {id:"velour5", price:19900, ml:5, name:"VELOUR NIGHT MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml",
+  {id:"velour5", price:14900, ml:5, name:"VELOUR NIGHT MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml",
    title:"SCNTR Velour Night Mini 5 ml", chips:["Amber","Vanilla","Musk"],
    desc:"Ukuran mini 5 ml travel spray untuk tes di kulit. Hangat, lembut, dan tenang untuk malam hari atau suasana santai.",
    notes:{"Top":"Jeruk mandarin","Heart":"Markisa, bunga tiare","Base":"Amber, vanila, musk"}},
-  {id:"calm5", price:19900, ml:5, name:"CALM MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml",
+  {id:"calm5", price:14900, ml:5, name:"CALM MINI 5 ML", tag:"Coba Satuan · Travel", color:"var(--bone)", eyebrow:"Mini 5 ml",
    title:"SCNTR Calm Mini 5 ml", chips:["Citrus","Woody","Calm"],
    desc:"Ukuran mini 5 ml travel spray untuk coba varian Calm di kulit. Pembuka jeruk segar tipis dengan akhir kayu hangat tenang.",
    notes:{"Top":"Jeruk segar tipis","Heart":"Kayu hangat","Base":"Kayu tenang"}}
@@ -846,6 +846,8 @@ function buildRail(){
 /* ---- detail ---- */
 function renderDetail(){
   $("#dTitle").textContent = active.title;
+  $("#s-detail .sub").textContent = "Eau de Parfum · " + active.ml + " ml";
+  $("#s-detail .price").textContent = rupiah(active.price);
   $("#dDesc").textContent = active.desc;
   $("#dChips").innerHTML = active.chips.map(c => `<span class="chip">${c}</span>`).join("");
 }
@@ -918,7 +920,7 @@ function renderCart(){
   $("#shipLbl").textContent = rupiah(subtotal) + " / " + rupiah(FREE_MIN);
   $("#shipMsg").textContent = freeShip
     ? "Ongkir kamu gratis. Nice."
-    : "Gratis ongkir untuk pembelian minimal Rp 198.000";
+    : "Gratis ongkir untuk pembelian minimal Rp 150.000";
 
   $("#summary").innerHTML = cart.length ? `
     <div class="totals">
